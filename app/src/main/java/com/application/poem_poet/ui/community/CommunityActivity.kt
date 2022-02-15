@@ -25,7 +25,7 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_community)
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val navController = findNavController(R.id.main_nav_host_container)
 
         bottomNavigationView.setupWithNavController(navController)

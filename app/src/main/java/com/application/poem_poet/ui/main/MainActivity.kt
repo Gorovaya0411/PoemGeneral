@@ -1,10 +1,7 @@
 package com.application.poem_poet.ui.main
 
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.os.VibrationEffect
-import android.os.Vibrator
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
@@ -29,9 +26,6 @@ class MainActivity : MvpAppCompatActivity(), MainActivityView {
     }
 
     private lateinit var navController: NavController
-    private val vibrator: Vibrator by lazy(LazyThreadSafetyMode.NONE) {
-        getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-    }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
@@ -64,6 +58,7 @@ class MainActivity : MvpAppCompatActivity(), MainActivityView {
         val navHostFragment: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.main_nav_host_container) as NavHostFragment
         navController = navHostFragment.navController
+
         goToWelcomeFragment()
     }
 
@@ -71,25 +66,5 @@ class MainActivity : MvpAppCompatActivity(), MainActivityView {
         navController.navigate(R.id.action_splashFragment_to_welcomeFragment)
     }
 
-    override fun goToOptionFragment() {
-//        navController.navigate(R.id.action_menuFragment_to_optionFragment)
-    }
 
-    fun soundCheckAndStartVibration() {
-        if (presenter.getCheckSound()) {
-
-        }
-        startVibration()
-    }
-
-    private fun startVibration(milliseconds: Long = 200) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-            vibrator.vibrate(
-                VibrationEffect.createOneShot(
-                    milliseconds,
-                    VibrationEffect.DEFAULT_AMPLITUDE
-                )
-            )
-        else vibrator.vibrate(milliseconds)
-    }
 }
