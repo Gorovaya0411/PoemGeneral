@@ -15,7 +15,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.spinner.loup"
+        applicationId "com.application.poem_poet"
         minSdkVersion 21
         targetSdkVersion 32
         versionCode 1

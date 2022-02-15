@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.smarteryo.poem_poet.ui.splash.SplashFragment"
+        android:name="com.application.poem_poet.ui.splash.SplashFragment"
         android:label="SplashFragment"
         tools:layout="@layout/fragment_splash">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.smarteryo.poem_poet.ui.greeting_user.WelcomeFragment"
+        android:name="com.application.poem_poet.ui.greeting_user.WelcomeFragment"
         android:label="WelcomeFragment"
         tools:layout="@layout/fragment_welcome">
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.smarteryo.poem_poet.ui.greeting_user.LoginFragment"
+        android:name="com.application.poem_poet.ui.greeting_user.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.smarteryo.poem_poet.ui.greeting_user.RegisterFragment"
+        android:name="com.application.poem_poet.ui.greeting_user.RegisterFragment"
         android:label="RegisterFragment"
         tools:layout="@layout/fragment_register">
         <action
