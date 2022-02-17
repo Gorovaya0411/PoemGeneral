@@ -14,6 +14,9 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/PoemPoet/app/src/main/res/layout/activity_community.xml" value="0.28489583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PoemPoet/app/src/main/res/layout/activity_login.xml" value="0.2375" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PoemPoet/app/src/main/res/layout/activity_main.xml" value="0.1625" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PoemPoet/app/src/main/res/layout/fragment_login.xml" value="0.1765625" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PoemPoet/app/src/main/res/layout/fragment_my_poem.xml" value="0.17604166666666668" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PoemPoet/app/src/main/res/layout/fragment_profile.xml" value="0.1765625" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PoemPoet/app/src/main/res/layout/fragment_register.xml" value="0.2375" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PoemPoet/app/src/main/res/layout/fragment_splash.xml" value="0.1765625" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PoemPoet/app/src/main/res/layout/fragment_welcome.xml" value="0.2" />
@@ -25,7 +28,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentRegisterBinding
 import com.application.poem_poet.ui.base.BaseFragment
 import com.application.poem_poet.ui.community.CommunityActivity
@@ -13,8 +14,10 @@ import com.application.poem_poet.utill.extension.launchActivityWithFinish
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import dagger.hilt.android.AndroidEntryPoint
 
-class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
+@AndroidEntryPoint
+class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment_register) {
 
     private val contextActivity: MainActivity by lazy(LazyThreadSafetyMode.NONE) {
         (activity as MainActivity)
@@ -100,6 +103,4 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
             }
         }
     }
-
-    override fun initViewBinding() = FragmentRegisterBinding.inflate(layoutInflater)
 }

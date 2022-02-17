@@ -5,25 +5,14 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.application.poem_poet.MyApplication
 import com.application.poem_poet.R
-import com.application.poem_poet.di.modul.ui.main.MainActivityModule
-import moxy.MvpAppCompatActivity
-import moxy.presenter.InjectPresenter
-import moxy.presenter.ProvidePresenter
+import dagger.hilt.android.AndroidEntryPoint
 
-
-class MainActivity : MvpAppCompatActivity(), MainActivityView {
-
-    @InjectPresenter
-    lateinit var presenter: MainActivityPresenter
-
-    @ProvidePresenter
-    fun provideMainActivityPresenter(): MainActivityPresenter {
-        return MyApplication.appComponent.with(MainActivityModule()).presenter
-    }
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private lateinit var navController: NavController
 
@@ -51,20 +40,5 @@ class MainActivity : MvpAppCompatActivity(), MainActivityView {
                     or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION)
         }
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val navHostFragment: NavHostFragment = supportFragmentManager
-            .findFragmentById(R.id.main_nav_host_container) as NavHostFragment
-        navController = navHostFragment.navController
-
-        goToWelcomeFragment()
-    }
-
-    override fun goToWelcomeFragment() {
-        navController.navigate(R.id.action_splashFragment_to_welcomeFragment)
-    }
-
 
 }

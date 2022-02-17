@@ -11,10 +11,12 @@ import com.application.poem_poet.ui.main.MainActivity
 import com.application.poem_poet.utill.extension.launchActivityWithFinish
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import dagger.hilt.android.AndroidEntryPoint
 
-class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
+@AndroidEntryPoint
+class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>(R.layout.fragment_welcome) {
 
-    var firebaseUser: FirebaseUser? = null
+    private var firebaseUser: FirebaseUser? = null
     private val contextActivity: MainActivity by lazy(LazyThreadSafetyMode.NONE) {
         (activity as MainActivity)
     }
@@ -37,6 +39,4 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
             launchActivityWithFinish<CommunityActivity>(contextActivity)
         }
     }
-
-    override fun initViewBinding() = FragmentWelcomeBinding.inflate(layoutInflater)
 }

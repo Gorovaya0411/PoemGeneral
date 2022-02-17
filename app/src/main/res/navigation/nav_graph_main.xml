@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.application.poem_poet.ui.general_navigation.profile.WelcomeFragment"
+        android:name="com.application.poem_poet.ui.greeting_user.WelcomeFragment"
         android:label="WelcomeFragment"
         tools:layout="@layout/fragment_welcome">
         <action

@@ -3,7 +3,6 @@ package com.application.poem_poet.ui.greeting_user
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentLoginBinding
 import com.application.poem_poet.ui.base.BaseFragment
@@ -11,8 +10,10 @@ import com.application.poem_poet.ui.community.CommunityActivity
 import com.application.poem_poet.ui.main.MainActivity
 import com.application.poem_poet.utill.extension.launchActivityWithFinish
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
-class LoginFragment : BaseFragment<FragmentLoginBinding>() {
+@AndroidEntryPoint
+class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
     private lateinit var mAuth: FirebaseAuth
 
@@ -63,6 +64,4 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             }
         }
     }
-
-    override fun initViewBinding() = FragmentLoginBinding.inflate(layoutInflater)
 }
