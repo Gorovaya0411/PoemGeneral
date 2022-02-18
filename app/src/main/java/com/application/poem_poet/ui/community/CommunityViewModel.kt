@@ -8,5 +8,4 @@ import javax.inject.Inject
 @HiltViewModel
 class CommunityViewModel @Inject constructor(
     private val appUseCase: AppUseCase
-) : BaseViewModel() {
-}
+) : BaseViewModel()

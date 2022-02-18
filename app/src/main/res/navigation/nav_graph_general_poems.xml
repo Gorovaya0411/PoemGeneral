@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_general_poems"
+    app:startDestination="@id/listPoemsFragment">
+
+    <fragment
+        android:id="@+id/listUsersFragment"
+        android:name="com.application.poem_poet.ui.general_navigation.poets.navigation.users.ListUsersFragment"
+        android:label="ListUsersFragment"
+        tools:layout="@layout/fragment_list_users" />
+    <fragment
+        android:id="@+id/listPoemsFragment"
+        android:name="com.application.poem_poet.ui.general_navigation.poets.navigation.poets.ListPoetsFragment"
+        android:label="ListPoemsFragment"
+        tools:layout="@layout/fragment_list_poets" />
+</navigation>

@@ -31,25 +31,20 @@
         android:name="com.application.poem_poet.ui.greeting_user.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
+
         <action
-            android:id="@+id/action_loginFragment_to_navigation"
-            app:destination="@id/navigation"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/splashFragment"
-            app:popUpToInclusive="true"/>
+            android:id="@+id/action_loginFragment_to_nav_graph_community"
+            app:destination="@id/nav_graph_community" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.application.poem_poet.ui.greeting_user.RegisterFragment"
         android:label="RegisterFragment"
         tools:layout="@layout/fragment_register">
-        <action
-            android:id="@+id/action_registerFragment_to_navigation"
-            app:destination="@id/navigation"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/splashFragment"
-            app:popUpToInclusive="true"/>
-    </fragment>
 
-    <include app:graph="@navigation/navigation" />
+        <action
+            android:id="@+id/action_registerFragment_to_nav_graph_community"
+            app:destination="@id/nav_graph_community" />
+    </fragment>
+    <include app:graph="@navigation/nav_graph_community" />
 </navigation>

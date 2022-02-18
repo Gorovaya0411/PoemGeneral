@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -167,22 +168,22 @@
         <!--                app:layout_constraintEnd_toStartOf="@+id/imageViewQuotationMarksDown" />-->
 
 
-        <!--            <TextView-->
-        <!--                android:id="@+id/textViewStatus"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginLeft="65dp"-->
-        <!--                android:layout_marginTop="25dp"-->
-        <!--                android:layout_marginRight="65dp"-->
-        <!--                android:fontFamily="@font/g11331"-->
-        <!--                android:gravity="center"-->
-        <!--                android:textColor="#2a52be"-->
-        <!--                android:textSize="25sp"-->
-        <!--                app:layout_constraintEnd_toStartOf="@+id/imageViewQuotationMarksDown"-->
-        <!--                app:layout_constraintHorizontal_bias="0.0"-->
-        <!--                app:layout_constraintStart_toEndOf="@+id/imageViewQuotationMarksUp"-->
-        <!--                app:layout_constraintTop_toBottomOf="@+id/textViewUsername"-->
-        <!--                tools:text="Когда я вижу звузды хочется напомнить себе что все хорошо и я очень рад это" />-->
+<!--                    <TextView-->
+<!--                        android:id="@+id/textViewStatus"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginLeft="65dp"-->
+<!--                        android:layout_marginTop="25dp"-->
+<!--                        android:layout_marginRight="65dp"-->
+<!--                        android:fontFamily="@font/g11331"-->
+<!--                        android:gravity="center"-->
+<!--                        android:textColor="#2a52be"-->
+<!--                        android:textSize="25sp"-->
+<!--                        app:layout_constraintEnd_toStartOf="@+id/imageViewQuotationMarksDown"-->
+<!--                        app:layout_constraintHorizontal_bias="0.0"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/imageViewQuotationMarksUp"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/textViewUsername"-->
+<!--                        tools:text="Когда я вижу звузды хочется напомнить себе что все хорошо и я очень рад это" />-->
 
 
         <!--            <ImageView-->
@@ -392,7 +393,5 @@
         <!--        app:layout_constraintBottom_toTopOf="@+id/imageViewNoInternet"-->
         <!--        app:layout_constraintEnd_toEndOf="parent"-->
         <!--        app:layout_constraintStart_toStartOf="parent" />-->
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

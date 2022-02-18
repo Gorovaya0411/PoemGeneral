@@ -24,4 +24,9 @@
 
     </style>
 
+    <style name="ThemeOverlay.AppCompat.Dialog.Alert.TestDialogTheme">
+        <item name="colorAccent">#DC143C</item>
+        <item name="colorPrimary">#DC143C</item>
+    </style>
+
 </resources>

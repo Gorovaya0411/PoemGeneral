@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/g17575"
             android:gravity="center"
-            android:text="@string/log_in"
+            android:text="@string/to_come_in"
             android:textColor="@color/dark_purple"
             android:textSize="65sp"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,20 +1,15 @@
 package com.application.poem_poet.ui.main
 
 import android.os.Build
-import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import com.application.poem_poet.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
-
-    private lateinit var navController: NavController
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
@@ -40,5 +35,4 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION)
         }
     }
-
 }

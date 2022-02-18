@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/listPoemsFragment"
+        android:icon="@drawable/ic_menu_user"
+        android:title="@string/poets_poems" />
+
+    <item
+        android:id="@+id/listUsersFragment"
+        android:icon="@drawable/ic_menu_profile"
+        android:title="@string/poets_users" />
+</menu>
