@@ -1,37 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_welcome">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <SearchView
+        android:id="@+id/list_poet_country_search"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="8dp"
+        android:background="@drawable/search_view_rounded"
+        android:iconifiedByDefault="false"
+        android:padding="2dp"
+        android:queryHint="Поиск"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryBackground="@null" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_poet_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_welcome">
-
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/RecyclerMain"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_marginTop="46dp"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/country_search" />-->
-
-
-<!--    <SearchView-->
-<!--        android:id="@+id/country_search"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:layout_margin="8dp"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:background="@drawable/search_view_rounded"-->
-<!--        android:iconifiedByDefault="false"-->
-<!--        android:padding="2dp"-->
-<!--        android:queryHint="Поиск"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:queryBackground="@null"-->
-<!--     />-->
-
+        android:layout_marginTop="46dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_poet_country_search" />
 </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>

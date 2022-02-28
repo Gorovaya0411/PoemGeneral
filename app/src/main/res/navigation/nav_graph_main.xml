@@ -46,5 +46,9 @@
             android:id="@+id/action_registerFragment_to_nav_graph_community"
             app:destination="@id/nav_graph_community" />
     </fragment>
-    <include app:graph="@navigation/nav_graph_community" />
+    <include app:graph="@navigation/nav_graph_community" >
+        <action
+            android:id="@+id/action_nav_graph_community_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+    </include>
 </navigation>

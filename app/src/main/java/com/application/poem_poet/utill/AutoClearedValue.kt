@@ -1,4 +1,4 @@
-package com.smarteryo.computerone.utill
+package com.application.poem_poet.utill
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver

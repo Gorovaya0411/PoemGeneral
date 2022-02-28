@@ -8,7 +8,14 @@
         android:id="@+id/profileFragment"
         android:name="com.application.poem_poet.ui.general_navigation.profile.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_jobUserFragment"
+            app:destination="@id/jobUserFragment" />
+        <action
+            android:id="@+id/action_profileFragment_self"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/generalPoetsFragment"
         android:name="com.application.poem_poet.ui.general_navigation.poets.GeneralPoetsFragment"
@@ -19,4 +26,9 @@
         android:name="com.application.poem_poet.ui.general_navigation.my_poem.MyPoemFragment"
         android:label="MyPoemFragment"
         tools:layout="@layout/fragment_my_poem"/>
+    <fragment
+        android:id="@+id/jobUserFragment"
+        android:name="com.application.poem_poet.ui.job_user.JobUserFragment"
+        android:label="JobUserFragment"
+        tools:layout="@layout/fragment_job_user"/>
 </navigation>

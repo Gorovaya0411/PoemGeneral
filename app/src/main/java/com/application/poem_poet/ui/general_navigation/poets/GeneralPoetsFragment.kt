@@ -1,27 +1,23 @@
 package com.application.poem_poet.ui.general_navigation.poets
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
 import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentGeneralPoetsBinding
 import com.application.poem_poet.ui.base.BaseFragment
 import com.application.poem_poet.ui.community.CommunityActivity
-import com.application.poem_poet.ui.main.MainActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
-class GeneralPoetsFragment : BaseFragment<FragmentGeneralPoetsBinding>(R.layout.fragment_general_poets) {
+class GeneralPoetsFragment : BaseFragment<FragmentGeneralPoetsBinding>() {
 
     private var firebaseUser: FirebaseUser? = null
     private val contextActivity: CommunityActivity by lazy(LazyThreadSafetyMode.NONE) {
         (activity as CommunityActivity)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         firebaseUser = FirebaseAuth.getInstance().currentUser
@@ -33,4 +29,6 @@ class GeneralPoetsFragment : BaseFragment<FragmentGeneralPoetsBinding>(R.layout.
             )
         )
     }
+
+    override fun initViewBinding() = FragmentGeneralPoetsBinding.inflate(layoutInflater)
 }

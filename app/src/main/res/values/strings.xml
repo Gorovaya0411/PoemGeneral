@@ -6,6 +6,8 @@
     <string name="username">Имя пользователя</string>
     <string name="registration">Зарегистрироваться</string>
 
+    <string name="registration_en">REGISTRATION</string>
+
     <string name="to_come_in">Войти</string>
 
     <string name="profile">Профиль</string>
@@ -19,4 +21,18 @@
     <string name="poets_poems">Стихи поэтов</string>
     <string name="poets_users">Стихи пользователей</string>
 
+    <string name="my_job">My Job</string>
+
+    <string name="avatar">Аватар</string>
+    <string name="quotation_marks">Кавычки</string>
+    <string name="change_status">Изменить статус</string>
+    <string name="change_login">Изменить логин</string>
+    <string name="communication_with_you">Связь с вами</string>
+    <string name="user_job">Мои работы</string>
+    <string name="go_out">Выйти</string>
+    <string name="successfully_changed">Успешно изменено</string>
+    <string name="line_remained_empty">Строка осталась пустой</string>
+    <string name="data_successfully_changed">Ваш %s успешно изменен</string>
+
+    <string name="like">Лайк</string>
 </resources>

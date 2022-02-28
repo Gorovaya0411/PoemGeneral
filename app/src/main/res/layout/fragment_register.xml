@@ -1,91 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_welcome">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_welcome">
+    <Button
+        android:id="@+id/register_registration_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_welcome_registration_btn"
+        app:layout_constraintBottom_toTopOf="@+id/register_progress_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_linear_layout" />
 
-        <Button
-            android:id="@+id/register_registration_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_login_registration"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/register_linear_layout" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_register_sing_up"
+        android:contentDescription="@string/registration_en"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/register_linear_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/register_progress_bar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+    <LinearLayout
+        android:id="@+id/register_linear_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/register_progress_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
-                android:id="@+id/register_username_edit_text"
-                style="@style/EditTextStyle"
-                android:layout_width="318dp"
-                android:layout_height="67dp"
-                android:layout_marginBottom="12dp"
-                android:autofillHints=""
-                android:ems="10"
-                android:foregroundGravity="center_vertical"
-                android:hint="@string/username"
-                android:inputType="textPersonName"
-                android:textSize="20sp" />
+        <EditText
+            android:id="@+id/register_username_edit_text"
+            style="@style/EditTextStyle"
+            android:layout_width="318dp"
+            android:layout_height="67dp"
+            android:layout_marginBottom="12dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:foregroundGravity="center_vertical"
+            android:hint="@string/username"
+            android:inputType="textPersonName"
+            android:textSize="20sp">
 
-            <EditText
-                android:id="@+id/register_email_edit_text"
-                style="@style/EditTextStyle"
-                android:layout_width="318dp"
-                android:layout_height="67dp"
-                android:layout_marginBottom="8dp"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"
-                android:textSize="20sp" />
+            <requestFocus />
+        </EditText>
 
-            <EditText
-                android:id="@+id/register_password_edit_text"
-                style="@style/EditTextStyle"
-                android:layout_width="318dp"
-                android:layout_height="67dp"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:textSize="20sp" />
-        </LinearLayout>
+        <EditText
+            android:id="@+id/register_email_edit_text"
+            style="@style/EditTextStyle"
+            android:layout_width="318dp"
+            android:layout_height="67dp"
+            android:layout_marginBottom="8dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:textSize="20sp">
 
-        <ProgressBar
-            android:id="@+id/register_progress_bar"
-            android:layout_width="64dp"
-            android:layout_height="61dp"
-            android:layout_marginBottom="20dp"
-            android:indeterminateOnly="true"
-            android:indeterminateTint="@color/dark_purple"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <requestFocus />
+        </EditText>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/g17575"
-            android:gravity="center"
-            android:text="@string/registration"
-            android:textColor="@color/dark_purple"
-            android:textSize="55sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+        <EditText
+            android:id="@+id/register_password_edit_text"
+            style="@style/EditTextStyle"
+            android:layout_width="318dp"
+            android:layout_height="67dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textSize="20sp">
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/register_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:indeterminateOnly="true"
+        android:indeterminateTint="@color/dark_purple"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/profileFragment"
-        android:icon="@drawable/ic_menu_profile"
-        android:title="@string/profile" />
+        android:id="@+id/myPoemFragment"
+        android:icon="@drawable/ic_menu_love_poem"
+        android:title="@string/love_poems" />
 
     <item
         android:id="@+id/generalPoetsFragment"
@@ -12,7 +12,7 @@
         android:title="@string/poems" />
 
     <item
-        android:id="@+id/myPoemFragment"
-        android:icon="@drawable/ic_menu_love_poem"
-        android:title="@string/love_poems" />
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_menu_profile"
+        android:title="@string/profile" />
 </menu>

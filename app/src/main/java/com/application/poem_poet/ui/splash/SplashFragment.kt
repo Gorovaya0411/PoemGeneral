@@ -9,15 +9,12 @@ import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentSplashBinding
 import com.application.poem_poet.ui.base.BaseFragment
 import com.application.poem_poet.ui.main.MainActivity
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_splash){
+class SplashFragment : BaseFragment<FragmentSplashBinding>() {
 
     private val mainActivityContext: MainActivity by lazy(LazyThreadSafetyMode.NONE) {
         (activity as MainActivity)
     }
-
 
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,4 +22,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_spl
         mainActivityContext.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         findNavController().navigate(R.id.action_splashFragment_to_welcomeFragment)
     }
+
+    override fun initViewBinding() = FragmentSplashBinding.inflate(layoutInflater)
 }

@@ -1,15 +1,12 @@
 package com.application.poem_poet.utill
 
 import android.content.Context
-import android.media.MediaPlayer
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.View
-import android.widget.EditText
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.databinding.BindingAdapter
-import com.application.poem_poet.R
 
 
 @BindingAdapter(value = ["vibrationEnabled", "soundEnabled", "listener"], requireAll = false)

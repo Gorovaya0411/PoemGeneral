@@ -9,9 +9,10 @@ import moxy.viewstate.strategy.StateStrategyType
 @StateStrategyType(value = AddToEndStrategy::class)
 interface ProfileView : MvpView {
     fun showElementsProfile(model: User?)
+    fun workWithAvatar(model: User?)
     fun workWithStatus()
     fun workWithAddress()
-    fun workWithAvatar(model: User?)
     fun showDialog(model: DialogFragment)
     fun openAddActivity()
+    fun goToJobUserFragment()
 }

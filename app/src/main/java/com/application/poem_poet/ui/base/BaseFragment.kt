@@ -4,35 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.smarteryo.computerone.utill.autoCleared
+import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment<VB : ViewDataBinding>(
-    @LayoutRes val layoutRes: Int
-) : Fragment() {
+abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
-    protected var binding by autoCleared<VB>()
+    protected lateinit var binding: VB
 
     final override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return initDataBinding(inflater, container).also { binding ->
-            this.binding = binding
+        return initViewBinding().also { viewBinding ->
+            this.binding = viewBinding
         }.root
     }
 
-    private fun initDataBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): VB = DataBindingUtil.inflate(
-        inflater,
-        layoutRes,
-        container,
-        false
-    )
+    abstract fun initViewBinding(): VB
+
 }
