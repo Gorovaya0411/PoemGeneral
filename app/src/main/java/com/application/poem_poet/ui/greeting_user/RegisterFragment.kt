@@ -78,7 +78,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
                                 userHashMap["email"] = email
                                 userHashMap["login"] = login
                                 userHashMap["avatar"] =
-                                    "https://firebasestorage.googleapis.com/v0/b/poemspoets-9db16.appspot.com/o/icon.png?alt=media&token=3b87c7de-0a6f-48ab-8933-a72637c290ac"
+                                    "https://firebasestorage.googleapis.com/v0/b/poemspoets-130cd.appspot.com/o/icon2.png?alt=media&token=f241a65b-137c-47e2-b33c-800e6a6a1b3d"
                                 userHashMap["search"] = login.toLowerCase(Locale.ROOT)
                                 userHashMap["status"] = status
                                 userHashMap["address"] = address

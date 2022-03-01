@@ -1,4 +1,4 @@
-package com.application.poem_poet.ui.general_navigation.poets.navigation.poets
+package com.application.poem_poet.ui.general_navigation.poets.navigation.users
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -10,39 +10,22 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.application.poem_poet.R
 import com.application.poem_poet.databinding.ItemViewListPoetsBinding
+import com.application.poem_poet.databinding.ItemViewListUsersBinding
 import com.application.poem_poet.model.PoemAnswer
 import com.squareup.picasso.Picasso
 import java.util.*
 
-class AdapterListPoets(private var callback: (PoemAnswer) -> Unit) :
-    RecyclerView.Adapter<AdapterListPoets.MyViewHolder>() {
 
+class AdapterListUser(private var callback: (PoemAnswer) -> Unit) :
+    RecyclerView.Adapter<AdapterListUser.MyViewHolder>() {
     var dataTest = mutableListOf<PoemAnswer?>()
     var initialData = mutableListOf<PoemAnswer?>()
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(data: MutableList<PoemAnswer?>) {
-        dataTest = data
+        this.dataTest = data
         initialData = data
         notifyDataSetChanged()
-    }
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.item_view_list_poets,
-                parent,
-                false
-            ), callback
-        )
-    }
-
-    override fun getItemCount(): Int = dataTest.count()
-
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        dataTest[position]?.let { holder.bind(it) }
-
     }
 
     fun getFilter(): Filter {
@@ -80,22 +63,38 @@ class AdapterListPoets(private var callback: (PoemAnswer) -> Unit) :
         }
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        return MyViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.item_view_list_users,
+                parent,
+                false
+            ), callback
+        )
+    }
+
+    override fun getItemCount(): Int = dataTest.count()
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        dataTest[position]?.let { holder.bind(it) }
+    }
+
     class MyViewHolder(itemView: View, private var callback: (PoemAnswer) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
-        var binding = ItemViewListPoetsBinding.bind(itemView)
-        private var avatar: ImageView = binding.listPoemAvatarPoetsImg
-        private var title: TextView = binding.listPoemTitleTxt
-        private var name: TextView = binding.listPoemNamePoetTxt
-        private var genre: TextView = binding.listPoemGenreTxt
-        private var like: TextView = binding.listPoemNumberLikesTxt
-        var namePoetModified = ""
+        var binding = ItemViewListUsersBinding.bind(itemView)
+        private var avatar: ImageView = binding.listUsersAvatarUsersImg
+        private var title: TextView = binding.listUsersTitleTxt
+        private var name: TextView = binding.listUsersNameUserTxt
+        private var genre: TextView = binding.listUsersGenreTxt
+        private var nameUserModified = ""
+        private var like: TextView = binding.listUsersNumberLikesTxt
 
         fun bind(model: PoemAnswer) {
-            namePoetModified = model.namePoet.replace("|", ".", true)
+            nameUserModified = model.username.replace("|", ".", true)
             title.text = model.titlePoem
-            like.text = model.like.toString()
-            name.text = namePoetModified
+            name.text = nameUserModified
             genre.text = model.genre
+            like.text = model.like.toString()
             Picasso.get()
                 .load(model.avatar)
                 .into(avatar)
@@ -105,4 +104,5 @@ class AdapterListPoets(private var callback: (PoemAnswer) -> Unit) :
             }
         }
     }
+
 }

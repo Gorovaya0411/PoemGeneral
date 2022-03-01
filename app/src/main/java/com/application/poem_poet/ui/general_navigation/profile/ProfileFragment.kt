@@ -213,8 +213,7 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
     }
 
     override fun openAddActivity() {
-//        val intent = Intent(requireContext(), AddPoemActivity::class.java)
-//        startActivity(intent)
+        findNavController().navigate(R.id.action_profileFragment_to_addPoemFragment)
     }
 
     override fun goToJobUserFragment() {

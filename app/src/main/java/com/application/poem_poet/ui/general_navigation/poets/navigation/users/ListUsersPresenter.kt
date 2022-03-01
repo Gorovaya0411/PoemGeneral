@@ -1,4 +1,4 @@
-package com.application.poem_poet.ui.general_navigation.poets.navigation.poets
+package com.application.poem_poet.ui.general_navigation.poets.navigation.users
 
 import com.application.poem_poet.model.PoemAnswer
 import com.google.firebase.database.DataSnapshot
@@ -7,12 +7,11 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import moxy.MvpPresenter
 
-class ListPoetsPresenter : MvpPresenter<ListPoetsView>() {
-    private val myAdapter =
-        AdapterListPoets { openingNewActivity(it) }
+class ListUsersPresenter : MvpPresenter<ListUserView>() {
     private var listPoemPoet: MutableList<PoemAnswer?> = mutableListOf()
     private var listPoemPoetRand: List<PoemAnswer?> = mutableListOf()
-    private var listPoemPoetSet: Set<PoemAnswer?> = mutableSetOf()
+    private val myAdapter =
+        AdapterListUser { openingNewActivity(it) }
 
     fun getData() {
         viewState.workWithAdapter(myAdapter)
@@ -26,11 +25,14 @@ class ListPoetsPresenter : MvpPresenter<ListPoetsView>() {
             override fun onDataChange(p0: DataSnapshot) {
                 val children = p0.children
                 children.forEach {
+
                     val poem: PoemAnswer? = it.getValue(PoemAnswer::class.java)
-                    if (poem!!.namePoet != "") {
+                    if (poem!!.namePoet == "") {
                         listPoemPoet.add(poem)
                         listPoemPoetRand = listPoemPoet.shuffled()
                     }
+
+
                 }
                 populateData(listPoemPoetRand as MutableList<PoemAnswer?>)
             }
@@ -41,7 +43,7 @@ class ListPoetsPresenter : MvpPresenter<ListPoetsView>() {
         myAdapter.setData(poems)
     }
 
-    private fun openingNewActivity(model: PoemAnswer) {
+    fun openingNewActivity(model: PoemAnswer) {
         viewState.openingNewActivity(model)
     }
 }

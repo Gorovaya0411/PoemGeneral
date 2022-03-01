@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_welcome">
+    android:background="@color/bg">
 
     <ImageView
         android:id="@+id/imageViewNoInternet"
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
-        android:fontFamily="@font/g4201"
+        android:fontFamily="@font/g17575"
         android:gravity="center_horizontal"
         android:text="@string/no_internet"
         android:textColor="#1f1338"

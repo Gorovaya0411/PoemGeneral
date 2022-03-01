@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_welcome">
+    android:background="@color/bg">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/general_poets_fragment_container_view"
@@ -11,15 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/general_poets_bottom_navigation_view"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/general_poets_bottom_navigation_view"
         app:navGraph="@navigation/nav_graph_general_poems" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/general_poets_bottom_navigation_view"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#A89CB0"
+        android:background="@color/lite_purple"
         app:itemIconTint="@drawable/selector"
         app:itemRippleColor="@color/dark_purple"
         app:itemTextColor="@drawable/selector"
@@ -29,4 +29,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/menu_bottom_general_poem" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/general_poets_floating_action_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/dark_purple"
+        android:clickable="true"
+        android:contentDescription="@string/add_poem"
+        android:focusable="true"
+        android:src="@drawable/ic_general_poets_plus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/general_poets_bottom_navigation_view"
+        app:layout_constraintVertical_bias="0.95" />
 </androidx.constraintlayout.widget.ConstraintLayout>
