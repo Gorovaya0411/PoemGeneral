@@ -3,13 +3,12 @@ package com.application.poem_poet.ui.general_navigation.profile
 import com.application.poem_poet.dialogFragments.ForEmptyJobsDialog
 import com.application.poem_poet.model.PoemAnswer
 import com.application.poem_poet.model.User
-import com.application.poem_poet.ui.community.CommunityActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import moxy.MvpPresenter
+import javax.inject.Inject
 
-class ProfilePresenter : MvpPresenter<ProfileView>() {
+class ProfilePresenter @Inject constructor() : ProfilePresenterImpl() {
     private var refUser: DatabaseReference? = null
     private var firebaseUser: FirebaseUser? = null
     var array = emptyArray<String>()
@@ -17,7 +16,7 @@ class ProfilePresenter : MvpPresenter<ProfileView>() {
     var arrayPoem = emptyArray<String>()
     private val emptyMyJobsDialog = ForEmptyJobsDialog(::openAddActivity)
 
-    fun addData() {
+    override fun addData() {
         firebaseUser = FirebaseAuth.getInstance().currentUser
         refUser = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
         refUser!!.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -41,7 +40,7 @@ class ProfilePresenter : MvpPresenter<ProfileView>() {
         })
     }
 
-    fun receivingPoem(login:String) {
+    override fun receivingPoem(login: String) {
         val refReceivingPoem =
             FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
                 .child("MyJob")
@@ -63,7 +62,7 @@ class ProfilePresenter : MvpPresenter<ProfileView>() {
         })
     }
 
-    private fun changeUsernameAll(model: String) {
+    override fun changeUsernameAll(model: String) {
         array.forEach {
             val refChangeUsernameMyJob =
                 FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
@@ -74,7 +73,7 @@ class ProfilePresenter : MvpPresenter<ProfileView>() {
         }
     }
 
-    fun receivingPoemCatalog(login:String, uid:String) {
+    override fun receivingPoemCatalog(login: String, uid: String) {
         val refReceivingPoem =
             FirebaseDatabase.getInstance().reference.child(uid).child("Poems")
 
@@ -96,7 +95,7 @@ class ProfilePresenter : MvpPresenter<ProfileView>() {
         })
     }
 
-    private fun changeUsernameAllCatalog(model: String, uid:String) {
+    override fun changeUsernameAllCatalog(model: String, uid: String) {
         arrayCatalog.forEach {
             val refChangeUsernameCatalog =
                 FirebaseDatabase.getInstance().reference.child(uid).child("Poems")
@@ -106,7 +105,7 @@ class ProfilePresenter : MvpPresenter<ProfileView>() {
         }
     }
 
-    fun receivingPoemPoems(login:String, uid:String) {
+    override fun receivingPoemPoems(login: String, uid: String) {
         val refReceivingPoem =
             FirebaseDatabase.getInstance().reference.child("Poem")
 
@@ -129,7 +128,7 @@ class ProfilePresenter : MvpPresenter<ProfileView>() {
         })
     }
 
-    private fun changeUsernameAllPoem(model: String) {
+    override fun changeUsernameAllPoem(model: String) {
         array.forEach {
             val refChangeUsernamePoem =
                 FirebaseDatabase.getInstance().reference.child("Poem")
@@ -139,7 +138,7 @@ class ProfilePresenter : MvpPresenter<ProfileView>() {
         }
     }
 
-    fun checkListMyJob() {
+    override fun checkListMyJob() {
         val refListMyJob =
             FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
                 .child("MyJob")
@@ -160,7 +159,7 @@ class ProfilePresenter : MvpPresenter<ProfileView>() {
         })
     }
 
-    private fun openAddActivity() {
+    override fun openAddActivity() {
         viewState.openAddActivity()
     }
 }

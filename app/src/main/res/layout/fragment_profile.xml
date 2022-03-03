@@ -1,182 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg">
+    android:background="@color/bg"
+    android:orientation="vertical">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/profile_quotation_marks_right_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/quotation_marks"
+            android:src="@drawable/ic_profile_quotes"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/profile_status_txt" />
+
+        <ImageView
+            android:id="@+id/profile_quotation_marks_left_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/quotation_marks"
+            android:rotation="180"
+            android:src="@drawable/ic_profile_quotes"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_status_txt"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/profile_my_job_linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_lower_threshold_view"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_profile_my_job"
+                android:contentDescription="@string/my_job" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/reza_zulmi_sans"
+                android:text="@string/user_job"
+                android:textColor="@color/dark_purple"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/profile_login_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/reza_zulmi_sans"
+            android:textColor="@color/dark_purple"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_card_view"
+            tools:text="Ксения Горовая" />
+
+        <TextView
+            android:id="@+id/profile_status_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp">
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="40dp"
+            android:fontFamily="@font/reza_zulmi_sans"
+            android:gravity="center"
+            android:text="@string/change_status"
+            android:textColor="@color/dark_purple"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toStartOf="@+id/profile_quotation_marks_left_btn"
+            app:layout_constraintStart_toEndOf="@+id/profile_quotation_marks_right_btn"
+            app:layout_constraintTop_toBottomOf="@+id/profile_login_txt"
+            tools:text="Введите статус" />
+
+        <TextView
+            android:id="@+id/profile_email_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:fontFamily="@font/reza_zulmi_sans"
+            android:text="@string/change_login"
+            android:textColor="@color/dark_purple"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_status_txt" />
+
+        <TextView
+            android:id="@+id/profile_communication_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/reza_zulmi_sans"
+            android:text="@string/communication_with_you"
+            android:textColor="@color/dark_purple"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_email_txt" />
+
+        <TextView
+            android:id="@+id/profile_go_out_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:layout_marginBottom="60dp"
+            android:fontFamily="@font/reza_zulmi_sans"
+            android:text="@string/go_out"
+            android:textColor="@color/red"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_my_job_linear_layout" />
+
+        <View
+            android:id="@+id/profile_lower_threshold_view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_communication_txt" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/profile_card_view"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="60dp"
+            app:cardCornerRadius="90dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/profile_quotation_marks_right_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/quotation_marks"
-                android:src="@drawable/ic_profile_quotes"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/profile_status_txt" />
-
-            <ImageView
-                android:id="@+id/profile_quotation_marks_left_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/quotation_marks"
-                android:rotation="180"
-                android:src="@drawable/ic_profile_quotes"
-                app:layout_constraintBottom_toBottomOf="@+id/profile_status_txt"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <LinearLayout
-                android:id="@+id/profile_my_job_linear_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_lower_threshold_view"
-                tools:ignore="UseCompoundDrawables">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_profile_my_job"
-                    android:contentDescription="@string/my_job" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="15dp"
-                    android:fontFamily="@font/reza_zulmi_sans"
-                    android:text="@string/user_job"
-                    android:textColor="@color/dark_purple"
-                    android:textSize="22sp" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/profile_login_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/reza_zulmi_sans"
-                android:textColor="@color/dark_purple"
-                android:textSize="32sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_card_view"
-                tools:text="Ксения Горовая" />
-
-            <TextView
-                android:id="@+id/profile_status_txt"
+                android:id="@+id/profile_image_img"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginRight="40dp"
-                android:fontFamily="@font/reza_zulmi_sans"
-                android:gravity="center"
-                android:text="@string/change_status"
-                android:textColor="@color/dark_purple"
-                android:textSize="22sp"
-                app:layout_constraintEnd_toStartOf="@+id/profile_quotation_marks_left_btn"
-                app:layout_constraintStart_toEndOf="@+id/profile_quotation_marks_right_btn"
-                app:layout_constraintTop_toBottomOf="@+id/profile_login_txt"
-                tools:text="Введите статус" />
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@color/white"
+                android:contentDescription="@string/avatar"
+                android:scaleType="centerCrop" />
 
-            <TextView
-                android:id="@+id/profile_email_txt"
+            <ProgressBar
+                android:id="@+id/profile_progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
-                android:fontFamily="@font/reza_zulmi_sans"
-                android:text="@string/change_login"
-                android:textColor="@color/dark_purple"
-                android:textSize="22sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_status_txt" />
+                android:layout_gravity="center"
+                android:indeterminateOnly="true"
+                android:indeterminateTint="@color/dark_purple" />
+        </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/profile_communication_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/reza_zulmi_sans"
-                android:text="@string/communication_with_you"
-                android:textColor="@color/dark_purple"
-                android:textSize="22sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_email_txt" />
-
-            <TextView
-                android:id="@+id/profile_go_out_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
-                android:layout_marginBottom="60dp"
-                android:text="@string/go_out"
-                android:fontFamily="@font/reza_zulmi_sans"
-                android:textColor="@color/red"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_my_job_linear_layout" />
-
-            <View
-                android:id="@+id/profile_lower_threshold_view"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/gray"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_communication_txt" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/profile_card_view"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
-                android:layout_marginTop="60dp"
-                app:cardCornerRadius="90dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/profile_image_img"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/white"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:contentDescription="@string/avatar"
-                    android:scaleType="centerCrop" />
-
-                <ProgressBar
-                    android:id="@+id/profile_progress_bar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:indeterminateOnly="true"
-                    android:indeterminateTint="@color/dark_purple" />
-            </androidx.cardview.widget.CardView>
-
-            <Button
-                android:id="@+id/profile_change_photo_btn"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_profile_photo_btn"
-                app:layout_constraintStart_toStartOf="@+id/profile_card_view"
-                app:layout_constraintTop_toTopOf="@+id/profile_card_view" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/profile_change_photo_btn"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_profile_photo_btn"
+            app:layout_constraintStart_toStartOf="@+id/profile_card_view"
+            app:layout_constraintTop_toTopOf="@+id/profile_card_view" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

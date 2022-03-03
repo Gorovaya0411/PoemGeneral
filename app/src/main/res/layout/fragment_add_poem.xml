@@ -1,135 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg">
+    android:background="@color/bg"
+    android:orientation="vertical">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/add_poem_img">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/add_poem_back_img"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
+            android:contentDescription="@string/back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.055"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.026"
+            app:srcCompat="@drawable/ic_base_back" />
+
+        <ImageView
+            android:id="@+id/add_poem_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_register_sing_up"
+            android:contentDescription="@string/add_poem"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/add_poem_check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/reza_zulmi_sans"
+            android:text="@string/add_my_poem"
+            android:textColor="@color/dark_purple"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:theme="@style/MyCheckBox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_poem_title_edit_txt" />
+
+        <EditText
+            android:id="@+id/add_poem_title_edit_txt"
+            style="@style/EditTextStyleAddPoem"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:autofillHints=""
+            android:hint="@string/input_title_poem"
+            android:inputType="textLongMessage"
             app:layout_constraintTop_toBottomOf="@+id/add_poem_img">
 
-            <ImageView
-                android:id="@+id/add_poem_back_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/back"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.055"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.026"
-                app:srcCompat="@drawable/ic_base_back" />
+            <requestFocus />
+        </EditText>
 
-            <ImageView
-                android:id="@+id/add_poem_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_register_sing_up"
-                android:contentDescription="@string/add_poem"
-                android:gravity="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/add_poem_genre_edit_txt"
+            style="@style/EditTextStyleAddPoem"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:autofillHints=""
+            android:fontFamily="@font/reza_zulmi_sans"
+            android:hint="@string/input_genre"
+            android:inputType="textLongMessage"
+            app:layout_constraintTop_toBottomOf="@+id/add_poem_auto_complete_txt">
 
-            <CheckBox
-                android:id="@+id/add_poem_check_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/reza_zulmi_sans"
-                android:text="@string/add_my_poem"
-                android:textColor="@color/dark_purple"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:theme="@style/MyCheckBox"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/add_poem_title_edit_txt" />
+            <requestFocus />
+        </EditText>
 
-            <EditText
-                android:id="@+id/add_poem_title_edit_txt"
-                style="@style/EditTextStyleAddPoem"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="30dp"
-                android:autofillHints=""
-                android:hint="@string/input_title_poem"
-                android:inputType="textLongMessage"
-                app:layout_constraintTop_toBottomOf="@+id/add_poem_img">
+        <EditText
+            android:id="@+id/add_poem_poem_edit_txt"
+            style="@style/EditTextStyleAddPoem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="@string/input_poem"
+            android:inputType="textMultiLine"
+            app:layout_constraintTop_toBottomOf="@+id/add_poem_genre_edit_txt">
 
-                <requestFocus />
-            </EditText>
+            <requestFocus />
+        </EditText>
 
-            <EditText
-                android:id="@+id/add_poem_genre_edit_txt"
-                style="@style/EditTextStyleAddPoem"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:autofillHints=""
-                android:fontFamily="@font/reza_zulmi_sans"
-                android:hint="@string/input_genre"
-                android:inputType="textLongMessage"
-                app:layout_constraintTop_toBottomOf="@+id/add_poem_auto_complete_txt">
+        <TextView
+            android:id="@+id/add_poem_name_txt"
+            style="@style/StyleForMainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_poem_check_box" />
 
-                <requestFocus />
-            </EditText>
+        <AutoCompleteTextView
+            android:id="@+id/add_poem_auto_complete_txt"
+            style="@style/EditTextStyleAddPoem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="@string/input_name_poet"
+            android:inputType="textNoSuggestions"
+            app:layout_constraintTop_toBottomOf="@+id/add_poem_check_box" />
 
-            <EditText
-                android:id="@+id/add_poem_poem_edit_txt"
-                style="@style/EditTextStyleAddPoem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:hint="@string/input_poem"
-                android:inputType="textMultiLine"
-                app:layout_constraintTop_toBottomOf="@+id/add_poem_genre_edit_txt">
-
-                <requestFocus />
-            </EditText>
-
-            <TextView
-                android:id="@+id/add_poem_name_txt"
-                style="@style/StyleForMainText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/add_poem_check_box" />
-
-            <AutoCompleteTextView
-                android:id="@+id/add_poem_auto_complete_txt"
-                style="@style/EditTextStyleAddPoem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="@string/input_name_poet"
-                android:inputType="textNoSuggestions"
-                app:layout_constraintTop_toBottomOf="@+id/add_poem_check_box" />
-
-            <Button
-                android:id="@+id/add_poem_add_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/bg_welcome_registration_btn"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/add_poem_poem_edit_txt" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/add_poem_add_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/bg_welcome_registration_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_poem_poem_edit_txt" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

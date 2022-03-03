@@ -51,15 +51,34 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/PoemPoets/app/src/main/res/menu/menu_bottom_general_poem.xml" value="0.17760416666666667" />
         <entry key="app/src/main/res/drawable-hdpi/ic_favorite_pink.xml" value="0.1875" />
         <entry key="app/src/main/res/drawable-hdpi/ic_menu_user.xml" value="0.371875" />
+        <entry key="app/src/main/res/drawable-hdpi/search_view_rounded.xml" value="0.226" />
+        <entry key="app/src/main/res/drawable-mdpi/checkbox_detailed_poem_add.xml" value="0.226" />
+        <entry key="app/src/main/res/drawable-mdpi/checkbox_detailed_poem_like.xml" value="0.226" />
+        <entry key="app/src/main/res/drawable-mdpi/ic_add_circle_outline_purple_24dp.xml" value="0.226" />
+        <entry key="app/src/main/res/drawable-mdpi/ic_detailed_poem_add.xml" value="0.226" />
+        <entry key="app/src/main/res/drawable-mdpi/ic_detailed_poem_add_purple.xml" value="0.226" />
+        <entry key="app/src/main/res/drawable-mdpi/ic_detailed_poem_favorite_purple.xml" value="0.226" />
+        <entry key="app/src/main/res/drawable-v24/bg_welcome_entrance_btn.xml" value="0.226" />
+        <entry key="app/src/main/res/drawable-v24/bg_welcome_registration_btn.xml" value="0.226" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.226" />
         <entry key="app/src/main/res/drawable-v24/ic_menu_poems.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable-v24/selector.xml" value="0.2140625" />
+        <entry key="app/src/main/res/drawable-xhdpi/bg_profile_photo_btn.xml" value="0.226" />
         <entry key="app/src/main/res/drawable-xxhdpi/bg_general_poets_add_poem.xml" value="0.1875" />
         <entry key="app/src/main/res/drawable/ic_base_back.xml" value="0.1875" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1875" />
         <entry key="app/src/main/res/drawable/ic_general_poets_plus.xml" value="0.1875" />
+        <entry key="app/src/main/res/drawable/ic_login_entrance.xml" value="0.226" />
+        <entry key="app/src/main/res/drawable/ic_login_registration.xml" value="0.226" />
         <entry key="app/src/main/res/drawable/ic_menu_love_poem.xml" value="0.371875" />
+        <entry key="app/src/main/res/drawable/ic_menu_poems.xml" value="0.226" />
         <entry key="app/src/main/res/drawable/ic_menu_profile.xml" value="0.371875" />
+        <entry key="app/src/main/res/drawable/ic_profile_my_job.xml" value="0.226" />
+        <entry key="app/src/main/res/drawable/ic_profile_quotes.xml" value="0.226" />
+        <entry key="app/src/main/res/drawable/ic_welcome_entrance.xml" value="0.226" />
+        <entry key="app/src/main/res/drawable/ic_welcome_registration.xml" value="0.226" />
         <entry key="app/src/main/res/layout/activity_community.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/activity_detailed_poem_for_job.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/fragment_add_poem.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_general_poets.xml" value="0.16" />

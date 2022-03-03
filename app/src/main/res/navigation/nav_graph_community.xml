@@ -37,7 +37,11 @@
         android:id="@+id/jobUserFragment"
         android:name="com.application.poem_poet.ui.job_user.JobUserFragment"
         android:label="JobUserFragment"
-        tools:layout="@layout/fragment_job_user"/>
+        tools:layout="@layout/fragment_job_user">
+        <action
+            android:id="@+id/action_jobUserFragment_to_addPoemFragment"
+            app:destination="@id/addPoemFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addPoemFragment"
         android:name="com.application.poem_poet.ui.auxiliary_fragment.AddPoemFragment"

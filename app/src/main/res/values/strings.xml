@@ -44,4 +44,5 @@
     <string name="input_genre">Напишите жанр</string>
     <string name="input_poem">Напишите стих</string>
     <string name="input_name_poet">Введите имя автора</string>
+    <string name="edit">Редактировать</string>
 </resources>

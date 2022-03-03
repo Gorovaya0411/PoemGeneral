@@ -3,12 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="137dp"
-    android:background="@color/bg">
+    android:layout_height="150dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="130dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="15dp"
@@ -24,40 +23,47 @@
 
             <TextView
                 android:id="@+id/job_user_title_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="7dp"
                 android:fontFamily="@font/reza_zulmi_sans"
+                android:gravity="center"
+                android:lines="3"
                 android:maxLines="1"
-                android:scrollHorizontally="true"
                 android:textColor="@color/dark_purple"
                 android:textSize="28sp"
                 android:textStyle="bold"
+                app:autoSizeMaxTextSize="100sp"
+                app:autoSizeMinTextSize="4sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Любовь В Организме" />
+                tools:text="Любовь" />
 
             <TextView
-                android:id="@+id/textViewNamePoetOrUser"
+                android:id="@+id/job_user_name_txt"
                 style="@style/StyleForMainText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:layout_marginTop="9dp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/job_user_title_txt"
                 tools:text="Михаил Лермонтов" />
 
             <TextView
-                android:id="@+id/textViewGenre"
+                android:id="@+id/job_user_genre_txt"
                 style="@style/StyleForMainText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp"
+                android:layout_marginTop="4dp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewNamePoetOrUser"
+                app:layout_constraintTop_toBottomOf="@+id/job_user_name_txt"
                 tools:text="Про любовь" />
 
             <TextView

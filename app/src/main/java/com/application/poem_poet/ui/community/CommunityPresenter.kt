@@ -6,18 +6,19 @@ import com.application.poem_poet.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import moxy.MvpPresenter
 import javax.inject.Inject
 
-class CommunityPresenter @Inject constructor(private val communityUseCase: CommunityUseCase) :
-    MvpPresenter<CommunityView>() {
+class CommunityPresenter @Inject constructor(
+    private val mainUseCase: CommunityUseCase
+
+) : CommunityActivityPresenter() {
 
     var array = emptyArray<String>()
     lateinit var name: String
     private var refReceivingName: DatabaseReference? = null
     private var firebaseUser: FirebaseUser? = null
 
-    fun receivingName() {
+    override fun receivingName() {
         firebaseUser = FirebaseAuth.getInstance().currentUser
         refReceivingName =
             FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
@@ -35,7 +36,16 @@ class CommunityPresenter @Inject constructor(private val communityUseCase: Commu
             }
         })
     }
-    private fun receivingPoem() {
+
+    override fun getCheckDetailedFragment(): String? {
+        return mainUseCase.checkDetailedFragment
+    }
+
+    override fun setCheckDetailedFragment(mark: String?) {
+        mainUseCase.checkDetailedFragment = mark
+    }
+
+    override  fun receivingPoem() {
         val refReceivingPoem =
             FirebaseDatabase.getInstance().reference.child("Poem")
         refReceivingPoem.addListenerForSingleValueEvent(object : ValueEventListener {

@@ -26,7 +26,7 @@ import moxy.MvpAppCompatActivity
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class CommunityActivity : MvpAppCompatActivity(), CommunityView {
+class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
 
     private lateinit var mAuth: FirebaseAuth
     private var firebaseUser: FirebaseUser? = null

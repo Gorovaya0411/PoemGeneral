@@ -6,15 +6,15 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import moxy.MvpPresenter
+import javax.inject.Inject
 
-class ListPoetsPresenter : MvpPresenter<ListPoetsView>() {
+class ListPoetsPresenter @Inject constructor() : ListPoetPresenterImpl() {
     private val myAdapter =
         AdapterListPoets { openingNewActivity(it) }
     private var listPoemPoet: MutableList<PoemAnswer?> = mutableListOf()
     private var listPoemPoetRand: List<PoemAnswer?> = mutableListOf()
-    private var listPoemPoetSet: Set<PoemAnswer?> = mutableSetOf()
 
-    fun getData() {
+    override fun getData() {
         viewState.workWithAdapter(myAdapter)
         viewState.workWithSearchWidget(myAdapter)
         val refUser = FirebaseDatabase.getInstance().reference.child("Poem")
@@ -37,11 +37,11 @@ class ListPoetsPresenter : MvpPresenter<ListPoetsView>() {
         })
     }
 
-    private fun populateData(poems: MutableList<PoemAnswer?>) {
+    override fun populateData(poems: MutableList<PoemAnswer?>) {
         myAdapter.setData(poems)
     }
 
-    private fun openingNewActivity(model: PoemAnswer) {
+    override fun openingNewActivity(model: PoemAnswer) {
         viewState.openingNewActivity(model)
     }
 }
