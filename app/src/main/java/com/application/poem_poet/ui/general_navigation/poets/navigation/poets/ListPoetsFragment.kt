@@ -1,5 +1,6 @@
 package com.application.poem_poet.ui.general_navigation.poets.navigation.poets
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentListPoetsBinding
 import com.application.poem_poet.model.PoemAnswer
+import com.application.poem_poet.ui.auxiliary_fragment.DetailedPoemFragment
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -48,9 +50,9 @@ class ListPoetsFragment : MvpAppCompatFragment(), ListPoetsView {
     }
 
     override fun openingNewActivity(model: PoemAnswer) {
-//        val intent = Intent(context, DetailedPoemGeneralActivity::class.java)
-//        intent.putExtra("KEY", model)
-//        startActivity(intent)
+        val intent = Intent(context, DetailedPoemFragment::class.java)
+        intent.putExtra("KEY", model)
+        startActivity(intent)
     }
 
     override fun workWithAdapter(model: AdapterListPoets) {

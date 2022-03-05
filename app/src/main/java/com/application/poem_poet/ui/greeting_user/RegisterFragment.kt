@@ -33,6 +33,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
         mAuth = FirebaseAuth.getInstance()
         binding.registerProgressBar.visibility = ProgressBar.INVISIBLE
 
+        binding.registerBackImg.setOnClickListener {
+            contextActivity.onBackPressed()
+        }
+
         binding.registerRegistrationBtn.setOnClickListener {
             registerUser()
         }

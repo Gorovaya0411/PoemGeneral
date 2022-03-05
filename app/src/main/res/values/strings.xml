@@ -39,7 +39,7 @@
 
     <string name="add_poem">Добавить стих</string>
 
-    <string name="add_my_poem">Хочу добавить свой стих</string>
+    <string name="add_my_poem">Хочу добавить стих свего авторства</string>
     <string name="input_title_poem">Введите название стиха</string>
     <string name="input_genre">Напишите жанр</string>
     <string name="input_poem">Напишите стих</string>

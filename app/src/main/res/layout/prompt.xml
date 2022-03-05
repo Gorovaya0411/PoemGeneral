@@ -13,6 +13,7 @@
         android:autofillHints=""
         android:backgroundTint="#170F26"
         android:ems="10"
+        android:fontFamily="@font/reza_zulmi_sans"
         android:foregroundGravity="center_vertical"
         android:hint="@string/username"
         android:inputType="textPersonName"

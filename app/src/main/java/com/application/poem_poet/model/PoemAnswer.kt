@@ -2,7 +2,7 @@ package com.application.poem_poet.model
 
 import java.io.Serializable
 
-class PoemAnswer() : Serializable {
+class PoemAnswer: Serializable {
     var username: String = ""
     var titlePoem: String = ""
     var namePoet: String = ""

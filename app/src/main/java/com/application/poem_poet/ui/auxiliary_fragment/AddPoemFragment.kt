@@ -61,6 +61,10 @@ class AddPoemFragment : BaseFragment<FragmentAddPoemBinding>() {
             addPoemAddBtn.setOnClickListener {
                 addPoem()
             }
+
+            addPoemBackImg.setOnClickListener {
+                findNavController().navigate(R.id.action_addPoemFragment_to_generalPoetsFragment)
+            }
         }
     }
 
@@ -134,6 +138,7 @@ class AddPoemFragment : BaseFragment<FragmentAddPoemBinding>() {
                     Toast.LENGTH_LONG
                 ).show()
             } else {
+                addPoemAddBtn.setBackgroundResource(R.drawable.ic_add_poem_add_select)
                 addAvatar()
                 if (namePoetModified == "") {
                     refPoemPoetOrUser =

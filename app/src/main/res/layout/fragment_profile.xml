@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -41,24 +39,24 @@
             android:layout_marginTop="24dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_lower_threshold_view"
+            app:layout_constraintTop_toBottomOf="@+id/profile_communication_txt"
             tools:ignore="UseCompoundDrawables">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_profile_my_job"
-                android:contentDescription="@string/my_job" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="15dp"
                 android:fontFamily="@font/reza_zulmi_sans"
                 android:text="@string/user_job"
                 android:textColor="@color/dark_purple"
                 android:textSize="22sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/ic_profile_my_job"
+                android:contentDescription="@string/my_job" />
         </LinearLayout>
 
         <TextView
@@ -83,7 +81,6 @@
             android:layout_marginRight="40dp"
             android:fontFamily="@font/reza_zulmi_sans"
             android:gravity="center"
-            android:text="@string/change_status"
             android:textColor="@color/dark_purple"
             android:textSize="22sp"
             app:layout_constraintEnd_toStartOf="@+id/profile_quotation_marks_left_btn"
@@ -95,8 +92,8 @@
             android:id="@+id/profile_email_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
             android:fontFamily="@font/reza_zulmi_sans"
+            android:layout_marginTop="24dp"
             android:text="@string/change_login"
             android:textColor="@color/dark_purple"
             android:textSize="22sp"
@@ -119,25 +116,23 @@
             android:id="@+id/profile_go_out_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
-            android:layout_marginBottom="60dp"
             android:fontFamily="@font/reza_zulmi_sans"
             android:text="@string/go_out"
             android:textColor="@color/red"
-            android:textSize="28sp"
+            android:textSize="22sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="24dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_my_job_linear_layout" />
+            app:layout_constraintTop_toBottomOf="@+id/profile_lower_threshold_view" />
 
         <View
             android:id="@+id/profile_lower_threshold_view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="20dp"
             android:background="@color/gray"
+            android:layout_marginTop="24dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_communication_txt" />
+            app:layout_constraintTop_toBottomOf="@+id/profile_my_job_linear_layout" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/profile_card_view"

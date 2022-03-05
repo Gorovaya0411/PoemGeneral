@@ -1,23 +1,26 @@
 package com.application.poem_poet.ui.auxiliary_fragment
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
-import com.example.poemspoets.data.model.PoemAnswer
-import com.example.poemspoets.ui.activities.mainScenes.MainActivity
+import android.view.View
+import com.application.poem_poet.databinding.FragmentDetailedPoemBinding
+import com.application.poem_poet.model.PoemAnswer
+import com.application.poem_poet.ui.base.BaseFragment
+import com.application.poem_poet.ui.community.CommunityActivity
+import com.application.poem_poet.ui.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.android.synthetic.main.activity_detailed_poem_for_job.*
 
-class DetailedPoemFragment : AppCompatActivity() {
+class DetailedPoemFragment : BaseFragment<FragmentDetailedPoemBinding>() {
     private var firebaseUser: FirebaseUser? = null
+    private val contextActivity: CommunityActivity by lazy(LazyThreadSafetyMode.NONE) {
+        (activity as CommunityActivity)
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detailed_poem_for_job)
-
-        val getModelPoemAnswer = intent.getSerializableExtra("KEY") as PoemAnswer
+        val getModelPoemAnswer = contextActivity.intent.getSerializableExtra("KEY") as PoemAnswer
         val namePoetModified = getModelPoemAnswer.namePoet.replace("|", ".", true)
         val usernameModified = getModelPoemAnswer.username.replace("|", ".", true)
 
@@ -70,5 +73,5 @@ class DetailedPoemFragment : AppCompatActivity() {
         startActivity(intent)
     }
 
-
+    override fun initViewBinding() = FragmentDetailedPoemBinding.inflate(layoutInflater)
 }

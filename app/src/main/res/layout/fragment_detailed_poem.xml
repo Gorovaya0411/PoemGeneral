@@ -91,7 +91,7 @@
             android:id="@+id/detailed_poem_like_check_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="30dp"
             android:button="@drawable/checkbox_detailed_poem_like"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -101,22 +101,19 @@
             android:id="@+id/detailed_poem_add_poem_check_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="9dp"
+            android:layout_marginEnd="14dp"
             android:button="@drawable/checkbox_detailed_poem_add"
             app:layout_constraintBottom_toBottomOf="@+id/detailed_poem_like_check_box"
             app:layout_constraintEnd_toStartOf="@+id/detailed_poem_like_check_box"
             app:layout_constraintTop_toTopOf="@+id/detailed_poem_like_check_box" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/profile_change_photo_btn"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:background="@color/gray"
-            app:cornerRadius="100dp"
-            android:text="@string/edit"
+            android:background="@drawable/bg_detailed_poem_show_more_btn"
             app:layout_constraintBottom_toBottomOf="@+id/detailed_poem_add_poem_check_box"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/detailed_poem_add_poem_check_box"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/detailed_poem_add_poem_check_box" />
     </androidx.constraintlayout.widget.ConstraintLayout>

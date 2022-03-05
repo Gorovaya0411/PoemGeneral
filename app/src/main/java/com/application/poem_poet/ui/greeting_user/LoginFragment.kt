@@ -23,6 +23,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         mAuth = FirebaseAuth.getInstance()
 
+        binding.loginBackImg.setOnClickListener {
+            contextActivity.onBackPressed()
+        }
+
         binding.loginEntranceBtn.setOnClickListener {
             loginUser()
         }

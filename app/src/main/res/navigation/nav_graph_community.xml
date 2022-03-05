@@ -32,7 +32,7 @@
         android:id="@+id/myPoemFragment"
         android:name="com.application.poem_poet.ui.general_navigation.my_poem.MyPoemFragment"
         android:label="MyPoemFragment"
-        tools:layout="@layout/fragment_my_poem"/>
+        tools:layout="@layout/fragment_my_poem" />
     <fragment
         android:id="@+id/jobUserFragment"
         android:name="com.application.poem_poet.ui.job_user.JobUserFragment"
@@ -45,7 +45,8 @@
     <fragment
         android:id="@+id/addPoemFragment"
         android:name="com.application.poem_poet.ui.auxiliary_fragment.AddPoemFragment"
-        android:label="AddPoemFragment" >
+        android:label="AddPoemFragment"
+        tools:layout="@layout/fragment_add_poem">
         <action
             android:id="@+id/action_addPoemFragment_to_generalPoetsFragment"
             app:destination="@id/generalPoetsFragment" />

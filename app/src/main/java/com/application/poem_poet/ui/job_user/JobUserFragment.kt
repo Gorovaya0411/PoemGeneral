@@ -27,6 +27,9 @@ class JobUserFragment : MvpAppCompatFragment(), JobUserView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentJobUserBinding.bind(view)
+        binding.jobUserBackImg.setOnClickListener {
+            contextActivity.onBackPressed()
+        }
         detailedMyJobPresenter.getData()
     }
 
