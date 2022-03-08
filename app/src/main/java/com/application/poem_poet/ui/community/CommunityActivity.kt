@@ -8,10 +8,13 @@ import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.widget.ProgressBar
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.application.poem_poet.App
 import com.application.poem_poet.R
 import com.application.poem_poet.di.detailedModule.CommunityActivityModule
+import com.application.poem_poet.model.PoemAnswer
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -44,6 +47,28 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
         refChangeAvatarInUser =
             FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
                 .child("avatar")
+    }
+
+    fun openingNewActivity(model: PoemAnswer) {
+        val bundleListPoets = Bundle()
+        with(bundleListPoets) {
+            putString("username", model.username)
+            putString("titlePoem", model.titlePoem)
+            putString("namePoet", model.namePoet)
+            putString("poem", model.poem)
+            putString("avatar", model.avatar)
+            putInt("like", model.like)
+            putString("id", model.id)
+            putString("uid", model.uid)
+            putString("genre", model.genre)
+        }
+        val navHostFragment: NavHostFragment = supportFragmentManager
+            .findFragmentById(R.id.community_fragment_container_view) as NavHostFragment
+        val navController = navHostFragment.navController
+        navController.navigate(
+            R.id.action_generalPoetsFragment_to_detailedPoemFragment,
+            bundleListPoets
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

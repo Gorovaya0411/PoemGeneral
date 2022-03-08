@@ -45,4 +45,5 @@
     <string name="input_poem">Напишите стих</string>
     <string name="input_name_poet">Введите имя автора</string>
     <string name="edit">Редактировать</string>
+    <string name="close">close</string>
 </resources>

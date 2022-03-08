@@ -4,19 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.poem_poet.databinding.FragmentListUsersBinding
 import com.application.poem_poet.model.PoemAnswer
 import moxy.MvpAppCompatFragment
-import androidx.appcompat.widget.SearchView
 import com.application.poem_poet.R
-import moxy.ktx.moxyPresenter
+import com.application.poem_poet.ui.community.CommunityActivity
+import moxy.presenter.InjectPresenter
 
 class ListUsersFragment : MvpAppCompatFragment(), ListUserView {
 
-    private val poemsPoetsPresenter by moxyPresenter { ListUsersPresenter() }
+    @InjectPresenter
+    lateinit var poemsUsersPresenter: ListUsersPresenter
     lateinit var binding: FragmentListUsersBinding
+    private val contextActivity: CommunityActivity by lazy(LazyThreadSafetyMode.NONE) {
+        (activity as CommunityActivity)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +34,10 @@ class ListUsersFragment : MvpAppCompatFragment(), ListUserView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentListUsersBinding.bind(view)
-        poemsPoetsPresenter.getData()
+
+        binding.listUsersCountrySearch.onActionViewCollapsed()
+        binding.listUsersClose.visibility = ImageView.INVISIBLE
+        poemsUsersPresenter.getData()
     }
 
     override fun workWithSearchWidget(model: AdapterListUser) {
@@ -39,6 +48,11 @@ class ListUsersFragment : MvpAppCompatFragment(), ListUserView {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                binding.listUsersClose.visibility = ImageView.VISIBLE
+                binding.listUsersClose.setOnClickListener {
+                    binding.listUsersCountrySearch.onActionViewCollapsed()
+                    binding.listUsersClose.visibility = ImageView.INVISIBLE
+                }
                 model.getFilter().filter(newText)
                 return false
             }
@@ -47,13 +61,13 @@ class ListUsersFragment : MvpAppCompatFragment(), ListUserView {
     }
 
     override fun openingNewActivity(model: PoemAnswer) {
-//        val intent = Intent(context, DetailedPoemGeneralActivity::class.java)
-//        intent.putExtra("KEY", model)
-//        startActivity(intent)
+        contextActivity.communityPresenter.setCheckDetailedFragment("FromList")
+        contextActivity.openingNewActivity(model)
     }
 
     override fun workWithAdapter(model: AdapterListUser) {
-        binding.listUsersRecyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        binding.listUsersRecyclerView.layoutManager =
+            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         binding.listUsersRecyclerView.adapter = model
     }
 }

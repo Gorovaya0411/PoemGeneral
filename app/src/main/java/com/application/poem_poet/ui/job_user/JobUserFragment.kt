@@ -13,12 +13,16 @@ import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentJobUserBinding
 import com.application.poem_poet.model.PoemAnswer
 import com.application.poem_poet.ui.community.CommunityActivity
+import com.application.poem_poet.ui.main.MainPresenter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import moxy.presenter.InjectPresenter
+
 
 class JobUserFragment : MvpAppCompatFragment(), JobUserView {
 
-    private val detailedMyJobPresenter by moxyPresenter { JobUserPresenter() }
+    @InjectPresenter
+    lateinit var jobUserPresenter: JobUserPresenter
     private val contextActivity: CommunityActivity by lazy(LazyThreadSafetyMode.NONE) {
         (activity as CommunityActivity)
     }
@@ -28,9 +32,9 @@ class JobUserFragment : MvpAppCompatFragment(), JobUserView {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentJobUserBinding.bind(view)
         binding.jobUserBackImg.setOnClickListener {
-            contextActivity.onBackPressed()
+            findNavController().navigate(R.id.action_jobUserFragment_to_profileFragment)
         }
-        detailedMyJobPresenter.getData()
+        jobUserPresenter.getData()
     }
 
     override fun onCreateView(
@@ -59,10 +63,20 @@ class JobUserFragment : MvpAppCompatFragment(), JobUserView {
     }
 
     override fun openingNewActivity(model: PoemAnswer) {
-        contextActivity.communityPresenter.setCheckDetailedFragment("DetJobUser")
-//        val intent = Intent(this, DetailedPoemForJobActivity::class.java)
-//        intent.putExtra("KEY", model)
-//        startActivity(intent)
+        contextActivity.communityPresenter.setCheckDetailedFragment("FromProfile")
+        val bundle = Bundle()
+        with(bundle){
+            putString("username", model.username)
+            putString("titlePoem", model.titlePoem)
+            putString("namePoet", model.namePoet)
+            putString("poem", model.poem)
+            putString("avatar", model.avatar)
+            putInt("like",model.like)
+            putString("id", model.id)
+            putString("uid", model.uid)
+            putString("genre", model.genre)
+        }
+        findNavController().navigate(R.id.detailedPoemFragment, bundle)
     }
 
     override fun toast() {

@@ -11,7 +11,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import javax.inject.Inject
 
-class JobUserPresenter @Inject constructor() : JobUserPresenterImpl() {
+class    JobUserPresenter @Inject constructor() : JobUserPresenterImpl() {
 
     var firebaseUser: FirebaseUser? = null
     var listPoemPoet: MutableList<PoemAnswer?> = mutableListOf()

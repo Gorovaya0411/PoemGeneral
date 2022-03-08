@@ -9,12 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.application.poem_poet.R
-import com.application.poem_poet.databinding.ItemViewListPoetsBinding
 import com.application.poem_poet.databinding.ItemViewListUsersBinding
 import com.application.poem_poet.model.PoemAnswer
 import com.squareup.picasso.Picasso
 import java.util.*
-
 
 class AdapterListUser(private var callback: (PoemAnswer) -> Unit) :
     RecyclerView.Adapter<AdapterListUser.MyViewHolder>() {
@@ -104,5 +102,4 @@ class AdapterListUser(private var callback: (PoemAnswer) -> Unit) :
             }
         }
     }
-
 }

@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentGeneralPoetsBinding
+import com.application.poem_poet.model.PoemAnswer
 import com.application.poem_poet.ui.base.BaseFragment
 import com.application.poem_poet.ui.community.CommunityActivity
 import com.google.firebase.auth.FirebaseAuth

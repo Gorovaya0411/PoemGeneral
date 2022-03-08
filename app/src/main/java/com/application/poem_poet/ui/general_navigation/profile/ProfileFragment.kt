@@ -14,6 +14,7 @@ import com.application.poem_poet.databinding.FragmentProfileBinding
 import com.application.poem_poet.dialogFragments.ForOutDialog
 import com.application.poem_poet.model.User
 import com.application.poem_poet.ui.community.CommunityActivity
+import com.application.poem_poet.ui.job_user.JobUserPresenter
 import com.application.poem_poet.ui.main.MainActivity
 import com.application.poem_poet.utill.extension.launchActivityWithFinish
 import com.google.firebase.auth.FirebaseAuth
@@ -24,10 +25,12 @@ import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import moxy.presenter.InjectPresenter
 
 class ProfileFragment : MvpAppCompatFragment(), ProfileView {
 
-    private val profilePresenter by moxyPresenter { ProfilePresenter() }
+    @InjectPresenter
+    lateinit var profilePresenter: ProfilePresenter
 
     private var firebaseUser: FirebaseUser? = null
     private val forOut = ForOutDialog(::logOut)
