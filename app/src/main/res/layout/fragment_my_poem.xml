@@ -1,56 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg">
 
-    <ImageView
-        android:id="@+id/imageViewNoInternet"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/my_poem_recycle_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="55dp"
-        android:layout_marginTop="330dp"
-        android:layout_marginRight="55dp"
-        android:layout_marginBottom="50dp"
-        android:contentDescription="@string/picture"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/g17575"
-        android:text="@string/my_poem"
-        android:textColor="#1f1338"
-        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewNoInternet"
+        android:id="@+id/my_poem_no_verses_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:fontFamily="@font/g17575"
-        android:gravity="center_horizontal"
-        android:text="@string/no_internet"
-        android:textColor="#1f1338"
-        android:textSize="20sp"
+        android:fontFamily="@font/reza_zulmi_sans"
+        android:text="@string/no_verses"
+        android:textColor="@color/dark_purple"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewNoInternet"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/my_poem_recycle_view"
+        app:layout_constraintEnd_toEndOf="@+id/my_poem_recycle_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/my_poem_recycle_view" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecyclerMainMyPoem"
+    <TextView
+        android:id="@+id/my_poem_help_message_txt"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="65dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="55dp"
+        android:text="@string/help_messange"
+        android:fontFamily="@font/reza_zulmi_sans"
+        android:gravity="center"
+        android:textColor="@color/light_gray"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/my_poem_no_verses_txt" />
 </androidx.constraintlayout.widget.ConstraintLayout>

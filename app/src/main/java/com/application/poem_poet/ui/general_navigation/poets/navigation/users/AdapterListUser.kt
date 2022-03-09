@@ -39,7 +39,13 @@ class AdapterListUser(private var callback: (PoemAnswer) -> Unit) :
                                 .contains(charSearch.toLowerCase(Locale.ROOT)) || row.namePoet.toLowerCase(
                                 Locale.ROOT
                             )
-                                .contains(charSearch.toLowerCase(Locale.ROOT))
+                                .contains(charSearch.toLowerCase(Locale.ROOT)) || row.genre.toLowerCase(
+                                Locale.ROOT
+                            ).contains(
+                                charSearch.toLowerCase(
+                                    Locale.ROOT
+                                )
+                            )
                         ) {
                             resultList.add(row)
                         }

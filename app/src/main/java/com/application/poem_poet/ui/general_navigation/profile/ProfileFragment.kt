@@ -14,7 +14,6 @@ import com.application.poem_poet.databinding.FragmentProfileBinding
 import com.application.poem_poet.dialogFragments.ForOutDialog
 import com.application.poem_poet.model.User
 import com.application.poem_poet.ui.community.CommunityActivity
-import com.application.poem_poet.ui.job_user.JobUserPresenter
 import com.application.poem_poet.ui.main.MainActivity
 import com.application.poem_poet.utill.extension.launchActivityWithFinish
 import com.google.firebase.auth.FirebaseAuth
@@ -24,7 +23,6 @@ import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import moxy.MvpAppCompatFragment
-import moxy.ktx.moxyPresenter
 import moxy.presenter.InjectPresenter
 
 class ProfileFragment : MvpAppCompatFragment(), ProfileView {
@@ -40,6 +38,8 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
     lateinit var uid: String
     lateinit var binding: FragmentProfileBinding
     private lateinit var mAuth: FirebaseAuth
+    var checkMyJob = true
+    var checkOut = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,17 +92,29 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
                     profileEmailTxt
                 )
             }
-            profileMyJobLinearLayout.setOnClickListener { profilePresenter.checkListMyJob() }
+
+
+            profileMyJobLinearLayout.setOnClickListener {
+                if (checkMyJob) {
+                    checkMyJob = false
+                    profilePresenter.checkListMyJob()
+                }
+            }
+
             profileGoOutTxt.setOnClickListener {
-                forOut.show(
-                    requireActivity().supportFragmentManager,
-                    "ForDeleteMyPoemDialog"
-                )
+                if (checkOut) {
+                    checkOut = false
+                    forOut.show(
+                        requireActivity().supportFragmentManager,
+                        "ForDeleteMyPoemDialog"
+                    )
+                }
             }
         }
     }
 
     override fun showDialog(model: DialogFragment) {
+        checkMyJob = true
         model.show(
             requireActivity().supportFragmentManager,
             "ForEmptyJobsDialog"
@@ -142,9 +154,11 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
             context,
             R.style.ThemeOverlay_AppCompat_Dialog_Alert_TestDialogTheme
         )
+
+
         with(builder) {
             setTitle(title)
-            setView(R.layout.prompt)
+            setMessage(hint)
             setPositiveButton("OK") { dialog, _ ->
                 val result = input.text.toString()
                 when (mark) {
@@ -211,6 +225,7 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
     }
 
     private fun logOut() {
+        checkOut = true
         mAuth.signOut()
         launchActivityWithFinish<MainActivity>(contextActivity)
     }

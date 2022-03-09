@@ -1,19 +1,20 @@
-package com.application.poem_poet.ui.job_user
+package com.application.poem_poet.ui.general_navigation.my_poem
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.application.poem_poet.R
-import com.application.poem_poet.databinding.ItemViewJobUserBinding
+import com.application.poem_poet.databinding.ItemViewMyPoemBinding
 import com.application.poem_poet.model.PoemAnswer
+import com.squareup.picasso.Picasso
 
-
-class AdapterJobUser(private var callback: (PoemAnswer, Int) -> Unit) :
-    RecyclerView.Adapter<AdapterJobUser.MyViewHolder>() {
-    private var dataTest = mutableListOf<PoemAnswer?>()
+class AdapterMyPoem(private var callback: (PoemAnswer, Int) -> Unit) :
+    RecyclerView.Adapter<AdapterMyPoem.MyViewHolder>() {
+    var dataTest = mutableListOf<PoemAnswer?>()
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(data: MutableList<PoemAnswer?>) {
@@ -24,7 +25,7 @@ class AdapterJobUser(private var callback: (PoemAnswer, Int) -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.item_view_job_user,
+                R.layout.item_view_my_poem,
                 parent,
                 false
             ), callback
@@ -39,25 +40,30 @@ class AdapterJobUser(private var callback: (PoemAnswer, Int) -> Unit) :
 
     class MyViewHolder(itemView: View, private var callback: (PoemAnswer, Int) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
-        var binding = ItemViewJobUserBinding.bind(itemView)
-        private var title: TextView = binding.jobUserTitleTxt
-        private var name: TextView = binding.jobUserNameTxt
-        private var genre: TextView = binding.jobUserGenreTxt
+        var binding = ItemViewMyPoemBinding.bind(itemView)
+        private var avatar: ImageView = binding.listUsersAvatarUsersImg
+        private var title: TextView = binding.myPoemTitleTxt
+        private var name: TextView = binding.myPoemNameUserTxt
+        private var genre: TextView = binding.myPoemGenreTxt
+        private var like: TextView = binding.myPoemNumberLikesTxt
         private var nameModified = ""
-        private var like: TextView = binding.jobUsersNumberLikesTxt
 
         fun bind(model: PoemAnswer) {
-            nameModified = model.namePoet.replace("|", ".", true)
             if (model.namePoet == "") {
-                name.text = model.username
-
+                nameModified = model.username.replace("|", ".", true)
+                name.text = nameModified
             } else {
+                nameModified = model.namePoet.replace("|", ".", true)
                 name.text = nameModified
             }
             title.text = model.titlePoem
-
             genre.text = model.genre
             like.text = model.like.toString()
+            Picasso.get()
+                .load(model.avatar)
+                .into(avatar)
+
+
 
             itemView.setOnClickListener {
                 callback.invoke(model, 1)
