@@ -2,7 +2,7 @@ package com.application.poem_poet.ui.auxiliary_fragment.add_poem
 
 import android.widget.Button
 import android.widget.CheckBox
-import android.widget.TextView
+import com.application.poem_poet.model.PoemHelp
 import com.application.poem_poet.model.WorkAddUser
 import com.application.poem_poet.ui.community.CommunityActivity
 import moxy.MvpPresenter
@@ -19,15 +19,9 @@ interface AddPoemView : MvpView {
 abstract class AddPoemViewImpl : MvpPresenter<AddPoemView>() {
     abstract fun receivingNamePoet()
     abstract fun addPoem(
-        namePoet: String,
         checkAdd: Boolean,
         model: CommunityActivity,
-        titlePoem: String,
-        genre: String,
-        poem: String,
-        username: String,
-        avatar: String,
-        uid: String,
+        poemAnswer: PoemHelp,
         addPoemCheckBox: CheckBox,
         addPoemAddBtn: Button
     ): Boolean

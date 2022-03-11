@@ -8,6 +8,7 @@ import android.widget.*
 import androidx.navigation.fragment.findNavController
 import com.application.poem_poet.databinding.FragmentAddPoemBinding
 import com.application.poem_poet.R
+import com.application.poem_poet.model.PoemHelp
 import com.application.poem_poet.ui.community.CommunityActivity
 import com.google.firebase.auth.FirebaseAuth
 import moxy.MvpAppCompatFragment
@@ -68,16 +69,10 @@ class AddPoemFragment : MvpAppCompatFragment(), AddPoemView {
                 namePoet = addPoemGenreEditTxt.text.toString()
                 if (checkAdd) {
                     checkAdd = false
-                    checkAdd =  addPoemPresenter.addPoem(
-                        namePoet,
+                    checkAdd = addPoemPresenter.addPoem(
                         checkAdd,
                         contextActivity,
-                        titlePoem,
-                        genre,
-                        poem,
-                        username,
-                        avatar,
-                        uid,
+                        PoemHelp(username, titlePoem, namePoet, genre, poem, avatar, uid),
                         binding.addPoemCheckBox,
                         binding.addPoemAddBtn
                     )

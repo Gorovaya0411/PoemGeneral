@@ -16,7 +16,7 @@
         android:searchIcon="@drawable/ic_list_search"
         android:theme="@style/SearchViewStyle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/list_users_close"
@@ -24,10 +24,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:background="@drawable/ic_list_close"
+        android:contentDescription="@string/close"
         app:layout_constraintBottom_toBottomOf="@+id/list_users_country_search"
         app:layout_constraintEnd_toEndOf="@+id/list_users_country_search"
-        app:layout_constraintTop_toTopOf="@+id/list_users_country_search"
-        android:contentDescription="@string/close" />
+        app:layout_constraintTop_toTopOf="@+id/list_users_country_search" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_users_recycler_view"

@@ -2,45 +2,51 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detailed_poem_cons_l"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg">
 
-    <Button
-        android:id="@+id/detailed_poem_general_btn"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/detailed_poem_gen_linear_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_detailed_poem_show_more_btn"
-        app:layout_constraintBottom_toBottomOf="@+id/detailed_poem_add_poem_check_box"
-        app:layout_constraintEnd_toStartOf="@+id/detailed_poem_add_poem_check_box"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/detailed_poem_add_poem_check_box" />
-
-    <CheckBox
-        android:id="@+id/detailed_poem_like_check_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="24dp"
-        android:button="@drawable/checkbox_detailed_poem_like"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <CheckBox
-        android:id="@+id/detailed_poem_add_poem_check_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="14dp"
-        android:button="@drawable/checkbox_detailed_poem_add"
-        app:layout_constraintBottom_toBottomOf="@+id/detailed_poem_like_check_box"
-        app:layout_constraintEnd_toStartOf="@+id/detailed_poem_like_check_box"
-        app:layout_constraintTop_toTopOf="@+id/detailed_poem_like_check_box" />
+        <Button
+            android:id="@+id/detailed_poem_general_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_detailed_poem_show_more_btn" />
+
+        <CheckBox
+            android:id="@+id/detailed_poem_like_check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="24dp"
+            android:button="@drawable/checkbox_detailed_poem_like" />
+
+        <CheckBox
+            android:id="@+id/detailed_poem_add_poem_check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="12dp"
+            android:button="@drawable/checkbox_detailed_poem_add" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/detailed_poem_general_btn"
+        app:layout_constraintBottom_toTopOf="@+id/detailed_poem_gen_linear_layout"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -118,8 +124,8 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="16dp"
-                android:lineSpacingExtra="5dp"
                 android:layout_marginBottom="20dp"
+                android:lineSpacingExtra="5dp"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

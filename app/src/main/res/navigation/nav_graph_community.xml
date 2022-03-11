@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_jobUserFragment"
-            app:destination="@id/jobUserFragment"/>
+            app:destination="@id/jobUserFragment" />
         <action
             android:id="@+id/action_profileFragment_self"
             app:destination="@id/profileFragment" />
@@ -35,7 +35,7 @@
         android:id="@+id/myPoemFragment"
         android:name="com.application.poem_poet.ui.general_navigation.my_poem.MyPoemFragment"
         android:label="MyPoemFragment"
-        tools:layout="@layout/fragment_my_poem" >
+        tools:layout="@layout/fragment_my_poem">
         <action
             android:id="@+id/action_myPoemFragment_to_detailedPoemFragment"
             app:destination="@id/detailedPoemFragment" />
@@ -96,5 +96,81 @@
         <argument
             android:name="genre"
             app:argType="string" />
+        <action
+            android:id="@+id/action_detailedPoemFragment_to_changePoemFragment"
+            app:destination="@id/changePoemFragment" />
+        <action
+            android:id="@+id/action_detailedPoemFragment_self"
+            app:destination="@id/detailedPoemFragment" />
+        <action
+            android:id="@+id/action_detailedPoemFragment_to_fullInformationFragment"
+            app:destination="@id/fullInformationFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/changePoemFragment"
+        android:name="com.application.poem_poet.ui.auxiliary_fragment.change_poem.ChangePoemFragment"
+        android:label="ChangePoemFragment"
+        tools:layout="@layout/fragment_change_poem">
+        <argument
+            android:name="titlePoem"
+            app:argType="string" />
+        <argument
+            android:name="namePoet"
+            app:argType="string" />
+        <argument
+            android:name="poem"
+            app:argType="string" />
+        <argument
+            android:name="avatar"
+            app:argType="string" />
+        <argument
+            android:name="genre"
+            app:argType="string" />
+        <argument
+            android:name="username"
+            app:argType="string" />
+        <argument
+            android:name="like"
+            app:argType="integer" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="uid"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/fullInformationFragment"
+        android:name="com.application.poem_poet.ui.auxiliary_fragment.full_information.FullInformationFragment"
+        android:label="FullInformationFragment"
+        tools:layout="@layout/fragment_full_information">
+        <argument
+            android:name="titlePoem"
+            app:argType="string" />
+        <argument
+            android:name="namePoet"
+            app:argType="string" />
+        <argument
+            android:name="poem"
+            app:argType="string" />
+        <argument
+            android:name="avatar"
+            app:argType="string" />
+        <argument
+            android:name="genre"
+            app:argType="string" />
+        <argument
+            android:name="username"
+            app:argType="string" />
+        <argument
+            android:name="like"
+            app:argType="integer" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="uid"
+            app:argType="string" />
+    </fragment>
+
 </navigation>

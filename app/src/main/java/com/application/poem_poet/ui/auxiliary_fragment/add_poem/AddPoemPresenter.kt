@@ -19,8 +19,8 @@ class AddPoemPresenter @Inject constructor() : AddPoemViewImpl() {
     private lateinit var namePoetModified: String
     private var firebaseUser: FirebaseUser? = null
     private var login = ""
-   private var avatarHere = ""
-   private var uidHere = ""
+    private var avatarHere = ""
+    private var uidHere = ""
 
     override fun receivingNamePoet() {
         val refReceivingPoem =
@@ -50,15 +50,9 @@ class AddPoemPresenter @Inject constructor() : AddPoemViewImpl() {
     }
 
     override fun addPoem(
-        namePoet: String,
         checkAdd: Boolean,
         model: CommunityActivity,
-        titlePoem: String,
-        genre: String,
-        poem: String,
-        username: String,
-        avatar: String,
-        uid: String,
+        poemAnswer: PoemHelp,
         addPoemCheckBox: CheckBox,
         addPoemAddBtn: Button
     ): Boolean {
@@ -72,8 +66,8 @@ class AddPoemPresenter @Inject constructor() : AddPoemViewImpl() {
                 .child(firebaseUser!!.uid)
                 .child("MyJob")
                 .child(refAllPoem.key.toString())
-        namePoetModified = namePoet.replace(".", "|", true)
-        if (titlePoem == "") {
+        namePoetModified = poemAnswer.namePoet.replace(".", "|", true)
+        if (poemAnswer.titlePoem == "") {
             checkAddEdit = true
             android.widget.Toast.makeText(
                 model,
@@ -81,14 +75,14 @@ class AddPoemPresenter @Inject constructor() : AddPoemViewImpl() {
                 android.widget.Toast.LENGTH_LONG
             )
                 .show()
-        } else if (genre == "") {
+        } else if (poemAnswer.genre == "") {
             checkAddEdit = true
             android.widget.Toast.makeText(
                 model,
                 "Введите жанр",
                 android.widget.Toast.LENGTH_LONG
             ).show()
-        } else if (poem == "") {
+        } else if (poemAnswer.poem == "") {
             checkAddEdit = true
             android.widget.Toast.makeText(
                 model,
@@ -104,11 +98,11 @@ class AddPoemPresenter @Inject constructor() : AddPoemViewImpl() {
             ).show()
         } else {
             addPoemAddBtn.setBackgroundResource(com.application.poem_poet.R.drawable.ic_add_poem_add_select)
-            addAvatar(namePoet, avatar)
+            addAvatar(poemAnswer.namePoet, poemAnswer.avatar)
             if (namePoetModified == "") {
                 refPoemPoetOrUser =
                     FirebaseDatabase.getInstance().reference.child(
-                        uid
+                        poemAnswer.uid
                     ).child("Poems")
                         .child(refAllPoem.key.toString())
 
@@ -128,13 +122,13 @@ class AddPoemPresenter @Inject constructor() : AddPoemViewImpl() {
             }
 
             val poemHashMap = HashMap<String, Any>()
-            poemHashMap["titlePoem"] = titlePoem
+            poemHashMap["titlePoem"] = poemAnswer.titlePoem
             poemHashMap["namePoet"] = namePoetModified
-            poemHashMap["username"] = username
-            poemHashMap["genre"] = genre
-            poemHashMap["poem"] = poem
+            poemHashMap["username"] = poemAnswer.username
+            poemHashMap["genre"] = poemAnswer.genre
+            poemHashMap["poem"] = poemAnswer.poem
             poemHashMap["id"] = refAllPoem.key.toString()
-            poemHashMap["uid"] = uid
+            poemHashMap["uid"] = poemAnswer.uid
             poemHashMap["like"] = 0
 
             refPoemUsers.updateChildren(poemHashMap)
@@ -207,9 +201,9 @@ class AddPoemPresenter @Inject constructor() : AddPoemViewImpl() {
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.exists()) {
                     val user: User? = p0.getValue(User::class.java)
-                        login = user!!.login
-                        uidHere = user.uid
-                        avatarHere = user.avatar
+                    login = user!!.login
+                    uidHere = user.uid
+                    avatarHere = user.avatar
 
                 }
             }

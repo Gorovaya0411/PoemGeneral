@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/nearly_white">
+
+        <TextView
+            android:id="@+id/full_information_title_txt"
+            android:layout_width="230dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/reza_zulmi_sans"
+            android:gravity="start|center_vertical"
+            android:lines="3"
+            android:maxLines="1"
+            android:textColor="@color/dark_purple"
+            android:textSize="26sp"
+            app:autoSizeMaxTextSize="26sp"
+            app:autoSizeMinTextSize="4sp"
+            app:autoSizeStepGranularity="2sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Бородино" />
+
+        <TextView
+            android:id="@+id/full_information_number_likes_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/reza_zulmi_sans"
+            android:textColor="@color/dark_purple"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="25" />
+
+        <ImageView
+            android:id="@+id/full_information_favorite_img"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="3dp"
+            android:contentDescription="@string/like"
+            android:src="@drawable/ic_favorite"
+            app:layout_constraintBottom_toBottomOf="@+id/full_information_number_likes_txt"
+            app:layout_constraintEnd_toStartOf="@+id/full_information_number_likes_txt"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/full_information_genre_txt"
+            style="@style/StyleForMainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="12dp"
+            android:textSize="19sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/full_information_title_txt"
+            tools:text="Юмор" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

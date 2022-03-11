@@ -41,7 +41,7 @@ class AdapterMyPoem(private var callback: (PoemAnswer, Int) -> Unit) :
     class MyViewHolder(itemView: View, private var callback: (PoemAnswer, Int) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         var binding = ItemViewMyPoemBinding.bind(itemView)
-        private var avatar: ImageView = binding.listUsersAvatarUsersImg
+        private var avatar: ImageView = binding.myPoemAvatarUsersImg
         private var title: TextView = binding.myPoemTitleTxt
         private var name: TextView = binding.myPoemNameUserTxt
         private var genre: TextView = binding.myPoemGenreTxt

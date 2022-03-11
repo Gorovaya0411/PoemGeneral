@@ -4,19 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import androidx.navigation.fragment.findNavController
 import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentDetailedPoemBinding
 import com.application.poem_poet.model.PoemAnswer
 import com.application.poem_poet.ui.community.CommunityActivity
-import com.application.poem_poet.ui.community.CommunityPresenter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
 import moxy.MvpAppCompatFragment
-import moxy.ktx.moxyPresenter
 import moxy.presenter.InjectPresenter
 
 class DetailedPoemFragment : MvpAppCompatFragment(), DetailedPoemView {
@@ -81,10 +80,32 @@ class DetailedPoemFragment : MvpAppCompatFragment(), DetailedPoemView {
             detailedPoemGeneralBtn.setOnClickListener {
                 when (contextActivity.communityPresenter.getCheckDetailedFragment()) {
                     "FromProfile" -> {
-//                        openingChangeActivity(getModelPoemAnswer)
+                        openingNewFragment(
+                            arguments?.getString("titlePoem")!!,
+                            arguments?.getString("namePoet")!!,
+                            arguments?.getString("poem")!!,
+                            arguments?.getString("avatar")!!,
+                            arguments?.getString("genre")!!,
+                            arguments?.getString("username")!!,
+                            arguments?.getInt("like")!!,
+                            arguments?.getString("uid")!!,
+                            arguments?.getString("id")!!,
+                            R.id.changePoemFragment
+                        )
                     }
                     "FromListPoem" -> {
-//                        openingNewActivity(getModelPoemAnswer)
+                        openingNewFragment(
+                            arguments?.getString("titlePoem")!!,
+                            arguments?.getString("namePoet")!!,
+                            arguments?.getString("poem")!!,
+                            arguments?.getString("avatar")!!,
+                            arguments?.getString("genre")!!,
+                            arguments?.getString("username")!!,
+                            arguments?.getInt("like")!!,
+                            arguments?.getString("uid")!!,
+                            arguments?.getString("id")!!,
+                            R.id.fullInformationFragment
+                        )
                     }
                 }
             }
@@ -167,9 +188,30 @@ class DetailedPoemFragment : MvpAppCompatFragment(), DetailedPoemView {
 //    startActivity(intent)
     }
 
-    private fun openingChangeActivity(model: PoemAnswer) {
-//    val intent = Intent(this, ChangeYourPoemActivity::class.java)
-//    intent.putExtra("KEY", model)
-//    startActivity(intent)
+    private fun openingNewFragment(
+        titlePoem: String,
+        namePoet: String,
+        poem: String,
+        avatar: String,
+        genre: String,
+        username: String,
+        like: Int,
+        uid: String,
+        id: String,
+        view: Int
+    ) {
+        val bundle = Bundle()
+        with(bundle) {
+            putString("titlePoem", titlePoem)
+            putString("namePoet", namePoet)
+            putString("poem", poem)
+            putString("avatar", avatar)
+            putString("genre", genre)
+            putString("username", username)
+            putInt("like", like)
+            putString("uid", uid)
+            putString("id", id)
+        }
+        findNavController().navigate(view, bundle)
     }
 }

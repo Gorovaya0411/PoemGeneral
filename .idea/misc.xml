@@ -103,6 +103,7 @@
         <entry key="app/src/main/res/drawable-v24/selector.xml" value="0.2140625" />
         <entry key="app/src/main/res/drawable-xhdpi/bg_profile_photo_btn.xml" value="0.226" />
         <entry key="app/src/main/res/drawable-xxhdpi/bg_general_poets_add_poem.xml" value="0.1875" />
+        <entry key="app/src/main/res/drawable-xxxhdpi/bg_add_poem_add_btn.xml" value="0.19" />
         <entry key="app/src/main/res/drawable/ic_base_back.xml" value="0.1875" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1875" />
         <entry key="app/src/main/res/drawable/ic_general_poets_plus.xml" value="0.1875" />
@@ -117,9 +118,12 @@
         <entry key="app/src/main/res/drawable/ic_welcome_registration.xml" value="0.226" />
         <entry key="app/src/main/res/layout/activity_community.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/activity_detailed_poem_for_job.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_detailed_poet_and_user.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/fragment_add_poem.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_detailed_poem.xml" value="0.333786231884058" />
+        <entry key="app/src/main/res/layout/fragment_change_poem.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_detailed_poem.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_full_information.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/layout/fragment_general_poets.xml" value="0.16" />
         <entry key="app/src/main/res/layout/fragment_job_user.xml" value="0.24375" />
         <entry key="app/src/main/res/layout/fragment_list_poets.xml" value="0.2764227642276423" />
@@ -131,6 +135,7 @@
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/fragment_welcome.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/ii.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/item_view_full_information.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/layout/item_view_job_user.xml" value="0.333786231884058" />
         <entry key="app/src/main/res/layout/item_view_list_poets.xml" value="0.333786231884058" />
         <entry key="app/src/main/res/layout/item_view_list_users.xml" value="0.333786231884058" />
