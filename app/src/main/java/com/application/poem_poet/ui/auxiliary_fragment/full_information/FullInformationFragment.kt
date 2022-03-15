@@ -2,7 +2,6 @@ package com.application.poem_poet.ui.auxiliary_fragment.full_information
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +11,9 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.poem_poet.R
-import com.application.poem_poet.databinding.FragmentChangePoemBinding
 import com.application.poem_poet.databinding.FragmentFullInformationBinding
 import com.application.poem_poet.dialogFragments.ForEmptyInfoDialog
 import com.application.poem_poet.model.PoemAnswer
-import com.application.poem_poet.ui.auxiliary_fragment.change_poem.ChangePoemPresenter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.squareup.picasso.Picasso
@@ -34,7 +31,6 @@ class FullInformationFragment : MvpAppCompatFragment(), FullInformationView {
     lateinit var binding: FragmentFullInformationBinding
     private var uid = ""
     private var firebaseUser: FirebaseUser? = null
-    private var listPoemPoet: MutableList<PoemAnswer?> = mutableListOf()
     private val myAdapter =
         AdapterFullInformation { openingNewActivity(it) }
 
@@ -98,8 +94,8 @@ class FullInformationFragment : MvpAppCompatFragment(), FullInformationView {
         RecyclerViewPoetAndUser.adapter = myAdapter
     }
 
-    private fun populateData(poems: MutableList<PoemAnswer?>) {
-        myAdapter.setData(poems)
+    override fun populateData(listPoemPoet: MutableList<PoemAnswer?>) {
+        myAdapter.setData(listPoemPoet)
     }
 
     private fun openingNewActivity(model: PoemAnswer) {
