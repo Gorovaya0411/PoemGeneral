@@ -40,7 +40,7 @@ class ListPoetsFragment : MvpAppCompatFragment(), ListPoetsView {
 
         binding.listPoetCountrySearch.onActionViewCollapsed()
         binding.listPoetClose.visibility = ImageView.INVISIBLE
-        poemsPoetsPresenter.getData()
+        poemsPoetsPresenter.getData(contextActivity)
     }
 
     override fun workWithSearchWidget(model: AdapterListPoets) {

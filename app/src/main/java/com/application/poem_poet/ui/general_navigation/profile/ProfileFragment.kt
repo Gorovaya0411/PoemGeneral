@@ -40,6 +40,7 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
     private lateinit var mAuth: FirebaseAuth
     var checkMyJob = true
     var checkOut = true
+    var login = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,7 +68,11 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
                     profileLoginTxt
                 )
             }
-            profileChangePhotoBtn.setOnClickListener { changePhotoUser() }
+            profileChangePhotoBtn.setOnClickListener {
+                contextActivity.communityPresenter.setCheckCropFragment("profile")
+                contextActivity.communityPresenter.setSaveLoginUser(login)
+                changePhotoUser()
+            }
             profileStatusTxt.setOnClickListener {
                 showDialog(
                     "status",
@@ -92,15 +97,12 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
                     profileEmailTxt
                 )
             }
-
-
             profileMyJobLinearLayout.setOnClickListener {
                 if (checkMyJob) {
                     checkMyJob = false
                     profilePresenter.checkListMyJob()
                 }
             }
-
             profileGoOutTxt.setOnClickListener {
                 if (checkOut) {
                     checkOut = false
@@ -124,6 +126,7 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
     override fun showElementsProfile(model: User?) {
         with(binding) {
             profileLoginTxt.text = model!!.login
+            login = model.login
             profileEmailTxt.text = model.email
             profileStatusTxt.text = model.status
             profileCommunicationTxt.text = model.address
@@ -146,20 +149,18 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
     }
 
     private fun showDialog(mark: String, title: String, hint: String, view: TextView) {
-        val input = EditText(context)
+        val input = EditText(contextActivity)
 
         input.hint = hint
         input.inputType = InputType.TYPE_CLASS_TEXT
         val builder: AlertDialog.Builder = AlertDialog.Builder(
-            context,
-            R.style.ThemeOverlay_AppCompat_Dialog_Alert_TestDialogTheme
+            contextActivity
         )
 
-
-        with(builder) {
-            setTitle(title)
-            setMessage(hint)
-            setPositiveButton("OK") { dialog, _ ->
+        builder.setTitle(title)
+        builder.setMessage(hint)
+        builder.setView(input)
+        builder.setPositiveButton("OK") { dialog, _ ->
                 val result = input.text.toString()
                 when (mark) {
                     "status" -> changeData(result, mark, view, "статус")
@@ -170,11 +171,10 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
                 dialog.cancel()
                 findNavController().navigate(R.id.action_profileFragment_self)
             }
-            setNegativeButton(
+        builder.setNegativeButton(
                 "Cancel"
             ) { dialog, _ -> dialog.cancel() }
-            show()
-        }
+        builder.show()
     }
 
     private fun changeData(data: String, mark: String, view: TextView, userText: String) {

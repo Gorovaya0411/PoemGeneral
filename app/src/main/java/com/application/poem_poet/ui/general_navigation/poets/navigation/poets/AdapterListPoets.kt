@@ -27,7 +27,6 @@ class AdapterListPoets(private var callback: (PoemAnswer) -> Unit) :
         notifyDataSetChanged()
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
             LayoutInflater.from(parent.context).inflate(

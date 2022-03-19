@@ -49,4 +49,6 @@
     <string name="no_verses">У вас нет добавленных стихов</string>
     <string name="help_messange">Воспользуетесь вкладкой Стихи, чтобы добавить</string>
 
+    <string name="change_photo">Изменить фото</string>
+    <string name="enter_the_biography">Напиши биографию кратко и интересно!\nОбязательно указывайте источник!:)</string>
 </resources>

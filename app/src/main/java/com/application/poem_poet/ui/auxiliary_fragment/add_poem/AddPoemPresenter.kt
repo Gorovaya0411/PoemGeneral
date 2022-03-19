@@ -16,7 +16,6 @@ class AddPoemPresenter @Inject constructor() : AddPoemViewImpl() {
     private lateinit var refPoemPoetOrUser: DatabaseReference
     private lateinit var refBio: DatabaseReference
     private var getAvatar: String? = null
-    private lateinit var namePoetModified: String
     private var firebaseUser: FirebaseUser? = null
     private var login = ""
     private var avatarHere = ""
@@ -66,7 +65,6 @@ class AddPoemPresenter @Inject constructor() : AddPoemViewImpl() {
                 .child(firebaseUser!!.uid)
                 .child("MyJob")
                 .child(refAllPoem.key.toString())
-        namePoetModified = poemAnswer.namePoet.replace(".", "|", true)
         if (poemAnswer.titlePoem == "") {
             checkAddEdit = true
             android.widget.Toast.makeText(
@@ -89,7 +87,7 @@ class AddPoemPresenter @Inject constructor() : AddPoemViewImpl() {
                 "Введите стих",
                 android.widget.Toast.LENGTH_LONG
             ).show()
-        } else if (namePoetModified == "" && !addPoemCheckBox.isChecked) {
+        } else if (poemAnswer.namePoet == "" && !addPoemCheckBox.isChecked) {
             checkAddEdit = true
             android.widget.Toast.makeText(
                 model,
@@ -99,7 +97,7 @@ class AddPoemPresenter @Inject constructor() : AddPoemViewImpl() {
         } else {
             addPoemAddBtn.setBackgroundResource(com.application.poem_poet.R.drawable.ic_add_poem_add_select)
             addAvatar(poemAnswer.namePoet, poemAnswer.avatar)
-            if (namePoetModified == "") {
+            if (poemAnswer.namePoet == "") {
                 refPoemPoetOrUser =
                     FirebaseDatabase.getInstance().reference.child(
                         poemAnswer.uid
@@ -109,28 +107,26 @@ class AddPoemPresenter @Inject constructor() : AddPoemViewImpl() {
             } else {
                 refPoemPoetOrUser =
                     FirebaseDatabase.getInstance().reference.child(
-                        namePoetModified
+                        poemAnswer.namePoet
                     )
                         .child("Poems")
                         .child(refAllPoem.key.toString())
                 refBio =
                     FirebaseDatabase.getInstance().reference.child(
-                        namePoetModified
+                        poemAnswer.namePoet
                     )
                         .child("biography")
                 refBio.setValue("")
             }
-
             val poemHashMap = HashMap<String, Any>()
             poemHashMap["titlePoem"] = poemAnswer.titlePoem
-            poemHashMap["namePoet"] = namePoetModified
+            poemHashMap["namePoet"] = poemAnswer.namePoet
             poemHashMap["username"] = poemAnswer.username
             poemHashMap["genre"] = poemAnswer.genre
             poemHashMap["poem"] = poemAnswer.poem
             poemHashMap["id"] = refAllPoem.key.toString()
             poemHashMap["uid"] = poemAnswer.uid
             poemHashMap["like"] = 0
-
             refPoemUsers.updateChildren(poemHashMap)
             refAllPoem.updateChildren(poemHashMap)
             refPoemPoetOrUser.updateChildren(poemHashMap)
@@ -158,7 +154,7 @@ class AddPoemPresenter @Inject constructor() : AddPoemViewImpl() {
 
     private fun addAvatar(namePoet: String, avatarMove: String) {
         val refUser =
-            FirebaseDatabase.getInstance().reference.child(namePoetModified)
+            FirebaseDatabase.getInstance().reference.child(namePoet)
         refUser.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
 

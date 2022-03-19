@@ -9,6 +9,5 @@ class MainActivityModule {
     @MainActivityScope
     fun providesMainActivityPresenter(mainUseCase: MainUseCase): MainPresenter {
         return MainPresenter(mainUseCase)
-
     }
 }

@@ -163,11 +163,6 @@ class DetailedPoemPresenter @Inject constructor() : DetailedPoemViewImpl() {
     override fun workCheckboxAdd(isChecked: Boolean,id: String, con:CommunityActivity) {
         if (isChecked) {
             viewState.addMyAdded()
-            Toast.makeText(
-                con,
-                "Уже добавлено!:)",
-                Toast.LENGTH_LONG
-            ).show()
         } else {
             val refDeletePoem =
                 FirebaseDatabase.getInstance().reference.child("Users")
@@ -177,7 +172,7 @@ class DetailedPoemPresenter @Inject constructor() : DetailedPoemViewImpl() {
             Toast.makeText(
                 con,
                 "Удалено из добавленных:)",
-                Toast.LENGTH_LONG
+                Toast.LENGTH_SHORT
             ).show()
         }
     }

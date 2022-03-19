@@ -66,7 +66,7 @@ class AddPoemFragment : MvpAppCompatFragment(), AddPoemView {
                 val username = addPoemPresenter.addUser().login
                 val avatar = addPoemPresenter.addUser().avatar
                 val uid = addPoemPresenter.addUser().uidHere
-                namePoet = addPoemGenreEditTxt.text.toString()
+                namePoet = addPoemAutoCompleteTxt.text.toString()
                 if (checkAdd) {
                     checkAdd = false
                     checkAdd = addPoemPresenter.addPoem(

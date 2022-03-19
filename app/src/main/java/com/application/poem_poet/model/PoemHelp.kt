@@ -1,6 +1,6 @@
 package com.application.poem_poet.model
 
-class PoemHelp (
+class PoemHelp(
     var username: String,
     var titlePoem: String,
     var namePoet: String,

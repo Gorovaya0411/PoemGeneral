@@ -1,19 +1,17 @@
 package com.application.poem_poet.ui.auxiliary_fragment.full_information
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
-import androidx.cardview.widget.CardView
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentFullInformationBinding
-import com.application.poem_poet.dialogFragments.ForEmptyInfoDialog
 import com.application.poem_poet.model.PoemAnswer
+import com.application.poem_poet.ui.community.CommunityActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.squareup.picasso.Picasso
@@ -24,15 +22,17 @@ import moxy.presenter.InjectPresenter
 class FullInformationFragment : MvpAppCompatFragment(), FullInformationView {
 
     private lateinit var pathName: String
-    private val emptyMyPoemDialog = ForEmptyInfoDialog(::openAddInfo)
-    private var biog = ""
-    private var address = ""
-    private var status = ""
+    private var addressHere = ""
+    private var statusHere = ""
     lateinit var binding: FragmentFullInformationBinding
-    private var uid = ""
+    private var uidHere = ""
     private var firebaseUser: FirebaseUser? = null
     private val myAdapter =
-        AdapterFullInformation { openingNewActivity(it) }
+        AdapterFullInformation { openingNewActivity() }
+    private val contextActivity: CommunityActivity by lazy(LazyThreadSafetyMode.NONE) {
+        (activity as CommunityActivity)
+    }
+    var bio = ""
 
     @InjectPresenter
     lateinit var fullInformationPresenter: FullInformationPresenter
@@ -48,6 +48,7 @@ class FullInformationFragment : MvpAppCompatFragment(), FullInformationView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFullInformationBinding.bind(view)
+        binding.fullInformationAddInfo.visibility = ImageView.INVISIBLE
         with(binding) {
 
             val namePoetChanged = arguments?.getString("namePoet")!!.replace("|", ".", true)
@@ -60,104 +61,125 @@ class FullInformationFragment : MvpAppCompatFragment(), FullInformationView {
 
 
             if (arguments?.getString("namePoet")!! == "") {
-                cardViewBio.visibility = CardView.INVISIBLE
                 fullInformationTitleTxt.text = nameUsernameChanged
                 pathName = arguments?.getString("uid")!!
-                addInfoForUser()
+                with(fullInformationPresenter.addInfoForUser(arguments?.getString("uid")!!)) {
+                    addressHere = address
+                    statusHere = status
+                    uidHere = uid
+                }
             } else {
-                getAvatarNew()
-                textViewYourCommunication.visibility = TextView.INVISIBLE
-                textViewUsernameOrNamePoet.text = namePoetChanged
-                pathName = getModel.namePoet
-                addBio()
+                fullInformationPresenter.getAvatarNew(
+                    arguments?.getString("id")!!,
+                    binding.listUsersAvatarUsersImg
+                )
+                binding.fullInformationTitleTxt.text = namePoetChanged
+                pathName = arguments?.getString("namePoet")!!
+                fullInformationPresenter.addBio(pathName)
             }
 
             workWithAdapter()
-            getData()
+            fullInformationPresenter.getData(pathName)
 
-            imageViewAdd.setOnClickListener {
+            binding.fullInformationAddInfo.setOnClickListener {
+                binding.fullInformationAddInfo.setBackgroundResource(R.drawable.ic_full_information_add_info_purple)
                 openAddInfo()
             }
 
-            buttonBiography.setOnClickListener {
-                val intent = Intent(this, BiographyActivity::class.java)
-                intent.putExtra("KEY", biog)
-                startActivity(intent)
-                finish()
+            binding.fullInformationBackImg.setOnClickListener {
+                val bundle = Bundle()
+                with(bundle) {
+                    putString("username", arguments?.getString("username")!!)
+                    putString("titlePoem", arguments?.getString("titlePoem")!!)
+                    putString("namePoet", arguments?.getString("namePoet")!!)
+                    putString("poem", arguments?.getString("poem")!!)
+                    putString("avatar", arguments?.getString("avatar")!!)
+                    putInt("like", arguments?.getInt("like")!!)
+                    putString("id", arguments?.getString("id")!!)
+                    putString("uid", arguments?.getString("uid")!!)
+                    putString("genre", arguments?.getString("genre")!!)
+                }
+                findNavController().navigate(R.id.detailedPoemFragment, bundle)
+            }
+
+            binding.fullInformationBioTxt.setOnClickListener {
+                val bundle = Bundle()
+                with(bundle) {
+                    putString("username", arguments?.getString("username")!!)
+                    putString("titlePoem", arguments?.getString("titlePoem")!!)
+                    putString("namePoet", arguments?.getString("namePoet")!!)
+                    putString("poem", arguments?.getString("poem")!!)
+                    putString("avatar", arguments?.getString("avatar")!!)
+                    putInt("like", arguments?.getInt("like")!!)
+                    putString("id", arguments?.getString("id")!!)
+                    putString("uid", arguments?.getString("uid")!!)
+                    putString("genre", arguments?.getString("genre")!!)
+                    putString("bio", bio)
+                }
+                findNavController().navigate(R.id.biographyFragment, bundle)
             }
         }
     }
 
     private fun workWithAdapter() {
-        RecyclerViewPoetAndUser.layoutManager =
-            LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        RecyclerViewPoetAndUser.adapter = myAdapter
+        binding.fullInformationRecyclerView.layoutManager =
+            LinearLayoutManager(contextActivity, RecyclerView.VERTICAL, false)
+        binding.fullInformationRecyclerView.adapter = myAdapter
     }
 
     override fun populateData(listPoemPoet: MutableList<PoemAnswer?>) {
         myAdapter.setData(listPoemPoet)
     }
 
-    private fun openingNewActivity(model: PoemAnswer) {
-        val intent = Intent(this, DetailedPoemGeneralActivity::class.java)
-        intent.putExtra("KEY", model)
-        startActivity(intent)
-        finish()
+    private fun openingNewActivity() {
+        val bundle = Bundle()
+        with(bundle) {
+            putString("username", arguments?.getString("username")!!)
+            putString("titlePoem", arguments?.getString("titlePoem")!!)
+            putString("namePoet", arguments?.getString("namePoet")!!)
+            putString("poem", arguments?.getString("poem")!!)
+            putString("avatar", arguments?.getString("avatar")!!)
+            putInt("like", arguments?.getInt("like")!!)
+            putString("id", arguments?.getString("id")!!)
+            putString("uid", arguments?.getString("uid")!!)
+            putString("genre", arguments?.getString("genre")!!)
+        }
+        findNavController().navigate(R.id.detailedPoemFragment, bundle)
     }
 
     private fun openAddInfo() {
-        val intent = Intent(this, AddAdditionalInfoActivity::class.java)
-        intent.putExtra("KEY", getModel)
-        startActivity(intent)
-        finish()
+        val bundle = Bundle()
+        with(bundle) {
+            putString("username", arguments?.getString("username")!!)
+            putString("titlePoem", arguments?.getString("titlePoem")!!)
+            putString("namePoet", arguments?.getString("namePoet")!!)
+            putString("poem", arguments?.getString("poem")!!)
+            putString("avatar", arguments?.getString("avatar")!!)
+            putInt("like", arguments?.getInt("like")!!)
+            putString("id", arguments?.getString("id")!!)
+            putString("uid", arguments?.getString("uid")!!)
+            putString("genre", arguments?.getString("genre")!!)
+        }
+        findNavController().navigate(R.id.addAdditionalInfoFragment, bundle)
     }
 
-    private fun convertData() {
-        if (getModel.namePoet == "") {
-            textViewInfoAvailable.visibility = TextView.INVISIBLE
-            imageViewAvatar.visibility = CardView.INVISIBLE
-            if (status != "") {
-                textViewStatus.text = status
-            } else {
-                textViewStatus.text = "Статус отсутствует"
+    override fun convertData(biog: String) {
+        bio = biog
+        if (arguments?.getString("namePoet")!! == "") {
+            binding.fullInformationCommunicationUserTxt.text = addressHere
+            binding.fullInformationBioTxt.text = statusHere
+            if (statusHere == "") {
+                binding.fullInformationBioTxt.text = "..."
             }
-            if (address != "") {
-                textViewCommunication.text = address
-            } else {
-                textViewCommunication.visibility = TextView.INVISIBLE
-                textViewYourCommunication.visibility = TextView.INVISIBLE
-            }
-
         } else {
-
-            if (biog == "" && getModel.avatar == "https://firebasestorage.googleapis.com/v0/b/poemspoets-9db16.appspot.com/o/icon.png?alt=media&token=3b87c7de-0a6f-48ab-8933-a72637c290ac") {
-                cardViewBio.visibility = CardView.INVISIBLE
-                textViewAddInfo.visibility = TextView.VISIBLE
-                imageViewAdd.visibility = ImageView.VISIBLE
-                emptyMyPoemDialog.show(this.supportFragmentManager, "ForDeleteMyPoemDialog")
-                textViewAddInfo.visibility = TextView.VISIBLE
-                imageViewAdd.visibility = ImageView.VISIBLE
-            } else if (getModel.avatar != "https://firebasestorage.googleapis.com/v0/b/poemspoets-9db16.appspot.com/o/icon.png?alt=media&token=3b87c7de-0a6f-48ab-8933-a72637c290ac" && biog == "") {
-                textViewAddInfo.visibility = TextView.VISIBLE
-                cardViewBio.visibility = CardView.INVISIBLE
-                textViewInfoAvailable.text = "Биография отсуствует"
-                imageViewAdd.visibility = ImageView.VISIBLE
-            } else if (biog != "" && getModel.avatar == "https://firebasestorage.googleapis.com/v0/b/poemspoets-9db16.appspot.com/o/icon.png?alt=media&token=3b87c7de-0a6f-48ab-8933-a72637c290ac") {
-                cardViewBio.visibility = CardView.VISIBLE
-                textViewAddInfo.visibility = TextView.VISIBLE
-                imageViewAdd.visibility = ImageView.VISIBLE
-                textViewInfoAvailable.visibility = TextView.INVISIBLE
+            if (biog != "") {
+                binding.fullInformationBioTxt.text = "Биография ->"
             } else {
-                textViewInfoAvailable.visibility = TextView.INVISIBLE
-                textViewAddInfo.visibility = TextView.INVISIBLE
-                imageViewAdd.visibility = ImageView.INVISIBLE
-                textViewAddInfo.visibility = TextView.INVISIBLE
-                imageViewAdd.visibility = ImageView.INVISIBLE
+                binding.fullInformationBioTxt.text = "..."
             }
-            textViewStatus.visibility = TextView.INVISIBLE
-            imageViewQuotationMarksUp.visibility = ImageView.INVISIBLE
-            imageViewQuotationMarksDown.visibility = ImageView.INVISIBLE
+            if (biog == "" || arguments?.getString("avatar")!! == "https://firebasestorage.googleapis.com/v0/b/poemspoets-130cd.appspot.com/o/icon.png?alt=media&token=5935d9cc-88cf-4697-8ed3-17abd66e9fee") {
+                binding.fullInformationAddInfo.visibility = ImageView.VISIBLE
+            }
         }
     }
-
 }

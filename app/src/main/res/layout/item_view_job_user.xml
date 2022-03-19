@@ -21,25 +21,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/job_user_title_txt"
-                android:layout_width="230dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="7dp"
-                android:fontFamily="@font/reza_zulmi_sans"
-                android:gravity="center"
-                android:lines="3"
-                android:maxLines="1"
-                android:textColor="@color/dark_purple"
-                android:textSize="26sp"
-                app:autoSizeMaxTextSize="26sp"
-                app:autoSizeMinTextSize="4sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Любовь" />
+            <ImageView
+                android:id="@+id/job_users_like_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/like"
+                android:src="@drawable/ic_favorite"
+                app:layout_constraintBottom_toBottomOf="@+id/job_users_number_likes_txt"
+                app:layout_constraintEnd_toStartOf="@+id/job_users_number_likes_txt"
+                app:layout_constraintTop_toTopOf="@+id/job_users_number_likes_txt" />
 
             <TextView
                 android:id="@+id/job_user_name_txt"
@@ -81,16 +72,25 @@
                 app:layout_constraintVertical_bias="0.9"
                 tools:text="1" />
 
-            <ImageView
-                android:id="@+id/job_users_like_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="@string/like"
-                android:src="@drawable/ic_favorite"
-                app:layout_constraintBottom_toBottomOf="@+id/job_users_number_likes_txt"
-                app:layout_constraintEnd_toStartOf="@+id/job_users_number_likes_txt"
-                app:layout_constraintTop_toTopOf="@+id/job_users_number_likes_txt" />
+            <TextView
+                android:id="@+id/job_user_title_txt"
+                android:layout_width="230dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/reza_zulmi_sans"
+                android:gravity="center"
+                android:lines="3"
+                android:maxLines="1"
+                android:textColor="@color/dark_purple"
+                android:textSize="26sp"
+                app:autoSizeMaxTextSize="26sp"
+                app:autoSizeMinTextSize="4sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Любовь" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

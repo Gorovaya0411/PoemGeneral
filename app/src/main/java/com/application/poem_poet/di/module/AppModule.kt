@@ -16,9 +16,8 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
-
 @Module
-class AppModule (private val myApplication: App) {
+class AppModule(private val myApplication: App) {
     @AppScope
     @Provides
     fun provideOKHttpClient(): OkHttpClient {
@@ -27,7 +26,6 @@ class AppModule (private val myApplication: App) {
             .connectTimeout(1200, TimeUnit.SECONDS)
             .build()
     }
-
 
     @AppScope
     @Provides
@@ -58,6 +56,4 @@ class AppModule (private val myApplication: App) {
     @AppScope
     @AppContext
     fun provideAppContext(): Context = myApplication.applicationContext
-
-
 }

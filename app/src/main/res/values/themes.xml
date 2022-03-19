@@ -27,6 +27,7 @@
     <style name="ThemeOverlay.AppCompat.Dialog.Alert.TestDialogTheme">
         <item name="colorAccent">@color/red</item>
         <item name="colorPrimary">@color/red</item>
+
     </style>
 
     <style name="ProfileStyle">

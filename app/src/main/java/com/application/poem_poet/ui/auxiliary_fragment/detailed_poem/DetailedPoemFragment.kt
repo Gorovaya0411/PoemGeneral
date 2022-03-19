@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import androidx.navigation.fragment.findNavController
 import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentDetailedPoemBinding
-import com.application.poem_poet.model.PoemAnswer
 import com.application.poem_poet.ui.community.CommunityActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -93,7 +91,7 @@ class DetailedPoemFragment : MvpAppCompatFragment(), DetailedPoemView {
                             R.id.changePoemFragment
                         )
                     }
-                    "FromListPoem" -> {
+                    "FromList" -> {
                         openingNewFragment(
                             arguments?.getString("titlePoem")!!,
                             arguments?.getString("namePoet")!!,
@@ -128,6 +126,7 @@ class DetailedPoemFragment : MvpAppCompatFragment(), DetailedPoemView {
                     arguments?.getString("uid")!!
                 )
             }
+
             detailedPoemAddPoemCheckBox.setOnCheckedChangeListener { _, isChecked ->
                 detailedPoemPresenter.workCheckboxAdd(
                     isChecked,
@@ -179,13 +178,6 @@ class DetailedPoemFragment : MvpAppCompatFragment(), DetailedPoemView {
         checkActivity = true
         binding.detailedPoemLikeCheckBox.isChecked = true
         like = arguments?.getInt("like")!!
-    }
-
-
-    private fun openingNewActivity(model: PoemAnswer) {
-//    val intent = Intent(this, DetailedPoetAndUserActivity::class.java)
-//    intent.putExtra("KEY", model)
-//    startActivity(intent)
     }
 
     private fun openingNewFragment(

@@ -7,9 +7,9 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.application.poem_poet.App
 import com.application.poem_poet.R
@@ -24,6 +24,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
+import kotlinx.android.synthetic.main.fragment_add_additional_info.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import moxy.MvpAppCompatActivity
 import moxy.presenter.InjectPresenter
@@ -73,41 +74,78 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        profile_progress_bar.visibility = ProgressBar.VISIBLE
+        when (communityPresenter.getCheckCropFragment()) {
+            "profile" -> profile_progress_bar.visibility = ProgressBar.VISIBLE
+            "add" -> add_additional_info_progress_bar.visibility = ProgressBar.VISIBLE
+        }
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK && data != null
         ) {
-            communityPresenter.receivingName()
 
-            val uri = CropImage.getActivityResult(data).uri
+            when (communityPresenter.getCheckCropFragment()) {
+                "profile" -> {
+                    communityPresenter.receivingPoemUser(
+                        communityPresenter.getSaveLoginUser()!!,
+                        communityPresenter.getSaveIdUser()!!
+                    )
+                    val uri = CropImage.getActivityResult(data).uri
+                    val path = refStorageRoot.child("PhotoUser").child(firebaseUser!!.uid)
+                    path.putFile(uri).addOnCompleteListener { task1 ->
+                        if (task1.isSuccessful) {
+                            path.downloadUrl.addOnCompleteListener { task2 ->
+                                if (task2.isSuccessful) {
+                                    val photoUrl = task2.result.toString()
+                                    refChangeAvatarInUser!!.setValue(photoUrl)
+                                    communityPresenter.changeAvatarAll(
+                                        photoUrl,
+                                        communityPresenter.getSaveIdUser()!!
+                                    )
+                                    Picasso.get()
+                                        .load(photoUrl)
+                                        .into(profile_image_img)
+                                    profile_progress_bar.visibility = ProgressBar.INVISIBLE
+                                }
+                            }
 
-            val path = refStorageRoot.child("PhotoUser").child(firebaseUser!!.uid)
-            path.putFile(uri).addOnCompleteListener { task1 ->
-                if (task1.isSuccessful) {
-                    path.downloadUrl.addOnCompleteListener { task2 ->
-                        if (task2.isSuccessful) {
-                            val photoUrl = task2.result.toString()
-                            refChangeAvatarInUser!!.setValue(photoUrl)
-                            changeAvatarAll(photoUrl)
-                            Picasso.get()
-                                .load(photoUrl)
-                                .into(profile_image_img)
-                            profile_progress_bar.visibility = ProgressBar.INVISIBLE
                         }
                     }
+                }
+                "add" -> {
+                    communityPresenter.receivingPoemPoet(
+                        communityPresenter.getSaveNamePoetAddFragment()!!,
+                        communityPresenter.getSaveIdUser()!!
+                    )
+                    val uri = CropImage.getActivityResult(data).uri
+                    val refAvatar =
+                        FirebaseDatabase.getInstance().reference.child(communityPresenter.getSaveNamePoetAddFragment()!!)
+                            .child("avatar")
+                    val path = refStorageRoot.child("PhotoUser")
+                        .child(communityPresenter.getSaveNamePoetAddFragment()!!)
+                    path.putFile(uri).addOnCompleteListener { task1 ->
+                        if (task1.isSuccessful)
+                            path.downloadUrl.addOnCompleteListener { task2 ->
+                                if (task2.isSuccessful) {
+                                    val photoUrl = task2.result.toString()
+                                    communityPresenter.changeAvatarAllAdd(
+                                        photoUrl,
+                                        communityPresenter.getSaveIdPoetAddFragment()!!
+                                    )
+                                    refAvatar.setValue(photoUrl)
+                                    Picasso.get()
+                                        .load(photoUrl)
+                                        .into(add_additional_info_photo_img)
+                                    add_additional_info_progress_bar.visibility =
+                                        ProgressBar.INVISIBLE
 
+                                    add_additional_info_change_photo_txt.visibility =
+                                        TextView.INVISIBLE
+                                }
+                            }
+                    }
                 }
             }
         }
     }
 
-    private fun changeAvatarAll(model: String) {
-        array.forEach {
-            val refChangeAvatarAll =
-                FirebaseDatabase.getInstance().reference.child("Poem").child(it)
-                    .child("avatar")
-            refChangeAvatarAll.setValue(model)
-        }
-    }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)

@@ -4,13 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_marginTop="15dp"
     app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/nearly_white">
+
+        <ImageView
+            android:id="@+id/full_information_favorite_img"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="3dp"
+            android:contentDescription="@string/like"
+            android:src="@drawable/ic_favorite"
+            app:layout_constraintBottom_toBottomOf="@+id/full_information_number_likes_txt"
+            app:layout_constraintEnd_toStartOf="@+id/full_information_number_likes_txt"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/full_information_number_likes_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/reza_zulmi_sans"
+            android:textColor="@color/dark_purple"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="25" />
 
         <TextView
             android:id="@+id/full_information_title_txt"
@@ -30,33 +57,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Бородино" />
-
-        <TextView
-            android:id="@+id/full_information_number_likes_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="7dp"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="@font/reza_zulmi_sans"
-            android:textColor="@color/dark_purple"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="25" />
-
-        <ImageView
-            android:id="@+id/full_information_favorite_img"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="end"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="3dp"
-            android:contentDescription="@string/like"
-            android:src="@drawable/ic_favorite"
-            app:layout_constraintBottom_toBottomOf="@+id/full_information_number_likes_txt"
-            app:layout_constraintEnd_toStartOf="@+id/full_information_number_likes_txt"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/full_information_genre_txt"

@@ -2,8 +2,6 @@ package com.application.poem_poet.ui.community
 
 import com.application.poem_poet.domain.CommunityUseCase
 import com.application.poem_poet.model.PoemAnswer
-import com.application.poem_poet.model.User
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import javax.inject.Inject
@@ -13,29 +11,10 @@ class CommunityPresenter @Inject constructor(
 
 ) : CommunityActivityPresenter() {
 
-    var array = emptyArray<String>()
-    lateinit var name: String
-    private var refReceivingName: DatabaseReference? = null
-    private var firebaseUser: FirebaseUser? = null
-
-    override fun receivingName() {
-        firebaseUser = FirebaseAuth.getInstance().currentUser
-        refReceivingName =
-            FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
-        refReceivingName!!.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
-
-            override fun onDataChange(p0: DataSnapshot) {
-                if (p0.exists()) {
-                    val user: User? = p0.getValue(User::class.java)
-                    name = user!!.login
-                    receivingPoem()
-                }
-            }
-        })
-    }
+    var arrayUser = emptyArray<String>()
+    var arrayPoet = emptyArray<String>()
+    var arrayUserAdd = emptyArray<String>()
+    var arrayPoetAdd = emptyArray<String>()
 
     override fun getCheckDetailedFragment(): String? {
         return mainUseCase.checkDetailedFragment
@@ -45,7 +24,47 @@ class CommunityPresenter @Inject constructor(
         mainUseCase.checkDetailedFragment = mark
     }
 
-    override  fun receivingPoem() {
+    override fun getCheckCropFragment(): String? {
+        return mainUseCase.checkCropFragment
+    }
+
+    override fun setCheckCropFragment(mark: String?) {
+        mainUseCase.checkCropFragment = mark
+    }
+
+    override fun getSaveNamePoetAddFragment(): String? {
+        return mainUseCase.saveNamePoetAddFragment
+    }
+
+    override fun setSaveNamePoetAddFragment(namePoet: String?) {
+        mainUseCase.saveNamePoetAddFragment = namePoet
+    }
+
+    override fun getSaveIdPoetAddFragment(): String? {
+        return mainUseCase.saveIdPoetAddFragment
+    }
+
+    override fun setSaveIdPoetAddFragment(id: String?) {
+        mainUseCase.saveIdPoetAddFragment = id
+    }
+
+    override fun getSaveLoginUser(): String? {
+        return mainUseCase.saveLoginUser
+    }
+
+    override fun setSaveLoginUser(login: String?) {
+        mainUseCase.saveLoginUser = login
+    }
+
+    override fun getSaveIdUser(): String? {
+        return mainUseCase.saveIdUser
+    }
+
+    override fun setSaveIdUser(id: String?) {
+        mainUseCase.saveIdUser = id
+    }
+
+    override fun receivingPoemUser(login: String, id: String) {
         val refReceivingPoem =
             FirebaseDatabase.getInstance().reference.child("Poem")
         refReceivingPoem.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -58,12 +77,109 @@ class CommunityPresenter @Inject constructor(
                     val children = p0.children
                     children.forEach {
                         val poem: PoemAnswer? = it.getValue(PoemAnswer::class.java)
-                        if (poem!!.username == name && poem.namePoet == "") {
-                            array += poem.id
+                        if (poem!!.username == login && poem.namePoet == "") {
+                            arrayUser += poem.id
                         }
                     }
                 }
             }
         })
+
+        val refReceivingPoemAdd =
+            FirebaseDatabase.getInstance().reference.child("Users").child(id).child("MyAdded")
+        refReceivingPoemAdd.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()) {
+                    val children = p0.children
+                    children.forEach {
+                        val poem: PoemAnswer? = it.getValue(PoemAnswer::class.java)
+                        if (poem!!.username == login && poem.namePoet == "") {
+                            arrayUserAdd += poem.id
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    override fun receivingPoemPoet(namePoet: String, id: String) {
+        val refReceivingPoem =
+            FirebaseDatabase.getInstance().reference.child("Poem")
+        refReceivingPoem.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()) {
+                    val children = p0.children
+                    children.forEach {
+                        val poem: PoemAnswer? = it.getValue(PoemAnswer::class.java)
+                        if (poem != null) {
+                            if (poem.namePoet == namePoet) {
+                                arrayPoet += poem.id
+                            }
+                        }
+                    }
+                }
+            }
+        })
+
+        val refReceivingPoemAdd =
+            FirebaseDatabase.getInstance().reference.child("Users").child(id).child("MyAdded")
+        refReceivingPoemAdd.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()) {
+                    val children = p0.children
+                    children.forEach {
+                        val poem: PoemAnswer? = it.getValue(PoemAnswer::class.java)
+                        if (poem != null) {
+                            if (poem.namePoet == namePoet) {
+                                arrayPoetAdd += poem.id
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    override fun changeAvatarAll(photo: String, id: String) {
+        arrayUser.forEach {
+            val refChangeAvatarAll =
+                FirebaseDatabase.getInstance().reference.child("Users").child(id).child("MyAdded")
+                    .child(it).child("avatar")
+            refChangeAvatarAll.setValue(photo)
+        }
+
+        arrayUserAdd.forEach {
+            val refChangeAvatarAll =
+                FirebaseDatabase.getInstance().reference.child("Poem").child(it)
+                    .child("avatar")
+            refChangeAvatarAll.setValue(photo)
+        }
+    }
+
+    override fun changeAvatarAllAdd(photo: String, id: String) {
+        arrayPoet.forEach {
+            val refChangeAvatarAll =
+                FirebaseDatabase.getInstance().reference.child("Poem").child(it)
+                    .child("avatar")
+            refChangeAvatarAll.setValue(photo)
+        }
+        arrayPoetAdd.forEach {
+            val refChangeAvatarAll =
+                FirebaseDatabase.getInstance().reference.child("Users").child(id).child("MyAdded")
+                    .child(it).child("avatar")
+            refChangeAvatarAll.setValue(photo)
+        }
     }
 }
