@@ -1,16 +1,16 @@
 package com.application.poem_poet.domain
 
 
+import com.application.poem_poet.model.PoemAnswer
+import com.application.poem_poet.model.User
 import com.application.poem_poet.service.SessionStoreService
 import javax.inject.Inject
 
 interface CommunityUseCase {
     var checkDetailedFragment: String?
     var checkCropFragment: String?
-    var saveNamePoetAddFragment: String?
-    var saveIdPoetAddFragment: String?
-    var saveLoginUser: String?
-    var saveIdUser: String?
+    var savePoemAnswer: PoemAnswer
+    var saveUser: User
 }
 
 class CommunityUseCaseImpl @Inject constructor(
@@ -29,27 +29,15 @@ class CommunityUseCaseImpl @Inject constructor(
             sessionStoreService.checkCropFragment = value
         }
 
-    override var saveNamePoetAddFragment: String?
-        get() = sessionStoreService.saveNamePoetAddFragment
+    override var savePoemAnswer: PoemAnswer
+        get() = sessionStoreService.savePoemAnswer
         set(value) {
-            sessionStoreService.saveNamePoetAddFragment = value
+            sessionStoreService.savePoemAnswer = value
         }
 
-    override var saveIdPoetAddFragment: String?
-        get() = sessionStoreService.saveIdPoetAddFragment
+    override var saveUser: User
+        get() = sessionStoreService.saveUser
         set(value) {
-            sessionStoreService.saveIdPoetAddFragment = value
-        }
-
-    override var saveLoginUser: String?
-        get() = sessionStoreService.saveLoginUser
-        set(value) {
-            sessionStoreService.saveLoginUser = value
-        }
-
-    override var saveIdUser: String?
-        get() = sessionStoreService.saveIdUser
-        set(value) {
-            sessionStoreService.saveIdUser = value
+            sessionStoreService.saveUser = value
         }
 }

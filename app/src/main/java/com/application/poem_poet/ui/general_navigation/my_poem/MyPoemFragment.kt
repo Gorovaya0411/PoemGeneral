@@ -28,7 +28,6 @@ class MyPoemFragment : MvpAppCompatFragment(), MyPoemView {
         (activity as CommunityActivity)
     }
     lateinit var binding: FragmentMyPoemBinding
-
     @InjectPresenter
     lateinit var myPoemPresenter: MyPoemPresenter
 
@@ -86,7 +85,7 @@ class MyPoemFragment : MvpAppCompatFragment(), MyPoemView {
     }
 
     override fun openListPoemActivity() {
-        val intent = Intent(requireContext(), MainActivity::class.java)
+        val intent = Intent(requireContext(), CommunityActivity::class.java)
         startActivity(intent)
     }
 

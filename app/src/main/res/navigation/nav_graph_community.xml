@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_myPoemFragment_to_detailedPoemFragment"
             app:destination="@id/detailedPoemFragment" />
+        <action
+            android:id="@+id/action_myPoemFragment_to_generalPoetsFragment"
+            app:destination="@id/generalPoetsFragment" />
     </fragment>
     <fragment
         android:id="@+id/jobUserFragment"

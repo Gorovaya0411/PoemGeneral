@@ -5,9 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.poemspoets.data.model.PoemAnswer
-import com.example.poemspoets.ui.activities.R
-import kotlinx.android.synthetic.main.item_view_detailed_poet_and_user.view.*
+import com.application.poem_poet.R
+import com.application.poem_poet.databinding.ItemViewFullInformationBinding
+import com.application.poem_poet.databinding.ItemViewJobUserBinding
+import com.application.poem_poet.model.PoemAnswer
 
 class AdapterFullInformation(private var callback: (PoemAnswer) -> Unit) :
     RecyclerView.Adapter<AdapterFullInformation.MyViewHolder>() {
@@ -21,7 +22,7 @@ class AdapterFullInformation(private var callback: (PoemAnswer) -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.item_view_detailed_poet_and_user,
+                R.layout.item_view_full_information,
                 parent,
                 false
             ), callback
@@ -37,9 +38,10 @@ class AdapterFullInformation(private var callback: (PoemAnswer) -> Unit) :
 
     class MyViewHolder(itemView: View, private var callback: (PoemAnswer) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
-        private var name: TextView = itemView.textViewTitle
-        private var genre: TextView = itemView.textViewGenre
-        private var like: TextView = itemView.textViewNumberLikes
+        var binding = ItemViewFullInformationBinding.bind(itemView)
+        private var name: TextView = binding.fullInformationTitleTxt
+        private var genre: TextView = binding.fullInformationGenreTxt
+        private var like: TextView = binding.fullInformationNumberLikesTxt
 
 
         fun bind(model: PoemAnswer) {

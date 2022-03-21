@@ -1,15 +1,15 @@
 package com.application.poem_poet.service
 
 import com.application.poem_poet.db.SessionStore
+import com.application.poem_poet.model.PoemAnswer
+import com.application.poem_poet.model.User
 import javax.inject.Inject
 
 interface SessionStoreService {
     var checkDetailedFragment: String?
     var checkCropFragment: String?
-    var saveNamePoetAddFragment: String?
-    var saveIdPoetAddFragment: String?
-    var saveLoginUser: String?
-    var saveIdUser: String?
+    var saveUser: User
+    var savePoemAnswer: PoemAnswer
 }
 
 class SessionStoreServiceImpl @Inject constructor(private val sessionStore: SessionStore) :
@@ -27,27 +27,16 @@ class SessionStoreServiceImpl @Inject constructor(private val sessionStore: Sess
             sessionStore.checkCropFragment = value
         }
 
-    override var saveNamePoetAddFragment: String?
-        get() = sessionStore.saveNamePoetAddFragment
+    override var savePoemAnswer: PoemAnswer
+        get() = sessionStore.savePoemAnswer
         set(value) {
-            sessionStore.saveNamePoetAddFragment = value
+            sessionStore.savePoemAnswer = value
         }
 
-    override var saveIdPoetAddFragment: String?
-        get() = sessionStore.saveIdPoetAddFragment
+    override var saveUser: User
+        get() = sessionStore.saveUser
         set(value) {
-            sessionStore.saveIdPoetAddFragment = value
+            sessionStore.saveUser = value
         }
 
-    override var saveLoginUser: String?
-        get() = sessionStore.saveLoginUser
-        set(value) {
-            sessionStore.saveLoginUser = value
-        }
-
-    override var saveIdUser: String?
-        get() = sessionStore.saveIdUser
-        set(value) {
-            sessionStore.saveIdUser = value
-        }
 }

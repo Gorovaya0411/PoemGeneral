@@ -32,17 +32,14 @@ import moxy.presenter.ProvidePresenter
 
 class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
 
-    private lateinit var mAuth: FirebaseAuth
     private var firebaseUser: FirebaseUser? = null
     private lateinit var refStorageRoot: StorageReference
     private var refChangeAvatarInUser: DatabaseReference? = null
-    var array = emptyArray<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_community)
 
-        mAuth = FirebaseAuth.getInstance()
         firebaseUser = FirebaseAuth.getInstance().currentUser
         refStorageRoot = FirebaseStorage.getInstance().reference
         refChangeAvatarInUser =
@@ -50,18 +47,18 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
                 .child("avatar")
     }
 
-    fun openingNewActivity(model: PoemAnswer) {
+    fun openingNewActivity(poem: PoemAnswer) {
         val bundleListPoets = Bundle()
         with(bundleListPoets) {
-            putString("username", model.username)
-            putString("titlePoem", model.titlePoem)
-            putString("namePoet", model.namePoet)
-            putString("poem", model.poem)
-            putString("avatar", model.avatar)
-            putInt("like", model.like)
-            putString("id", model.id)
-            putString("uid", model.uid)
-            putString("genre", model.genre)
+            putString("username", poem.username)
+            putString("titlePoem", poem.titlePoem)
+            putString("namePoet", poem.namePoet)
+            putString("poem", poem.poem)
+            putString("avatar", poem.avatar)
+            putInt("like", poem.like)
+            putString("id", poem.id)
+            putString("uid", poem.uid)
+            putString("genre", poem.genre)
         }
         val navHostFragment: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.community_fragment_container_view) as NavHostFragment
@@ -84,8 +81,8 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
             when (communityPresenter.getCheckCropFragment()) {
                 "profile" -> {
                     communityPresenter.receivingPoemUser(
-                        communityPresenter.getSaveLoginUser()!!,
-                        communityPresenter.getSaveIdUser()!!
+                        communityPresenter.getSaveUser().login,
+                        communityPresenter.getSaveUser().uid
                     )
                     val uri = CropImage.getActivityResult(data).uri
                     val path = refStorageRoot.child("PhotoUser").child(firebaseUser!!.uid)
@@ -97,7 +94,7 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
                                     refChangeAvatarInUser!!.setValue(photoUrl)
                                     communityPresenter.changeAvatarAll(
                                         photoUrl,
-                                        communityPresenter.getSaveIdUser()!!
+                                        communityPresenter.getSaveUser().uid
                                     )
                                     Picasso.get()
                                         .load(photoUrl)
@@ -105,21 +102,20 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
                                     profile_progress_bar.visibility = ProgressBar.INVISIBLE
                                 }
                             }
-
                         }
                     }
                 }
                 "add" -> {
                     communityPresenter.receivingPoemPoet(
-                        communityPresenter.getSaveNamePoetAddFragment()!!,
-                        communityPresenter.getSaveIdUser()!!
+                        communityPresenter.getSavePoemAnswer().namePoet,
+                        communityPresenter.getSaveUser().uid
                     )
                     val uri = CropImage.getActivityResult(data).uri
                     val refAvatar =
-                        FirebaseDatabase.getInstance().reference.child(communityPresenter.getSaveNamePoetAddFragment()!!)
+                        FirebaseDatabase.getInstance().reference.child(communityPresenter.getSavePoemAnswer().namePoet)
                             .child("avatar")
                     val path = refStorageRoot.child("PhotoUser")
-                        .child(communityPresenter.getSaveNamePoetAddFragment()!!)
+                        .child(communityPresenter.getSavePoemAnswer().namePoet)
                     path.putFile(uri).addOnCompleteListener { task1 ->
                         if (task1.isSuccessful)
                             path.downloadUrl.addOnCompleteListener { task2 ->
@@ -127,7 +123,7 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
                                     val photoUrl = task2.result.toString()
                                     communityPresenter.changeAvatarAllAdd(
                                         photoUrl,
-                                        communityPresenter.getSaveIdPoetAddFragment()!!
+                                        communityPresenter.getSavePoemAnswer().id
                                     )
                                     refAvatar.setValue(photoUrl)
                                     Picasso.get()

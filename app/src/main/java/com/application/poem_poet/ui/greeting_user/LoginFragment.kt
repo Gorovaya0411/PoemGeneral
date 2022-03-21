@@ -13,7 +13,6 @@ import com.google.firebase.auth.FirebaseAuth
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     private lateinit var mAuth: FirebaseAuth
-
     private val contextActivity: MainActivity by lazy(LazyThreadSafetyMode.NONE) {
         (activity as MainActivity)
     }
@@ -42,14 +41,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     contextActivity,
                     "Введите E-mail",
                     Toast.LENGTH_LONG
-                )
-                    .show()
+                ).show()
                 password == "" -> Toast.makeText(
                     contextActivity,
                     "Введите пароль",
                     Toast.LENGTH_LONG
                 ).show()
-                else ->
+
+                else -> {
                     mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
@@ -62,6 +61,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                                 ).show()
                             }
                         }
+                }
             }
         }
     }

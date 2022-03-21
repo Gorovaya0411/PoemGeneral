@@ -31,7 +31,6 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
 
     override fun onStart() {
         super.onStart()
-
         if (firebaseUser != null) {
             launchActivityWithFinish<CommunityActivity>(contextActivity)
         }

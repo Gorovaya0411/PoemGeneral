@@ -14,16 +14,16 @@ import com.application.poem_poet.model.PoemAnswer
 import com.squareup.picasso.Picasso
 import java.util.*
 
-class AdapterListPoets(private var callback: (PoemAnswer) -> Unit) :
+class AdapterListPoets(private var openFragment: (PoemAnswer) -> Unit) :
     RecyclerView.Adapter<AdapterListPoets.MyViewHolder>() {
 
-    var dataTest = mutableListOf<PoemAnswer?>()
-    var initialData = mutableListOf<PoemAnswer?>()
+    var listPoem = mutableListOf<PoemAnswer?>()
+    var initialPoem = mutableListOf<PoemAnswer?>()
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(data: MutableList<PoemAnswer?>) {
-        dataTest = data
-        initialData = data
+        listPoem = data
+        initialPoem = data
         notifyDataSetChanged()
     }
 
@@ -33,26 +33,25 @@ class AdapterListPoets(private var callback: (PoemAnswer) -> Unit) :
                 R.layout.item_view_list_poets,
                 parent,
                 false
-            ), callback
+            ), openFragment
         )
     }
 
-    override fun getItemCount(): Int = dataTest.count()
+    override fun getItemCount(): Int = listPoem.count()
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        dataTest[position]?.let { holder.bind(it) }
-
+        listPoem[position]?.let { holder.bind(it) }
     }
 
     fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charSearch = constraint.toString()
-                dataTest = if (charSearch.isEmpty()) {
-                    initialData
+                listPoem = if (charSearch.isEmpty()) {
+                    initialPoem
                 } else {
                     val resultList: MutableList<PoemAnswer?> = mutableListOf()
-                    for (row in initialData) {
+                    for (row in initialPoem) {
                         if (row!!.titlePoem.toLowerCase(Locale.ROOT)
                                 .contains(charSearch.toLowerCase(Locale.ROOT)) || row.namePoet.toLowerCase(
                                 Locale.ROOT
@@ -71,17 +70,16 @@ class AdapterListPoets(private var callback: (PoemAnswer) -> Unit) :
                     resultList
                 }
                 val filterResults = FilterResults()
-                filterResults.values = dataTest
+                filterResults.values = listPoem
                 return filterResults
             }
 
             @SuppressLint("NotifyDataSetChanged")
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                dataTest = results?.values as MutableList<PoemAnswer?>
+                listPoem = results?.values as MutableList<PoemAnswer?>
                 notifyDataSetChanged()
             }
-
         }
     }
 

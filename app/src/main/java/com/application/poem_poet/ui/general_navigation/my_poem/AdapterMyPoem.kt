@@ -12,13 +12,13 @@ import com.application.poem_poet.databinding.ItemViewMyPoemBinding
 import com.application.poem_poet.model.PoemAnswer
 import com.squareup.picasso.Picasso
 
-class AdapterMyPoem(private var callback: (PoemAnswer, Int) -> Unit) :
+class AdapterMyPoem(private var openFragment: (PoemAnswer, Int) -> Unit) :
     RecyclerView.Adapter<AdapterMyPoem.MyViewHolder>() {
-    var dataTest = mutableListOf<PoemAnswer?>()
+    var listPoemAnswer = mutableListOf<PoemAnswer?>()
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(data: MutableList<PoemAnswer?>) {
-        this.dataTest = data
+        this.listPoemAnswer = data
         notifyDataSetChanged()
     }
 
@@ -28,14 +28,14 @@ class AdapterMyPoem(private var callback: (PoemAnswer, Int) -> Unit) :
                 R.layout.item_view_my_poem,
                 parent,
                 false
-            ), callback
+            ), openFragment
         )
     }
 
-    override fun getItemCount(): Int = dataTest.count()
+    override fun getItemCount(): Int = listPoemAnswer.count()
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        dataTest[position]?.let { holder.bind(it) }
+        listPoemAnswer[position]?.let { holder.bind(it) }
     }
 
     class MyViewHolder(itemView: View, private var callback: (PoemAnswer, Int) -> Unit) :
@@ -62,8 +62,6 @@ class AdapterMyPoem(private var callback: (PoemAnswer, Int) -> Unit) :
             Picasso.get()
                 .load(model.avatar)
                 .into(avatar)
-
-
 
             itemView.setOnClickListener {
                 callback.invoke(model, 1)

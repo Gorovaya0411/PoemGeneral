@@ -2,13 +2,12 @@ package com.application.poem_poet.ui.community
 
 import com.application.poem_poet.domain.CommunityUseCase
 import com.application.poem_poet.model.PoemAnswer
-import com.google.firebase.auth.FirebaseUser
+import com.application.poem_poet.model.User
 import com.google.firebase.database.*
 import javax.inject.Inject
 
 class CommunityPresenter @Inject constructor(
     private val mainUseCase: CommunityUseCase
-
 ) : CommunityActivityPresenter() {
 
     var arrayUser = emptyArray<String>()
@@ -32,36 +31,20 @@ class CommunityPresenter @Inject constructor(
         mainUseCase.checkCropFragment = mark
     }
 
-    override fun getSaveNamePoetAddFragment(): String? {
-        return mainUseCase.saveNamePoetAddFragment
+    override fun getSavePoemAnswer(): PoemAnswer {
+        return mainUseCase.savePoemAnswer
     }
 
-    override fun setSaveNamePoetAddFragment(namePoet: String?) {
-        mainUseCase.saveNamePoetAddFragment = namePoet
+    override fun setSavePoemAnswer(poem: PoemAnswer) {
+        mainUseCase.savePoemAnswer = poem
     }
 
-    override fun getSaveIdPoetAddFragment(): String? {
-        return mainUseCase.saveIdPoetAddFragment
+    override fun getSaveUser(): User {
+        return mainUseCase.saveUser
     }
 
-    override fun setSaveIdPoetAddFragment(id: String?) {
-        mainUseCase.saveIdPoetAddFragment = id
-    }
-
-    override fun getSaveLoginUser(): String? {
-        return mainUseCase.saveLoginUser
-    }
-
-    override fun setSaveLoginUser(login: String?) {
-        mainUseCase.saveLoginUser = login
-    }
-
-    override fun getSaveIdUser(): String? {
-        return mainUseCase.saveIdUser
-    }
-
-    override fun setSaveIdUser(id: String?) {
-        mainUseCase.saveIdUser = id
+    override fun setSaveUser(user: User) {
+        mainUseCase.saveUser = user
     }
 
     override fun receivingPoemUser(login: String, id: String) {
