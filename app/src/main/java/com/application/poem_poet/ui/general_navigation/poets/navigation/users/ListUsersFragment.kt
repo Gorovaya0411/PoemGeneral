@@ -34,7 +34,6 @@ class ListUsersFragment : MvpAppCompatFragment(), ListUserView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentListUsersBinding.bind(view)
-
         binding.listUsersCountrySearch.onActionViewCollapsed()
         binding.listUsersClose.visibility = ImageView.INVISIBLE
         poemsUsersPresenter.getData()
@@ -56,7 +55,6 @@ class ListUsersFragment : MvpAppCompatFragment(), ListUserView {
                 model.getFilter().filter(newText)
                 return false
             }
-
         })
     }
 

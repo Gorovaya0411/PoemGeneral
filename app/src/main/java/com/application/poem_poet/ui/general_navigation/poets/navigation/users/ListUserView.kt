@@ -1,7 +1,6 @@
 package com.application.poem_poet.ui.general_navigation.poets.navigation.users
 
 import com.application.poem_poet.model.PoemAnswer
-import com.application.poem_poet.ui.general_navigation.profile.ProfileView
 import moxy.MvpPresenter
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndStrategy

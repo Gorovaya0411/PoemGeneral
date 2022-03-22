@@ -1,6 +1,7 @@
 package com.application.poem_poet.ui.general_navigation.poets.navigation.poets
 
 import com.application.poem_poet.model.PoemAnswer
+import com.application.poem_poet.model.UserGeneral
 import com.application.poem_poet.ui.community.CommunityActivity
 import moxy.MvpPresenter
 import moxy.MvpView
@@ -12,6 +13,7 @@ interface ListPoetsView : MvpView {
     fun workWithSearchWidget(model: AdapterListPoets)
     fun openingNewActivity(model: PoemAnswer)
     fun workWithAdapter(model: AdapterListPoets)
+    fun saveUser(userGeneral: UserGeneral)
 }
 
 abstract class ListPoetPresenterImpl : MvpPresenter<ListPoetsView>() {

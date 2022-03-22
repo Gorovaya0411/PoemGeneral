@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,8 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentListPoetsBinding
 import com.application.poem_poet.model.PoemAnswer
+import com.application.poem_poet.model.UserGeneral
+import com.application.poem_poet.model.UserGeneralSave
 import com.application.poem_poet.ui.community.CommunityActivity
-import kotlinx.android.synthetic.main.fragment_list_poets.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 
@@ -37,7 +37,6 @@ class ListPoetsFragment : MvpAppCompatFragment(), ListPoetsView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentListPoetsBinding.bind(view)
-
         binding.listPoetCountrySearch.onActionViewCollapsed()
         binding.listPoetClose.visibility = ImageView.INVISIBLE
         poemsPoetsPresenter.getData(contextActivity)
@@ -71,6 +70,19 @@ class ListPoetsFragment : MvpAppCompatFragment(), ListPoetsView {
         binding.listPoetRecyclerView.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         binding.listPoetRecyclerView.adapter = model
+    }
+
+    override fun saveUser(userGeneral: UserGeneral) {
+        contextActivity.communityPresenter.setSaveUserGeneral(
+            UserGeneralSave(
+                userGeneral.email,
+                userGeneral.login,
+                userGeneral.avatar,
+                userGeneral.status,
+                userGeneral.address,
+                userGeneral.uid
+            )
+        )
     }
 }
 

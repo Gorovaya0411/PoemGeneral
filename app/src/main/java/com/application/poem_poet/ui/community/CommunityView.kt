@@ -2,6 +2,8 @@ package com.application.poem_poet.ui.community
 
 import com.application.poem_poet.model.PoemAnswer
 import com.application.poem_poet.model.User
+import com.application.poem_poet.model.UserGeneral
+import com.application.poem_poet.model.UserGeneralSave
 import moxy.MvpPresenter
 import moxy.MvpView
 
@@ -20,4 +22,6 @@ abstract class CommunityActivityPresenter : MvpPresenter<CommunityActivityView>(
     abstract fun setSavePoemAnswer(poem: PoemAnswer)
     abstract fun getSaveUser(): User
     abstract fun setSaveUser(user: User)
+    abstract fun getSaveUserGeneral(): UserGeneralSave
+    abstract fun setSaveUserGeneral(userGeneral: UserGeneralSave)
 }

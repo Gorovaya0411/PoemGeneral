@@ -4,7 +4,7 @@ import android.util.Log
 import android.widget.ImageView
 import com.application.poem_poet.model.Bio
 import com.application.poem_poet.model.PoemAnswer
-import com.application.poem_poet.model.User
+import com.application.poem_poet.model.UserGeneral
 import com.application.poem_poet.model.WorkAddInfo
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -82,7 +82,7 @@ class FullInformationPresenter @Inject constructor() : FullInformationImpl() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.exists()) {
-                    val info: User? = p0.getValue(User::class.java)
+                    val info: UserGeneral? = p0.getValue(UserGeneral::class.java)
                     status = info!!.status
                     address = info.address
                     uid = info.uid

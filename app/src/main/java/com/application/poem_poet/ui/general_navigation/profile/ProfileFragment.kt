@@ -12,12 +12,10 @@ import androidx.navigation.fragment.findNavController
 import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentProfileBinding
 import com.application.poem_poet.dialogFragments.ForOutDialog
-import com.application.poem_poet.model.User
 import com.application.poem_poet.ui.community.CommunityActivity
 import com.application.poem_poet.ui.main.MainActivity
 import com.application.poem_poet.utill.extension.launchActivityWithFinish
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
@@ -30,17 +28,14 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
     @InjectPresenter
     lateinit var profilePresenter: ProfilePresenter
 
-    private var firebaseUser: FirebaseUser? = null
     private val forOut = ForOutDialog(::logOut)
     private val contextActivity: CommunityActivity by lazy(LazyThreadSafetyMode.NONE) {
         (activity as CommunityActivity)
     }
-    lateinit var uid: String
     lateinit var binding: FragmentProfileBinding
     private lateinit var mAuth: FirebaseAuth
-    var checkMyJob = true
-    var checkOut = true
-    var login = ""
+    private var checkMyJob = true
+    private var checkOut = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,13 +47,12 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        firebaseUser = FirebaseAuth.getInstance().currentUser
         mAuth = FirebaseAuth.getInstance()
         binding = FragmentProfileBinding.bind(view)
 
         with(binding) {
             profileProgressBar.visibility = ProgressBar.INVISIBLE
-            profilePresenter.addData()
+            showElementsProfile()
 
             profileLoginTxt.setOnClickListener {
                 showDialog(
@@ -70,7 +64,6 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
             }
             profileChangePhotoBtn.setOnClickListener {
                 contextActivity.communityPresenter.setCheckCropFragment("profile")
-                contextActivity.communityPresenter.setSaveLoginUser(login)
                 changePhotoUser()
             }
             profileStatusTxt.setOnClickListener {
@@ -100,7 +93,7 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
             profileMyJobLinearLayout.setOnClickListener {
                 if (checkMyJob) {
                     checkMyJob = false
-                    profilePresenter.checkListMyJob()
+                    profilePresenter.receivingPoem(contextActivity.communityPresenter.getSaveUserGeneral().login)
                 }
             }
             profileGoOutTxt.setOnClickListener {
@@ -123,44 +116,37 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
         )
     }
 
-    override fun showElementsProfile(model: User?) {
+    private fun showElementsProfile() {
         with(binding) {
-            profileLoginTxt.text = model!!.login
-            login = model.login
-            profileEmailTxt.text = model.email
-            profileStatusTxt.text = model.status
-            profileCommunicationTxt.text = model.address
-            uid = model.uid
+            with(contextActivity.communityPresenter.getSaveUserGeneral()) {
+                profileLoginTxt.text = login
+                profileEmailTxt.text = email
+                profileStatusTxt.text = status
+                profileCommunicationTxt.text = uid
+                Picasso.get()
+                    .load(avatar)
+                    .into(binding.profileImageImg)
+                if (status == "") {
+                    binding.profileStatusTxt.text = getString(R.string.change_login)
+                }
+                if (address == "") {
+                    binding.profileCommunicationTxt.text =
+                        getString(R.string.communication_with_you)
+                }
+            }
         }
-    }
-
-    override fun workWithAvatar(model: User?) {
-        Picasso.get()
-            .load(model!!.avatar)
-            .into(binding.profileImageImg)
-    }
-
-    override fun workWithStatus() {
-        binding.profileStatusTxt.text = getString(R.string.change_login)
-    }
-
-    override fun workWithAddress() {
-        binding.profileCommunicationTxt.text = getString(R.string.communication_with_you)
     }
 
     private fun showDialog(mark: String, title: String, hint: String, view: TextView) {
         val input = EditText(contextActivity)
-
         input.hint = hint
         input.inputType = InputType.TYPE_CLASS_TEXT
-        val builder: AlertDialog.Builder = AlertDialog.Builder(
-            contextActivity
-        )
-
-        builder.setTitle(title)
-        builder.setMessage(hint)
-        builder.setView(input)
-        builder.setPositiveButton("OK") { dialog, _ ->
+        val builder: AlertDialog.Builder = AlertDialog.Builder(contextActivity)
+        with(contextActivity.communityPresenter) {
+            builder.setTitle(title)
+            builder.setMessage(hint)
+            builder.setView(input)
+            builder.setPositiveButton("OK") { dialog, _ ->
                 val result = input.text.toString()
                 when (mark) {
                     "status" -> changeData(result, mark, view, "статус")
@@ -171,18 +157,21 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
                 dialog.cancel()
                 findNavController().navigate(R.id.action_profileFragment_self)
             }
-        builder.setNegativeButton(
+            builder.setNegativeButton(
                 "Cancel"
             ) { dialog, _ -> dialog.cancel() }
-        builder.show()
+            builder.show()
+        }
     }
 
     private fun changeData(data: String, mark: String, view: TextView, userText: String) {
         val refDataUser =
-            FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
+            FirebaseDatabase.getInstance().reference.child("Users")
+                .child(contextActivity.communityPresenter.getSaveUserGeneral().uid)
                 .child(mark)
         val refDataAll =
-            FirebaseDatabase.getInstance().reference.child(uid).child(mark)
+            FirebaseDatabase.getInstance().reference.child(contextActivity.communityPresenter.getSaveUserGeneral().uid)
+                .child(mark)
 
         refDataUser.setValue(data)
         refDataAll.setValue(data)
@@ -194,17 +183,19 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
             getString(R.string.data_successfully_changed, userText),
             Toast.LENGTH_LONG
         ).show()
+        findNavController().navigate(R.id.action_profileFragment_self)
     }
 
     private fun changeLogin(data: String) {
         val refLogin =
-            FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
+            FirebaseDatabase.getInstance().reference.child("Users")
+                .child(contextActivity.communityPresenter.getSaveUserGeneral().uid)
                 .child("login")
 
         with(profilePresenter) {
             receivingPoem(data)
-            receivingPoemCatalog(data, uid)
-            receivingPoemPoems(data, uid)
+            receivingPoemCatalog(data, contextActivity.communityPresenter.getSaveUserGeneral().uid)
+            receivingPoemPoems(data, contextActivity.communityPresenter.getSaveUserGeneral().uid)
         }
 
         if (data == "") {

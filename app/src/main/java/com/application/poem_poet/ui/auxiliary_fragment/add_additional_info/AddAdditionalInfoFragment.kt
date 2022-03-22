@@ -73,8 +73,6 @@ class AddAdditionalInfoFragment : MvpAppCompatFragment(), AddAdditionalInfoView 
             }
 
             addAdditionalInfoPhotoCardView.setOnClickListener {
-                contextActivity.communityPresenter.setSaveNamePoetAddFragment(arguments?.getString("namePoet")!!)
-                contextActivity.communityPresenter.setSaveIdPoetAddFragment(arguments?.getString("id")!!)
                 contextActivity.communityPresenter.setCheckCropFragment("add")
                 addAdditionalInfoPresenter.changePhotoUser(contextActivity)
             }

@@ -2,7 +2,7 @@ package com.application.poem_poet.ui.auxiliary_fragment.detailed_poem
 
 import android.widget.Toast
 import com.application.poem_poet.model.PoemAnswer
-import com.application.poem_poet.model.User
+import com.application.poem_poet.model.UserGeneral
 import com.application.poem_poet.ui.community.CommunityActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -58,7 +58,7 @@ class DetailedPoemPresenter @Inject constructor() : DetailedPoemViewImpl() {
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.exists()) {
 
-                    val email: User? = p0.getValue(User::class.java)
+                    val email: UserGeneral? = p0.getValue(UserGeneral::class.java)
                     idUser = email!!.uid
                 }
             }

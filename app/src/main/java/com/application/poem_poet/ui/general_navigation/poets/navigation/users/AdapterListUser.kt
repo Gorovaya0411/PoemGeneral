@@ -14,15 +14,15 @@ import com.application.poem_poet.model.PoemAnswer
 import com.squareup.picasso.Picasso
 import java.util.*
 
-class AdapterListUser(private var callback: (PoemAnswer) -> Unit) :
+class AdapterListUser(private var openFragment: (PoemAnswer) -> Unit) :
     RecyclerView.Adapter<AdapterListUser.MyViewHolder>() {
-    var dataTest = mutableListOf<PoemAnswer?>()
-    var initialData = mutableListOf<PoemAnswer?>()
+    var listUser = mutableListOf<PoemAnswer?>()
+    var initialUser = mutableListOf<PoemAnswer?>()
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(data: MutableList<PoemAnswer?>) {
-        this.dataTest = data
-        initialData = data
+        this.listUser = data
+        initialUser = data
         notifyDataSetChanged()
     }
 
@@ -30,11 +30,11 @@ class AdapterListUser(private var callback: (PoemAnswer) -> Unit) :
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charSearch = constraint.toString()
-                dataTest = if (charSearch.isEmpty()) {
-                    initialData
+                listUser = if (charSearch.isEmpty()) {
+                    initialUser
                 } else {
                     val resultList: MutableList<PoemAnswer?> = mutableListOf()
-                    for (row in initialData) {
+                    for (row in initialUser) {
                         if (row!!.titlePoem.toLowerCase(Locale.ROOT)
                                 .contains(charSearch.toLowerCase(Locale.ROOT)) || row.namePoet.toLowerCase(
                                 Locale.ROOT
@@ -53,14 +53,14 @@ class AdapterListUser(private var callback: (PoemAnswer) -> Unit) :
                     resultList
                 }
                 val filterResults = FilterResults()
-                filterResults.values = dataTest
+                filterResults.values = listUser
                 return filterResults
             }
 
             @SuppressLint("NotifyDataSetChanged")
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                dataTest = results?.values as MutableList<PoemAnswer?>
+                listUser = results?.values as MutableList<PoemAnswer?>
                 notifyDataSetChanged()
             }
 
@@ -73,14 +73,14 @@ class AdapterListUser(private var callback: (PoemAnswer) -> Unit) :
                 R.layout.item_view_list_users,
                 parent,
                 false
-            ), callback
+            ), openFragment
         )
     }
 
-    override fun getItemCount(): Int = dataTest.count()
+    override fun getItemCount(): Int = listUser.count()
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        dataTest[position]?.let { holder.bind(it) }
+        listUser[position]?.let { holder.bind(it) }
     }
 
     class MyViewHolder(itemView: View, private var callback: (PoemAnswer) -> Unit) :

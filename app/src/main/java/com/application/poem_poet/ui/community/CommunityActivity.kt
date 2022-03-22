@@ -15,6 +15,7 @@ import com.application.poem_poet.App
 import com.application.poem_poet.R
 import com.application.poem_poet.di.detailedModule.CommunityActivityModule
 import com.application.poem_poet.model.PoemAnswer
+import com.application.poem_poet.model.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -48,24 +49,13 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
     }
 
     fun openingNewActivity(poem: PoemAnswer) {
-        val bundleListPoets = Bundle()
-        with(bundleListPoets) {
-            putString("username", poem.username)
-            putString("titlePoem", poem.titlePoem)
-            putString("namePoet", poem.namePoet)
-            putString("poem", poem.poem)
-            putString("avatar", poem.avatar)
-            putInt("like", poem.like)
-            putString("id", poem.id)
-            putString("uid", poem.uid)
-            putString("genre", poem.genre)
-        }
+        communityPresenter.setSavePoemAnswer(poem)
+        communityPresenter.setSaveUser(User("", poem.username, poem.avatar, "", "", poem.uid))
         val navHostFragment: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.community_fragment_container_view) as NavHostFragment
         val navController = navHostFragment.navController
         navController.navigate(
-            R.id.action_generalPoetsFragment_to_detailedPoemFragment,
-            bundleListPoets
+            R.id.action_generalPoetsFragment_to_detailedPoemFragment
         )
     }
 

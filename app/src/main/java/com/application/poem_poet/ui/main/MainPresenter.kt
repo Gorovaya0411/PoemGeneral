@@ -1,17 +1,8 @@
 package com.application.poem_poet.ui.main
 
 import com.application.poem_poet.domain.MainUseCase
-import com.application.poem_poet.model.User
+import com.application.poem_poet.model.UserGeneral
 import javax.inject.Inject
 
-class MainPresenter @Inject constructor(private val mainUseCase: MainUseCase) :
-    MainActivityPresenterImpl() {
-
-    override fun getSaveUser(): User {
-        return mainUseCase.saveUser
-    }
-
-    override fun setSaveUser(user: User) {
-        mainUseCase.saveUser = user
-    }
-}
+class MainPresenter @Inject constructor() :
+    MainActivityPresenterImpl()
