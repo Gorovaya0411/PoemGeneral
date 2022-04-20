@@ -31,8 +31,6 @@ class ListUsersPresenter @Inject constructor() : ListUserPresenterImpl() {
                         listPoemPoet.add(poem)
                         listPoemPoetRand = listPoemPoet.shuffled()
                     }
-
-
                 }
                 populateData(listPoemPoetRand as MutableList<PoemAnswer?>)
             }

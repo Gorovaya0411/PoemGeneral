@@ -196,7 +196,7 @@ class AddPoemPresenter @Inject constructor() : AddPoemViewImpl() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.exists()) {
-                    val userGeneral: UserGeneral? = p0.getValue(UserGeneral::class.java)
+                    val userGeneral: User? = p0.getValue(User::class.java)
                     login = userGeneral!!.login
                     uidHere = userGeneral.uid
                     avatarHere = userGeneral.avatar

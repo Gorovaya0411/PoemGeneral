@@ -123,33 +123,6 @@
         <action
             android:id="@+id/action_fullInformationFragment_to_addAdditionalInfoFragment"
             app:destination="@id/addAdditionalInfoFragment" />
-        <argument
-            android:name="titlePoem"
-            app:argType="string" />
-        <argument
-            android:name="namePoet"
-            app:argType="string" />
-        <argument
-            android:name="poem"
-            app:argType="string" />
-        <argument
-            android:name="avatar"
-            app:argType="string" />
-        <argument
-            android:name="genre"
-            app:argType="string" />
-        <argument
-            android:name="username"
-            app:argType="string" />
-        <argument
-            android:name="like"
-            app:argType="integer" />
-        <argument
-            android:name="id"
-            app:argType="string" />
-        <argument
-            android:name="uid"
-            app:argType="string" />
         <action
             android:id="@+id/action_fullInformationFragment_to_biographyFragment"
             app:destination="@id/biographyFragment" />
@@ -159,33 +132,6 @@
         android:name="com.application.poem_poet.ui.auxiliary_fragment.add_additional_info.AddAdditionalInfoFragment"
         android:label="AddAdditionalInfoFragment"
         tools:layout="@layout/fragment_add_additional_info">
-        <argument
-            android:name="titlePoem"
-            app:argType="string" />
-        <argument
-            android:name="namePoet"
-            app:argType="string" />
-        <argument
-            android:name="poem"
-            app:argType="string" />
-        <argument
-            android:name="avatar"
-            app:argType="string" />
-        <argument
-            android:name="genre"
-            app:argType="string" />
-        <argument
-            android:name="username"
-            app:argType="string" />
-        <argument
-            android:name="like"
-            app:argType="integer" />
-        <argument
-            android:name="id"
-            app:argType="string" />
-        <argument
-            android:name="uid"
-            app:argType="string" />
         <action
             android:id="@+id/action_addAdditionalInfoFragment_to_fullInformationFragment"
             app:destination="@id/fullInformationFragment" />
@@ -198,33 +144,6 @@
         <action
             android:id="@+id/action_biographyFragment_to_fullInformationFragment"
             app:destination="@id/fullInformationFragment" />
-        <argument
-            android:name="titlePoem"
-            app:argType="string" />
-        <argument
-            android:name="namePoet"
-            app:argType="string" />
-        <argument
-            android:name="poem"
-            app:argType="string" />
-        <argument
-            android:name="avatar"
-            app:argType="string" />
-        <argument
-            android:name="genre"
-            app:argType="string" />
-        <argument
-            android:name="username"
-            app:argType="string" />
-        <argument
-            android:name="like"
-            app:argType="integer" />
-        <argument
-            android:name="id"
-            app:argType="string" />
-        <argument
-            android:name="uid"
-            app:argType="string" />
         <argument
             android:name="bio"
             app:argType="string" />

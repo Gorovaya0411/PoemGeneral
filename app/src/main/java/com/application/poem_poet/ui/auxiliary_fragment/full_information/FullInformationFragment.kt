@@ -50,73 +50,52 @@ class FullInformationFragment : MvpAppCompatFragment(), FullInformationView {
         binding = FragmentFullInformationBinding.bind(view)
         binding.fullInformationAddInfo.visibility = ImageView.INVISIBLE
         with(binding) {
+            with(contextActivity.communityPresenter.getSavePoemHelp()) {
 
-            val namePoetChanged = arguments?.getString("namePoet")!!.replace("|", ".", true)
-            val nameUsernameChanged = arguments?.getString("username")!!.replace("|", ".", true)
+                val namePoetChanged = namePoet.replace("|", ".", true)
+                val nameUsernameChanged = arguments?.getString("username")!!.replace("|", ".", true)
 
-            Picasso.get()
-                .load(arguments?.getString("avatar")!!)
-                .into(listUsersAvatarUsersImg)
-            firebaseUser = FirebaseAuth.getInstance().currentUser
+                Picasso.get()
+                    .load(arguments?.getString("avatar")!!)
+                    .into(listUsersAvatarUsersImg)
+                firebaseUser = FirebaseAuth.getInstance().currentUser
 
 
-            if (arguments?.getString("namePoet")!! == "") {
-                fullInformationTitleTxt.text = nameUsernameChanged
-                pathName = arguments?.getString("uid")!!
-                with(fullInformationPresenter.addInfoForUser(arguments?.getString("uid")!!)) {
-                    addressHere = address
-                    statusHere = status
-                    uidHere = uid
+                if (arguments?.getString("namePoet")!! == "") {
+                    fullInformationTitleTxt.text = nameUsernameChanged
+                    pathName = arguments?.getString("uid")!!
+                    addressHere = contextActivity.communityPresenter.getSaveUserGeneral().address
+                    statusHere = contextActivity.communityPresenter.getSaveUserGeneral().status
+                    uidHere = contextActivity.communityPresenter.getSaveUserGeneral().uid
+                    convertData("")
+                } else {
+                    Picasso.get()
+                        .load(contextActivity.communityPresenter.getSavePoemHelp().avatar)
+                        .into(binding.listUsersAvatarUsersImg)
+                    binding.fullInformationTitleTxt.text = namePoetChanged
+                    pathName = arguments?.getString("namePoet")!!
+                    fullInformationPresenter.addBio(pathName)
                 }
-            } else {
-                fullInformationPresenter.getAvatarNew(
-                    arguments?.getString("id")!!,
-                    binding.listUsersAvatarUsersImg
-                )
-                binding.fullInformationTitleTxt.text = namePoetChanged
-                pathName = arguments?.getString("namePoet")!!
-                fullInformationPresenter.addBio(pathName)
-            }
 
-            workWithAdapter()
-            fullInformationPresenter.getData(pathName)
+                workWithAdapter()
+                fullInformationPresenter.getData(pathName)
 
-            binding.fullInformationAddInfo.setOnClickListener {
-                binding.fullInformationAddInfo.setBackgroundResource(R.drawable.ic_full_information_add_info_purple)
-                openAddInfo()
-            }
-
-            binding.fullInformationBackImg.setOnClickListener {
-                val bundle = Bundle()
-                with(bundle) {
-                    putString("username", arguments?.getString("username")!!)
-                    putString("titlePoem", arguments?.getString("titlePoem")!!)
-                    putString("namePoet", arguments?.getString("namePoet")!!)
-                    putString("poem", arguments?.getString("poem")!!)
-                    putString("avatar", arguments?.getString("avatar")!!)
-                    putInt("like", arguments?.getInt("like")!!)
-                    putString("id", arguments?.getString("id")!!)
-                    putString("uid", arguments?.getString("uid")!!)
-                    putString("genre", arguments?.getString("genre")!!)
+                binding.fullInformationAddInfo.setOnClickListener {
+                    binding.fullInformationAddInfo.setBackgroundResource(R.drawable.ic_full_information_add_info_purple)
+                    openAddInfo()
                 }
-                findNavController().navigate(R.id.detailedPoemFragment, bundle)
-            }
 
-            binding.fullInformationBioTxt.setOnClickListener {
-                val bundle = Bundle()
-                with(bundle) {
-                    putString("username", arguments?.getString("username")!!)
-                    putString("titlePoem", arguments?.getString("titlePoem")!!)
-                    putString("namePoet", arguments?.getString("namePoet")!!)
-                    putString("poem", arguments?.getString("poem")!!)
-                    putString("avatar", arguments?.getString("avatar")!!)
-                    putInt("like", arguments?.getInt("like")!!)
-                    putString("id", arguments?.getString("id")!!)
-                    putString("uid", arguments?.getString("uid")!!)
-                    putString("genre", arguments?.getString("genre")!!)
-                    putString("bio", bio)
+                binding.fullInformationBackImg.setOnClickListener {
+                    findNavController().navigate(R.id.detailedPoemFragment)
                 }
-                findNavController().navigate(R.id.biographyFragment, bundle)
+
+                binding.fullInformationBioTxt.setOnClickListener {
+                    val bundle = Bundle()
+                    with(bundle) {
+                        putString("bio", bio)
+                    }
+                    findNavController().navigate(R.id.biographyFragment, bundle)
+                }
             }
         }
     }
@@ -132,35 +111,11 @@ class FullInformationFragment : MvpAppCompatFragment(), FullInformationView {
     }
 
     private fun openingNewActivity() {
-        val bundle = Bundle()
-        with(bundle) {
-            putString("username", arguments?.getString("username")!!)
-            putString("titlePoem", arguments?.getString("titlePoem")!!)
-            putString("namePoet", arguments?.getString("namePoet")!!)
-            putString("poem", arguments?.getString("poem")!!)
-            putString("avatar", arguments?.getString("avatar")!!)
-            putInt("like", arguments?.getInt("like")!!)
-            putString("id", arguments?.getString("id")!!)
-            putString("uid", arguments?.getString("uid")!!)
-            putString("genre", arguments?.getString("genre")!!)
-        }
-        findNavController().navigate(R.id.detailedPoemFragment, bundle)
+        findNavController().navigate(R.id.detailedPoemFragment)
     }
 
     private fun openAddInfo() {
-        val bundle = Bundle()
-        with(bundle) {
-            putString("username", arguments?.getString("username")!!)
-            putString("titlePoem", arguments?.getString("titlePoem")!!)
-            putString("namePoet", arguments?.getString("namePoet")!!)
-            putString("poem", arguments?.getString("poem")!!)
-            putString("avatar", arguments?.getString("avatar")!!)
-            putInt("like", arguments?.getInt("like")!!)
-            putString("id", arguments?.getString("id")!!)
-            putString("uid", arguments?.getString("uid")!!)
-            putString("genre", arguments?.getString("genre")!!)
-        }
-        findNavController().navigate(R.id.addAdditionalInfoFragment, bundle)
+        findNavController().navigate(R.id.addAdditionalInfoFragment)
     }
 
     override fun convertData(biog: String) {

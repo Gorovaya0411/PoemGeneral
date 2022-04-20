@@ -1,8 +1,6 @@
 package com.application.poem_poet.ui.community
 
-import com.application.poem_poet.model.PoemAnswer
-import com.application.poem_poet.model.User
-import com.application.poem_poet.model.UserGeneral
+import com.application.poem_poet.model.PoemHelp
 import com.application.poem_poet.model.UserGeneralSave
 import moxy.MvpPresenter
 import moxy.MvpView
@@ -18,10 +16,8 @@ abstract class CommunityActivityPresenter : MvpPresenter<CommunityActivityView>(
     abstract fun setCheckCropFragment(mark: String?)
     abstract fun changeAvatarAllAdd(photo: String, id: String)
     abstract fun changeAvatarAll(photo: String, id: String)
-    abstract fun getSavePoemAnswer(): PoemAnswer
-    abstract fun setSavePoemAnswer(poem: PoemAnswer)
-    abstract fun getSaveUser(): User
-    abstract fun setSaveUser(user: User)
+    abstract fun getSavePoemHelp(): PoemHelp
+    abstract fun setSavePoemHelp(poem: PoemHelp)
     abstract fun getSaveUserGeneral(): UserGeneralSave
     abstract fun setSaveUserGeneral(userGeneral: UserGeneralSave)
 }

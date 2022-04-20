@@ -29,6 +29,7 @@ class ListUsersFragment : MvpAppCompatFragment(), ListUserView {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_list_users, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,6 +45,7 @@ class ListUsersFragment : MvpAppCompatFragment(), ListUserView {
             SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
+
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
@@ -54,6 +56,7 @@ class ListUsersFragment : MvpAppCompatFragment(), ListUserView {
                 }
                 model.getFilter().filter(newText)
                 return false
+
             }
         })
     }

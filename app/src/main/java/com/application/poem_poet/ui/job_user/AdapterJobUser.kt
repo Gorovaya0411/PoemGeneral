@@ -11,13 +11,13 @@ import com.application.poem_poet.databinding.ItemViewJobUserBinding
 import com.application.poem_poet.model.PoemAnswer
 
 
-class AdapterJobUser(private var callback: (PoemAnswer, Int) -> Unit) :
+class AdapterJobUser(private var openNewActivity: (PoemAnswer, Int) -> Unit) :
     RecyclerView.Adapter<AdapterJobUser.MyViewHolder>() {
-    private var dataTest = mutableListOf<PoemAnswer?>()
+    private var listPoem = mutableListOf<PoemAnswer?>()
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(data: MutableList<PoemAnswer?>) {
-        this.dataTest = data
+        this.listPoem = data
         notifyDataSetChanged()
     }
 
@@ -27,14 +27,14 @@ class AdapterJobUser(private var callback: (PoemAnswer, Int) -> Unit) :
                 R.layout.item_view_job_user,
                 parent,
                 false
-            ), callback
+            ), openNewActivity
         )
     }
 
-    override fun getItemCount(): Int = dataTest.count()
+    override fun getItemCount(): Int = listPoem.count()
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        dataTest[position]?.let { holder.bind(it) }
+        listPoem[position]?.let { holder.bind(it) }
     }
 
     class MyViewHolder(itemView: View, private var callback: (PoemAnswer, Int) -> Unit) :

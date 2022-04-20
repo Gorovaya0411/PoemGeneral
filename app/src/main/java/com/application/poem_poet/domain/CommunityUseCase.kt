@@ -1,9 +1,6 @@
 package com.application.poem_poet.domain
 
-
-import com.application.poem_poet.model.PoemAnswer
-import com.application.poem_poet.model.User
-import com.application.poem_poet.model.UserGeneral
+import com.application.poem_poet.model.PoemHelp
 import com.application.poem_poet.model.UserGeneralSave
 import com.application.poem_poet.service.SessionStoreService
 import javax.inject.Inject
@@ -11,9 +8,8 @@ import javax.inject.Inject
 interface CommunityUseCase {
     var checkDetailedFragment: String?
     var checkCropFragment: String?
-    var savePoemAnswer: PoemAnswer
+    var savePoemHelp: PoemHelp
     var saveUserGeneral: UserGeneralSave
-    var saveUser: User
 }
 
 class CommunityUseCaseImpl @Inject constructor(
@@ -32,21 +28,15 @@ class CommunityUseCaseImpl @Inject constructor(
             sessionStoreService.checkCropFragment = value
         }
 
-    override var savePoemAnswer: PoemAnswer
-        get() = sessionStoreService.savePoemAnswer
+    override var savePoemHelp: PoemHelp
+        get() = sessionStoreService.savePoemHelp
         set(value) {
-            sessionStoreService.savePoemAnswer = value
+            sessionStoreService.savePoemHelp = value
         }
 
     override var saveUserGeneral: UserGeneralSave
         get() = sessionStoreService.saveUserGeneral
         set(value) {
             sessionStoreService.saveUserGeneral = value
-        }
-
-    override var saveUser: User
-        get() = sessionStoreService.saveUser
-        set(value) {
-            sessionStoreService.saveUser = value
         }
 }

@@ -29,18 +29,14 @@ class MyPoemPresenter @Inject constructor() : MyPoemViewImpl() {
         refUser.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
 
-
             }
 
             override fun onDataChange(p0: DataSnapshot) {
                 val listMyPoem: PoemAnswer? = p0.getValue(PoemAnswer::class.java)
                 val children = p0.children
-
                 if (listMyPoem == null) {
-
                     viewState.showDialog(emptyMyPoemDialog)
                 }
-
                 children.forEach {
                     val poem: PoemAnswer? = it.getValue(PoemAnswer::class.java)
                     listPoemPoet.add(poem)

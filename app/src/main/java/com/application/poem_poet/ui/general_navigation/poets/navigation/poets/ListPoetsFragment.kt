@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentListPoetsBinding
 import com.application.poem_poet.model.PoemAnswer
-import com.application.poem_poet.model.UserGeneral
-import com.application.poem_poet.model.UserGeneralSave
 import com.application.poem_poet.ui.community.CommunityActivity
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -70,19 +68,6 @@ class ListPoetsFragment : MvpAppCompatFragment(), ListPoetsView {
         binding.listPoetRecyclerView.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         binding.listPoetRecyclerView.adapter = model
-    }
-
-    override fun saveUser(userGeneral: UserGeneral) {
-        contextActivity.communityPresenter.setSaveUserGeneral(
-            UserGeneralSave(
-                userGeneral.email,
-                userGeneral.login,
-                userGeneral.avatar,
-                userGeneral.status,
-                userGeneral.address,
-                userGeneral.uid
-            )
-        )
     }
 }
 

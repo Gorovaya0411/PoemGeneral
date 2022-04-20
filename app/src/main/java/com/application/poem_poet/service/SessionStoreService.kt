@@ -1,9 +1,7 @@
 package com.application.poem_poet.service
 
 import com.application.poem_poet.db.SessionStore
-import com.application.poem_poet.model.PoemAnswer
-import com.application.poem_poet.model.User
-import com.application.poem_poet.model.UserGeneral
+import com.application.poem_poet.model.PoemHelp
 import com.application.poem_poet.model.UserGeneralSave
 import javax.inject.Inject
 
@@ -11,8 +9,7 @@ interface SessionStoreService {
     var checkDetailedFragment: String?
     var checkCropFragment: String?
     var saveUserGeneral: UserGeneralSave
-    var savePoemAnswer: PoemAnswer
-    var saveUser: User
+    var savePoemHelp: PoemHelp
 }
 
 class SessionStoreServiceImpl @Inject constructor(private val sessionStore: SessionStore) :
@@ -30,21 +27,15 @@ class SessionStoreServiceImpl @Inject constructor(private val sessionStore: Sess
             sessionStore.checkCropFragment = value
         }
 
-    override var savePoemAnswer: PoemAnswer
-        get() = sessionStore.savePoemAnswer
+    override var savePoemHelp: PoemHelp
+        get() = sessionStore.savePoemHelp
         set(value) {
-            sessionStore.savePoemAnswer = value
+            sessionStore.savePoemHelp = value
         }
 
     override var saveUserGeneral: UserGeneralSave
         get() = sessionStore.saveUserGeneral
         set(value) {
             sessionStore.saveUserGeneral = value
-        }
-
-    override var saveUser: User
-        get() = sessionStore.saveUser
-        set(value) {
-            sessionStore.saveUser = value
         }
 }

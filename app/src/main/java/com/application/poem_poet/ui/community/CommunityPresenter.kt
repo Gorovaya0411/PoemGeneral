@@ -2,7 +2,7 @@ package com.application.poem_poet.ui.community
 
 import com.application.poem_poet.domain.CommunityUseCase
 import com.application.poem_poet.model.PoemAnswer
-import com.application.poem_poet.model.User
+import com.application.poem_poet.model.PoemHelp
 import com.application.poem_poet.model.UserGeneralSave
 import com.google.firebase.database.*
 import javax.inject.Inject
@@ -32,12 +32,12 @@ class CommunityPresenter @Inject constructor(
         mainUseCase.checkCropFragment = mark
     }
 
-    override fun getSavePoemAnswer(): PoemAnswer {
-        return mainUseCase.savePoemAnswer
+    override fun getSavePoemHelp(): PoemHelp {
+        return mainUseCase.savePoemHelp
     }
 
-    override fun setSavePoemAnswer(poem: PoemAnswer) {
-        mainUseCase.savePoemAnswer = poem
+    override fun setSavePoemHelp(poem: PoemHelp) {
+        mainUseCase.savePoemHelp = poem
     }
 
     override fun getSaveUserGeneral(): UserGeneralSave {
@@ -46,14 +46,6 @@ class CommunityPresenter @Inject constructor(
 
     override fun setSaveUserGeneral(userGeneral: UserGeneralSave) {
         mainUseCase.saveUserGeneral = userGeneral
-    }
-
-    override fun getSaveUser(): User {
-        return mainUseCase.saveUser
-    }
-
-    override fun setSaveUser(user: User) {
-        mainUseCase.saveUser = user
     }
 
     override fun receivingPoemUser(login: String, id: String) {

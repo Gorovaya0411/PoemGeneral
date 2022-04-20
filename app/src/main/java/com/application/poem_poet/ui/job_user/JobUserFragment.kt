@@ -13,11 +13,8 @@ import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentJobUserBinding
 import com.application.poem_poet.model.PoemAnswer
 import com.application.poem_poet.ui.community.CommunityActivity
-import com.application.poem_poet.ui.main.MainPresenter
 import moxy.MvpAppCompatFragment
-import moxy.ktx.moxyPresenter
 import moxy.presenter.InjectPresenter
-
 
 class JobUserFragment : MvpAppCompatFragment(), JobUserView {
 
@@ -43,6 +40,7 @@ class JobUserFragment : MvpAppCompatFragment(), JobUserView {
 
     ): View? {
         return inflater.inflate(R.layout.fragment_job_user, container, false)
+
     }
 
     override fun openDeleteDialog(model: DialogFragment) {
@@ -64,19 +62,7 @@ class JobUserFragment : MvpAppCompatFragment(), JobUserView {
 
     override fun openingNewActivity(model: PoemAnswer) {
         contextActivity.communityPresenter.setCheckDetailedFragment("FromProfile")
-        val bundle = Bundle()
-        with(bundle){
-            putString("username", model.username)
-            putString("titlePoem", model.titlePoem)
-            putString("namePoet", model.namePoet)
-            putString("poem", model.poem)
-            putString("avatar", model.avatar)
-            putInt("like",model.like)
-            putString("id", model.id)
-            putString("uid", model.uid)
-            putString("genre", model.genre)
-        }
-        findNavController().navigate(R.id.detailedPoemFragment, bundle)
+        findNavController().navigate(R.id.detailedPoemFragment)
     }
 
     override fun toast() {

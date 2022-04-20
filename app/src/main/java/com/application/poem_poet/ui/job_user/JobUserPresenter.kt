@@ -61,7 +61,6 @@ class JobUserPresenter @Inject constructor() : JobUserPresenterImpl() {
         currentId = model.id
         if (mode == 1) {
             openingNewActivity(model)
-
         } else {
             viewState.openDeleteDialog(deleteDialog)
         }

@@ -15,19 +15,16 @@ import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentMyPoemBinding
 import com.application.poem_poet.model.PoemAnswer
 import com.application.poem_poet.ui.community.CommunityActivity
-import com.application.poem_poet.ui.main.MainActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 
 class MyPoemFragment : MvpAppCompatFragment(), MyPoemView {
 
-    private var firebaseUser: FirebaseUser? = null
     private val contextActivity: CommunityActivity by lazy(LazyThreadSafetyMode.NONE) {
         (activity as CommunityActivity)
     }
     lateinit var binding: FragmentMyPoemBinding
+
     @InjectPresenter
     lateinit var myPoemPresenter: MyPoemPresenter
 
@@ -44,7 +41,6 @@ class MyPoemFragment : MvpAppCompatFragment(), MyPoemView {
         binding = FragmentMyPoemBinding.bind(view)
         binding.myPoemNoVersesTxt.visibility = TextView.INVISIBLE
         binding.myPoemHelpMessageTxt.visibility = TextView.INVISIBLE
-        firebaseUser = FirebaseAuth.getInstance().currentUser
         myPoemPresenter.getData()
     }
 
@@ -63,19 +59,7 @@ class MyPoemFragment : MvpAppCompatFragment(), MyPoemView {
 
     override fun openingNewActivity(model: PoemAnswer) {
         contextActivity.communityPresenter.setCheckDetailedFragment("FromMyPoem")
-        val bundle = Bundle()
-        with(bundle) {
-            putString("username", model.username)
-            putString("titlePoem", model.titlePoem)
-            putString("namePoet", model.namePoet)
-            putString("poem", model.poem)
-            putString("avatar", model.avatar)
-            putInt("like", model.like)
-            putString("id", model.id)
-            putString("uid", model.uid)
-            putString("genre", model.genre)
-        }
-        findNavController().navigate(R.id.detailedPoemFragment, bundle)
+        findNavController().navigate(R.id.detailedPoemFragment)
     }
 
     override fun workWithAdapter(model: AdapterMyPoem) {

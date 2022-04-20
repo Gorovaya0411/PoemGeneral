@@ -97,15 +97,15 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
                 }
                 "add" -> {
                     communityPresenter.receivingPoemPoet(
-                        communityPresenter.getSavePoemAnswer().namePoet,
+                        communityPresenter.getSavePoemHelp().namePoet,
                         communityPresenter.getSaveUser().uid
                     )
                     val uri = CropImage.getActivityResult(data).uri
                     val refAvatar =
-                        FirebaseDatabase.getInstance().reference.child(communityPresenter.getSavePoemAnswer().namePoet)
+                        FirebaseDatabase.getInstance().reference.child(communityPresenter.getSavePoemHelp().namePoet)
                             .child("avatar")
                     val path = refStorageRoot.child("PhotoUser")
-                        .child(communityPresenter.getSavePoemAnswer().namePoet)
+                        .child(communityPresenter.getSavePoemHelp().namePoet)
                     path.putFile(uri).addOnCompleteListener { task1 ->
                         if (task1.isSuccessful)
                             path.downloadUrl.addOnCompleteListener { task2 ->
@@ -113,7 +113,7 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
                                     val photoUrl = task2.result.toString()
                                     communityPresenter.changeAvatarAllAdd(
                                         photoUrl,
-                                        communityPresenter.getSavePoemAnswer().id
+                                        communityPresenter.getSavePoemHelp().id
                                     )
                                     refAvatar.setValue(photoUrl)
                                     Picasso.get()
