@@ -2,7 +2,6 @@ package com.application.poem_poet.ui.auxiliary_fragment.detailed_poem
 
 import android.widget.Toast
 import com.application.poem_poet.model.PoemAnswer
-import com.application.poem_poet.model.User
 import com.application.poem_poet.ui.community.CommunityActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -15,9 +14,7 @@ import javax.inject.Inject
 class DetailedPoemPresenter @Inject constructor() : DetailedPoemViewImpl() {
     var arrayAddPoem = emptyArray<String>()
     private var firebaseUser: FirebaseUser? = null
-    private lateinit var idUser: String
     var arrayLike = emptyArray<String>()
-
 
     override fun savingValueCheckBoxAddPoem(model: String) {
         firebaseUser = FirebaseAuth.getInstance().currentUser
@@ -47,24 +44,6 @@ class DetailedPoemPresenter @Inject constructor() : DetailedPoemViewImpl() {
         })
     }
 
-    override fun addEmail() {
-        val refReceivingPoem =
-            FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
-        refReceivingPoem.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
-
-            override fun onDataChange(p0: DataSnapshot) {
-                if (p0.exists()) {
-
-                    val email: User? = p0.getValue(User::class.java)
-                    idUser = email!!.uid
-                }
-            }
-        })
-    }
-
     override fun savingValueCheckBoxLike(model: String) {
         val refReceivingPoem =
             FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
@@ -80,8 +59,8 @@ class DetailedPoemPresenter @Inject constructor() : DetailedPoemViewImpl() {
                     children.forEach {
                         val poem: PoemAnswer? = it.getValue(PoemAnswer::class.java)
                         arrayLike += poem!!.id
-
                     }
+
                     arrayLike.forEach {
                         if (model == it) {
                             viewState.workWithLike()
@@ -98,7 +77,8 @@ class DetailedPoemPresenter @Inject constructor() : DetailedPoemViewImpl() {
         like: Int,
         id: String,
         namePoet: String,
-        uid: String
+        uid: String,
+        idUser: String
     ): Boolean {
         var likeAdapt = like
         var check = checkActivity
@@ -160,7 +140,7 @@ class DetailedPoemPresenter @Inject constructor() : DetailedPoemViewImpl() {
         return check
     }
 
-    override fun workCheckboxAdd(isChecked: Boolean,id: String, con:CommunityActivity) {
+    override fun workCheckboxAdd(isChecked: Boolean, id: String, con: CommunityActivity) {
         if (isChecked) {
             viewState.addMyAdded()
         } else {

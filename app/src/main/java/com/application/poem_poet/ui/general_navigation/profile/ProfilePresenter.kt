@@ -2,6 +2,7 @@ package com.application.poem_poet.ui.general_navigation.profile
 
 import com.application.poem_poet.dialogFragments.ForEmptyJobsDialog
 import com.application.poem_poet.model.PoemAnswer
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import javax.inject.Inject
@@ -14,6 +15,7 @@ class ProfilePresenter @Inject constructor() : ProfilePresenterImpl() {
     private val emptyMyJobsDialog = ForEmptyJobsDialog(::openAddActivity)
 
     override fun receivingPoem(login: String) {
+        firebaseUser = FirebaseAuth.getInstance().currentUser
         val refReceivingPoem =
             FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
                 .child("MyJob")

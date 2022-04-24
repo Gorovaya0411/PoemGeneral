@@ -3,7 +3,6 @@ package com.application.poem_poet.ui.auxiliary_fragment.add_poem
 import android.widget.Button
 import android.widget.CheckBox
 import com.application.poem_poet.model.PoemHelp
-import com.application.poem_poet.model.WorkAddUser
 import com.application.poem_poet.ui.community.CommunityActivity
 import moxy.MvpPresenter
 import moxy.MvpView
@@ -25,5 +24,4 @@ abstract class AddPoemViewImpl : MvpPresenter<AddPoemView>() {
         addPoemCheckBox: CheckBox,
         addPoemAddBtn: Button
     ): Boolean
-    abstract fun addUser(): WorkAddUser
 }

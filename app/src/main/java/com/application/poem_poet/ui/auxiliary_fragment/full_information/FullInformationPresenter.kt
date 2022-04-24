@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class FullInformationPresenter @Inject constructor() : FullInformationImpl() {
     private var listPoemPoet: MutableList<PoemAnswer?> = mutableListOf()
-    var biog = ""
+    var bio = ""
 
     override fun getData(pathName: String) {
         val refPoet = FirebaseDatabase.getInstance().reference.child(pathName).child("Poems")
@@ -40,11 +40,11 @@ class FullInformationPresenter @Inject constructor() : FullInformationImpl() {
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.exists()) {
                     val bio: Bio? = p0.getValue(Bio::class.java)
-                    biog = bio!!.biography
-                    viewState.convertData(biog)
+                    this@FullInformationPresenter.bio = bio!!.biography
+                    viewState.convertData(this@FullInformationPresenter.bio)
                 }
             }
         })
-        return biog
+        return bio
     }
 }

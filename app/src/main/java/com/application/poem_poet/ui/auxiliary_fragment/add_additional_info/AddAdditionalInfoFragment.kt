@@ -39,42 +39,32 @@ class AddAdditionalInfoFragment : MvpAppCompatFragment(), AddAdditionalInfoView 
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAddAdditionalInfoBinding.bind(view)
         with(binding) {
-            refStorageRoot = FirebaseStorage.getInstance().reference
-            addAdditionalInfoProgressBar.visibility = ProgressBar.INVISIBLE
+            with(contextActivity.communityPresenter.getSavePoemHelp()) {
+                refStorageRoot = FirebaseStorage.getInstance().reference
+                addAdditionalInfoProgressBar.visibility = ProgressBar.INVISIBLE
 
-            addAdditionalInfoPresenter.getAvatar(arguments?.getString("id")!!)
-            addAdditionalInfoPresenter.getBio(
-                arguments?.getString("namePoet")!!,
-                addAdditionalInfoBioEditTxt
-            )
-
-            addAdditionalInfoAddBtn.setOnClickListener {
-                addAdditionalInfoPresenter.addBio(
-                    arguments?.getString("namePoet")!!,
-                    contextActivity,
+                addAdditionalInfoPresenter.getAvatar(id)
+                addAdditionalInfoPresenter.getBio(
+                    namePoet,
                     addAdditionalInfoBioEditTxt
                 )
-            }
 
-            addAdditionalInfoBackImg.setOnClickListener {
-                val bundle = Bundle()
-                with(bundle) {
-                    putString("username", arguments?.getString("username")!!)
-                    putString("titlePoem", arguments?.getString("titlePoem")!!)
-                    putString("namePoet", arguments?.getString("namePoet")!!)
-                    putString("poem", arguments?.getString("poem")!!)
-                    putString("avatar", arguments?.getString("avatar")!!)
-                    putInt("like", arguments?.getInt("like")!!)
-                    putString("id", arguments?.getString("id")!!)
-                    putString("uid", arguments?.getString("uid")!!)
-                    putString("genre", arguments?.getString("genre")!!)
+                addAdditionalInfoAddBtn.setOnClickListener {
+                    addAdditionalInfoPresenter.addBio(
+                        namePoet,
+                        contextActivity,
+                        addAdditionalInfoBioEditTxt
+                    )
                 }
-                findNavController().navigate(R.id.fullInformationFragment, bundle)
-            }
 
-            addAdditionalInfoPhotoCardView.setOnClickListener {
-                contextActivity.communityPresenter.setCheckCropFragment("add")
-                addAdditionalInfoPresenter.changePhotoUser(contextActivity)
+                addAdditionalInfoBackImg.setOnClickListener {
+                    findNavController().navigate(R.id.fullInformationFragment)
+                }
+
+                addAdditionalInfoPhotoCardView.setOnClickListener {
+                    contextActivity.communityPresenter.setCheckCropFragment("add")
+                    addAdditionalInfoPresenter.changePhotoUser(contextActivity)
+                }
             }
         }
     }
@@ -88,19 +78,7 @@ class AddAdditionalInfoFragment : MvpAppCompatFragment(), AddAdditionalInfoView 
     }
 
     override fun broadcastData() {
-        val bundle = Bundle()
-        with(bundle) {
-            putString("username", arguments?.getString("username")!!)
-            putString("titlePoem", arguments?.getString("titlePoem")!!)
-            putString("namePoet", arguments?.getString("namePoet")!!)
-            putString("poem", arguments?.getString("poem")!!)
-            putString("avatar", arguments?.getString("avatar")!!)
-            putInt("like", arguments?.getInt("like")!!)
-            putString("id", arguments?.getString("id")!!)
-            putString("uid", arguments?.getString("uid")!!)
-            putString("genre", arguments?.getString("genre")!!)
-        }
-        findNavController().navigate(R.id.fullInformationFragment, bundle)
+        findNavController().navigate(R.id.fullInformationFragment)
     }
 }
 

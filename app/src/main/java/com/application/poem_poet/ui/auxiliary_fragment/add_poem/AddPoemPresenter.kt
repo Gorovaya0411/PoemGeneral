@@ -17,9 +17,6 @@ class AddPoemPresenter @Inject constructor() : AddPoemViewImpl() {
     private lateinit var refBio: DatabaseReference
     private var getAvatar: String? = null
     private var firebaseUser: FirebaseUser? = null
-    private var login = ""
-    private var avatarHere = ""
-    private var uidHere = ""
 
     override fun receivingNamePoet() {
         val refReceivingPoem =
@@ -182,28 +179,5 @@ class AddPoemPresenter @Inject constructor() : AddPoemViewImpl() {
                 refPoemPoetOrUser.updateChildren(poemHashMap)
             }
         })
-    }
-
-
-    override fun addUser(): WorkAddUser {
-        firebaseUser = FirebaseAuth.getInstance().currentUser
-        val refUser =
-            FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
-        refUser.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
-
-            override fun onDataChange(p0: DataSnapshot) {
-                if (p0.exists()) {
-                    val userGeneral: User? = p0.getValue(User::class.java)
-                    login = userGeneral!!.login
-                    uidHere = userGeneral.uid
-                    avatarHere = userGeneral.avatar
-
-                }
-            }
-        })
-        return WorkAddUser(login, uidHere, avatarHere)
     }
 }

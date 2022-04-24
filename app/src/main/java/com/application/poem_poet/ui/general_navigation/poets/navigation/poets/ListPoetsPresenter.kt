@@ -1,6 +1,7 @@
 package com.application.poem_poet.ui.general_navigation.poets.navigation.poets
 
 import com.application.poem_poet.model.PoemAnswer
+import com.application.poem_poet.model.PoemHelp
 import com.application.poem_poet.model.User
 import com.application.poem_poet.model.UserGeneralSave
 import com.application.poem_poet.ui.community.CommunityActivity
@@ -33,6 +34,19 @@ class ListPoetsPresenter @Inject constructor() : ListPoetPresenterImpl() {
                         listPoemPoet.add(poem)
                         listPoemPoetRand = listPoemPoet.shuffled()
                     }
+                    model.communityPresenter.setSavePoemHelp(
+                        PoemHelp(
+                            poem.username,
+                            poem.titlePoem,
+                            poem.namePoet,
+                            poem.genre,
+                            poem.poem,
+                            poem.avatar,
+                            poem.id,
+                            poem.uid,
+                            poem.like
+                        )
+                    )
                 }
                 populateData(listPoemPoetRand as MutableList<PoemAnswer?>)
             }
@@ -40,7 +54,7 @@ class ListPoetsPresenter @Inject constructor() : ListPoetPresenterImpl() {
 
         val refUser =
             FirebaseDatabase.getInstance().reference.child("Users")
-                .child(model.communityPresenter.getSaveUser().uid)
+                .child(model.communityPresenter.getSaveUserGeneral().uid)
         refUser.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
 

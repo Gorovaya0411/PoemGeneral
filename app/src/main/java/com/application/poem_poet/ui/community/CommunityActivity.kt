@@ -15,6 +15,7 @@ import com.application.poem_poet.App
 import com.application.poem_poet.R
 import com.application.poem_poet.di.detailedModule.CommunityActivityModule
 import com.application.poem_poet.model.PoemAnswer
+import com.application.poem_poet.model.PoemHelp
 import com.application.poem_poet.model.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -49,8 +50,19 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
     }
 
     fun openingNewActivity(poem: PoemAnswer) {
-        communityPresenter.setSavePoemAnswer(poem)
-        communityPresenter.setSaveUser(User("", poem.username, poem.avatar, "", "", poem.uid))
+        communityPresenter.setSavePoemHelp(
+            PoemHelp(
+                poem.username,
+                poem.titlePoem,
+                poem.namePoet,
+                poem.genre,
+                poem.poem,
+                poem.avatar,
+                poem.id,
+                poem.uid,
+                poem.like
+            )
+        )
         val navHostFragment: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.community_fragment_container_view) as NavHostFragment
         val navController = navHostFragment.navController
@@ -71,8 +83,8 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
             when (communityPresenter.getCheckCropFragment()) {
                 "profile" -> {
                     communityPresenter.receivingPoemUser(
-                        communityPresenter.getSaveUser().login,
-                        communityPresenter.getSaveUser().uid
+                        communityPresenter.getSaveUserGeneral().login,
+                        communityPresenter.getSaveUserGeneral().uid
                     )
                     val uri = CropImage.getActivityResult(data).uri
                     val path = refStorageRoot.child("PhotoUser").child(firebaseUser!!.uid)
@@ -84,7 +96,7 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
                                     refChangeAvatarInUser!!.setValue(photoUrl)
                                     communityPresenter.changeAvatarAll(
                                         photoUrl,
-                                        communityPresenter.getSaveUser().uid
+                                        communityPresenter.getSaveUserGeneral().uid
                                     )
                                     Picasso.get()
                                         .load(photoUrl)
@@ -98,7 +110,7 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
                 "add" -> {
                     communityPresenter.receivingPoemPoet(
                         communityPresenter.getSavePoemHelp().namePoet,
-                        communityPresenter.getSaveUser().uid
+                        communityPresenter.getSaveUserGeneral().uid
                     )
                     val uri = CropImage.getActivityResult(data).uri
                     val refAvatar =

@@ -43,7 +43,6 @@ class AddPoemFragment : MvpAppCompatFragment(), AddPoemView {
             addPoemNameTxt.visibility = TextView.INVISIBLE
 
             addPoemPresenter.receivingNamePoet()
-            addPoemPresenter.addUser()
 
             addPoemCheckBox.setOnCheckedChangeListener { _, isChecked ->
 
@@ -54,8 +53,8 @@ class AddPoemFragment : MvpAppCompatFragment(), AddPoemView {
                     addPoemAutoCompleteTxt.visibility = AutoCompleteTextView.INVISIBLE
                     addPoemAutoCompleteTxt.setText("")
                     addPoemNameTxt.visibility = TextView.VISIBLE
-                    addPoemNameTxt.text = addPoemPresenter.addUser().login
-
+                    addPoemNameTxt.text =
+                        contextActivity.communityPresenter.getSaveUserGeneral().login
                 }
             }
 
@@ -63,16 +62,26 @@ class AddPoemFragment : MvpAppCompatFragment(), AddPoemView {
                 val titlePoem = addPoemTitleEditTxt.text.toString()
                 val genre = addPoemGenreEditTxt.text.toString()
                 val poem = addPoemPoemEditTxt.text.toString()
-                val username = addPoemPresenter.addUser().login
-                val avatar = addPoemPresenter.addUser().avatar
-                val uid = addPoemPresenter.addUser().uidHere
+                val username = contextActivity.communityPresenter.getSaveUserGeneral().login
+                val avatar = contextActivity.communityPresenter.getSaveUserGeneral().avatar
+                val uid = contextActivity.communityPresenter.getSaveUserGeneral().uid
                 namePoet = addPoemAutoCompleteTxt.text.toString()
                 if (checkAdd) {
                     checkAdd = false
                     checkAdd = addPoemPresenter.addPoem(
                         checkAdd,
                         contextActivity,
-                        PoemHelp(username, titlePoem, namePoet, genre, poem, avatar, uid),
+                        PoemHelp(
+                            username,
+                            titlePoem,
+                            namePoet,
+                            genre,
+                            poem,
+                            avatar,
+                            contextActivity.communityPresenter.getSavePoemHelp().id,
+                            uid,
+                            contextActivity.communityPresenter.getSavePoemHelp().like
+                        ),
                         binding.addPoemCheckBox,
                         binding.addPoemAddBtn
                     )

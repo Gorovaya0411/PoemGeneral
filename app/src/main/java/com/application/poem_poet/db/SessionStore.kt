@@ -27,7 +27,7 @@ class SessionStore(private val sharedPreferences: SharedPreferences) {
                     PoemHelp::class.java
                 )
             } catch (e: Exception) {
-                PoemHelp("", "", "", "", "", "", "")
+                PoemHelp("", "", "", "", "", " ", "","",0)
             }
         }
         set(value) {

@@ -17,8 +17,7 @@ abstract class ChangeViewImpl : MvpPresenter<ChangePoemView>() {
     abstract fun changePoem(
         id: String,
         model: CommunityActivity,
-        poemHelp: PoemHelp,
-        like: Int
+        poemHelp: PoemHelp
     )
     abstract fun receivingNamePoet()
     abstract fun addAvatar(namePoet: String)

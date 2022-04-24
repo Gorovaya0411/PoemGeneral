@@ -37,7 +37,7 @@ class AdapterJobUser(private var openNewActivity: (PoemAnswer, Int) -> Unit) :
         listPoem[position]?.let { holder.bind(it) }
     }
 
-    class MyViewHolder(itemView: View, private var callback: (PoemAnswer, Int) -> Unit) :
+    class MyViewHolder(itemView: View, private var openNewActivity: (PoemAnswer, Int) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         var binding = ItemViewJobUserBinding.bind(itemView)
         private var title: TextView = binding.jobUserTitleTxt
@@ -60,10 +60,10 @@ class AdapterJobUser(private var openNewActivity: (PoemAnswer, Int) -> Unit) :
             like.text = model.like.toString()
 
             itemView.setOnClickListener {
-                callback.invoke(model, 1)
+                openNewActivity.invoke(model, 1)
             }
             itemView.setOnLongClickListener {
-                callback.invoke(model, 2)
+                openNewActivity.invoke(model, 2)
                 return@setOnLongClickListener true
             }
         }

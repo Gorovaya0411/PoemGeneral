@@ -24,7 +24,7 @@ class DetailedPoemFragment : MvpAppCompatFragment(), DetailedPoemView {
     private val contextActivity: CommunityActivity by lazy(LazyThreadSafetyMode.NONE) {
         (activity as CommunityActivity)
     }
-    private var like: Int = 0
+    private var likeHere: Int = 0
     private var checkActivity: Boolean = false
     lateinit var binding: FragmentDetailedPoemBinding
     private lateinit var refFavouritesPoem: DatabaseReference
@@ -41,133 +41,110 @@ class DetailedPoemFragment : MvpAppCompatFragment(), DetailedPoemView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailedPoemBinding.bind(view)
-        like = arguments?.getInt("like")!!
-        arguments?.getString("id")?.let { detailedPoemPresenter.savingValueCheckBoxAddPoem(it) }
-        arguments?.getString("id")?.let { detailedPoemPresenter.savingValueCheckBoxLike(it) }
-        detailedPoemPresenter.addEmail()
-
-        when (contextActivity.communityPresenter.getCheckDetailedFragment()) {
-            "FromProfile" -> {
-                binding.detailedPoemGeneralBtn.setBackgroundResource(R.drawable.bg_detailed_poem_edit_btn)
-            }
-            "FromList" -> {
-                binding.detailedPoemGeneralBtn.setBackgroundResource(R.drawable.bg_detailed_poem_show_more_btn)
-            }
-        }
-
-        with(binding) {
-
-            val namePoetModified = arguments?.getString("namePoet")?.replace("|", ".", true)
-            val usernameModified = arguments?.getString("username")?.replace("|", ".", true)
-
-            if (arguments?.getString("namePoet") == "") {
-                detailedPoemNameTxt.text = usernameModified
-            } else {
-                detailedPoemNameTxt.text = namePoetModified
-            }
-
-            Picasso.get()
-                .load(arguments?.getString("avatar"))
-                .into(detailedPoemImageImg)
-
-            detailedPoemPoemTxt.text = arguments?.getString("poem")
-            detailedPoemTitleTxt.text = arguments?.getString("titlePoem")
-            firebaseUser = FirebaseAuth.getInstance().currentUser
+        with(contextActivity.communityPresenter.getSavePoemHelp()) {
+            likeHere = like
+            id.let { detailedPoemPresenter.savingValueCheckBoxAddPoem(it) }
+            id.let { detailedPoemPresenter.savingValueCheckBoxLike(it) }
 
 
-            detailedPoemGeneralBtn.setOnClickListener {
-                when (contextActivity.communityPresenter.getCheckDetailedFragment()) {
-                    "FromProfile" -> {
-                        openingNewFragment(
-                            arguments?.getString("titlePoem")!!,
-                            arguments?.getString("namePoet")!!,
-                            arguments?.getString("poem")!!,
-                            arguments?.getString("avatar")!!,
-                            arguments?.getString("genre")!!,
-                            arguments?.getString("username")!!,
-                            arguments?.getInt("like")!!,
-                            arguments?.getString("uid")!!,
-                            arguments?.getString("id")!!,
-                            R.id.changePoemFragment
-                        )
-                    }
-                    "FromList" -> {
-                        openingNewFragment(
-                            arguments?.getString("titlePoem")!!,
-                            arguments?.getString("namePoet")!!,
-                            arguments?.getString("poem")!!,
-                            arguments?.getString("avatar")!!,
-                            arguments?.getString("genre")!!,
-                            arguments?.getString("username")!!,
-                            arguments?.getInt("like")!!,
-                            arguments?.getString("uid")!!,
-                            arguments?.getString("id")!!,
-                            R.id.fullInformationFragment
-                        )
-                    }
+            when (contextActivity.communityPresenter.getCheckDetailedFragment()) {
+                "FromProfile" -> {
+                    binding.detailedPoemGeneralBtn.setBackgroundResource(R.drawable.bg_detailed_poem_edit_btn)
+                }
+                "FromList" -> {
+                    binding.detailedPoemGeneralBtn.setBackgroundResource(R.drawable.bg_detailed_poem_show_more_btn)
                 }
             }
 
-            detailedPoemLikeCheckBox.setOnCheckedChangeListener { _, isChecked ->
-                detailedPoemPresenter.workCheckboxLike(
-                    isChecked,
-                    checkActivity,
-                    like,
-                    arguments?.getString("id")!!,
-                    arguments?.getString("namePoet")!!,
-                    arguments?.getString("uid")!!
-                )
-                checkActivity = detailedPoemPresenter.workCheckboxLike(
-                    isChecked,
-                    checkActivity,
-                    like,
-                    arguments?.getString("id")!!,
-                    arguments?.getString("namePoet")!!,
-                    arguments?.getString("uid")!!
-                )
-            }
+            with(binding) {
 
-            detailedPoemAddPoemCheckBox.setOnCheckedChangeListener { _, isChecked ->
-                detailedPoemPresenter.workCheckboxAdd(
-                    isChecked,
-                    arguments?.getString("id")!!,
-                    contextActivity
-                )
+                val namePoetModified = namePoet.replace("|", ".", true)
+                val usernameModified = username.replace("|", ".", true)
+
+                if (namePoet == "") {
+                    detailedPoemNameTxt.text = usernameModified
+                } else {
+                    detailedPoemNameTxt.text = namePoetModified
+                }
+
+                Picasso.get()
+                    .load(avatar)
+                    .into(detailedPoemImageImg)
+
+                detailedPoemPoemTxt.text = poem
+                detailedPoemTitleTxt.text = titlePoem
+                firebaseUser = FirebaseAuth.getInstance().currentUser
+
+                detailedPoemGeneralBtn.setOnClickListener {
+                    when (contextActivity.communityPresenter.getCheckDetailedFragment()) {
+                        "FromProfile" -> findNavController().navigate(R.id.changePoemFragment)
+                        "FromList" -> findNavController().navigate(R.id.fullInformationFragment)
+                    }
+                }
+
+                detailedPoemLikeCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                    detailedPoemPresenter.workCheckboxLike(
+                        isChecked,
+                        checkActivity,
+                        likeHere,
+                        id,
+                        namePoet,
+                        uid,
+                        contextActivity.communityPresenter.getSaveUserGeneral().uid
+                    )
+                    checkActivity = detailedPoemPresenter.workCheckboxLike(
+                        isChecked,
+                        checkActivity,
+                        likeHere,
+                        id,
+                        namePoet,
+                        uid,
+                        contextActivity.communityPresenter.getSaveUserGeneral().uid
+                    )
+                }
+
+                detailedPoemAddPoemCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                    detailedPoemPresenter.workCheckboxAdd(
+                        isChecked,
+                        uid,
+                        contextActivity
+                    )
+                }
             }
         }
     }
 
     override fun addMyAdded() {
-        refMyPoem =
-            FirebaseDatabase.getInstance().reference.child("Users")
-                .child(firebaseUser!!.uid).child("MyAdded")
-                .child(arguments?.getString("id")!!)
+        with(contextActivity.communityPresenter.getSavePoemHelp()) {
+            refMyPoem =
+                FirebaseDatabase.getInstance().reference.child("Users")
+                    .child(firebaseUser!!.uid).child("MyAdded")
+                    .child(id)
 
-        val poemHashMap = HashMap<String, Any>()
-        poemHashMap["titlePoem"] = arguments?.getString("titlePoem")!!
-        poemHashMap["namePoet"] = arguments?.getString("namePoet")!!
-        poemHashMap["username"] = arguments?.getString("username")!!
-        poemHashMap["genre"] = arguments?.getString("genre")!!
-        poemHashMap["poem"] = arguments?.getString("poem")!!
-        poemHashMap["id"] = arguments?.getString("id")!!
-        poemHashMap["avatar"] = arguments?.getString("avatar")!!
-        poemHashMap["like"] = arguments?.getInt("like")!!
+            val poemHashMap = HashMap<String, Any>()
+            poemHashMap["titlePoem"] = titlePoem
+            poemHashMap["namePoet"] = namePoet
+            poemHashMap["username"] = username
+            poemHashMap["genre"] = genre
+            poemHashMap["poem"] = poem
+            poemHashMap["id"] = id
+            poemHashMap["avatar"] = avatar
+            poemHashMap["like"] = like
 
-        refMyPoem.updateChildren(poemHashMap)
-
+            refMyPoem.updateChildren(poemHashMap)
+        }
     }
 
     override fun addFavouritesPoem() {
         refFavouritesPoem =
             FirebaseDatabase.getInstance().reference.child("Users")
                 .child(firebaseUser!!.uid).child("MyFavouritesPoem")
-                .child(arguments?.getString("id")!!)
+                .child(contextActivity.communityPresenter.getSavePoemHelp().id)
 
         val poemHashMap = HashMap<String, Any>()
-        poemHashMap["id"] = arguments?.getString("id")!!
+        poemHashMap["id"] = contextActivity.communityPresenter.getSavePoemHelp().id
 
         refFavouritesPoem.updateChildren(poemHashMap)
-
     }
 
     override fun workWithCheckbox() {
@@ -177,33 +154,6 @@ class DetailedPoemFragment : MvpAppCompatFragment(), DetailedPoemView {
     override fun workWithLike() {
         checkActivity = true
         binding.detailedPoemLikeCheckBox.isChecked = true
-        like = arguments?.getInt("like")!!
-    }
-
-    private fun openingNewFragment(
-        titlePoem: String,
-        namePoet: String,
-        poem: String,
-        avatar: String,
-        genre: String,
-        username: String,
-        like: Int,
-        uid: String,
-        id: String,
-        view: Int
-    ) {
-        val bundle = Bundle()
-        with(bundle) {
-            putString("titlePoem", titlePoem)
-            putString("namePoet", namePoet)
-            putString("poem", poem)
-            putString("avatar", avatar)
-            putString("genre", genre)
-            putString("username", username)
-            putInt("like", like)
-            putString("uid", uid)
-            putString("id", id)
-        }
-        findNavController().navigate(view, bundle)
+        likeHere = contextActivity.communityPresenter.getSavePoemHelp().like
     }
 }

@@ -19,9 +19,6 @@ class ChangePoemFragment : MvpAppCompatFragment(), ChangePoemView {
     private lateinit var namePoetModified: String
     lateinit var binding: FragmentChangePoemBinding
     private lateinit var namePoet: String
-    private lateinit var titlePoem: String
-    private lateinit var genre: String
-    private lateinit var poem: String
     private val contextActivity: CommunityActivity by lazy(LazyThreadSafetyMode.NONE) {
         (activity as CommunityActivity)
     }
@@ -41,56 +38,48 @@ class ChangePoemFragment : MvpAppCompatFragment(), ChangePoemView {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentChangePoemBinding.bind(view)
         with(binding) {
-            changePoemPresenter.receivingNamePoet()
-            changePoemTitleEditTxt.setText(arguments?.getString("titlePoem"))
+            with(contextActivity.communityPresenter.getSavePoemHelp()) {
+                changePoemPresenter.receivingNamePoet()
+                changePoemTitleEditTxt.setText(titlePoem)
 
-            namePoetModified = arguments?.getString("namePoet")!!.replace("|", ".", true)
+                namePoetModified = namePoet.replace("|", ".", true)
 
-            if (arguments?.getString("namePoet")!! == "") {
-                changePoemAutoCompleteTxt.visibility = AutoCompleteTextView.INVISIBLE
-                changePoemNameTxt.text = arguments?.getString("username")!!
-            } else {
-                changePoemNameTxt.visibility = AutoCompleteTextView.INVISIBLE
-                changePoemAutoCompleteTxt.setText(namePoetModified)
-            }
-            changePoemGenreEditTxt.setText(arguments?.getString("genre")!!)
-            changePoemPoemEditTxt.setText(arguments?.getString("poem")!!)
+                if (namePoet == "") {
+                    changePoemAutoCompleteTxt.visibility = AutoCompleteTextView.INVISIBLE
+                    changePoemNameTxt.text = username
+                } else {
+                    changePoemNameTxt.visibility = AutoCompleteTextView.INVISIBLE
+                    changePoemAutoCompleteTxt.setText(namePoetModified)
+                }
+                changePoemGenreEditTxt.setText(genre)
+                changePoemPoemEditTxt.setText(poem)
 
-            changePoemAddBtn.setOnClickListener {
-                titlePoem = changePoemTitleEditTxt.text.toString()
-                genre = changePoemGenreEditTxt.text.toString()
-                poem = changePoemPoemEditTxt.text.toString()
-                namePoet = changePoemAutoCompleteTxt.text.toString()
-                changePoemPresenter.changePoem(
-                    arguments?.getString("id")!!, contextActivity,
-                    PoemHelp(
-                        arguments?.getString("username")!!,
-                        titlePoem,
-                        namePoet,
-                        genre,
-                        poem,
-                        arguments?.getString("avatar")!!,
-                        arguments?.getString("uid")!!
-                    ), arguments?.getInt("like")!!
-                )
+                changePoemAddBtn.setOnClickListener {
+                    titlePoem = changePoemTitleEditTxt.text.toString()
+                    genre = changePoemGenreEditTxt.text.toString()
+                    poem = changePoemPoemEditTxt.text.toString()
+                    namePoet = changePoemAutoCompleteTxt.text.toString()
+                    changePoemPresenter.changePoem(
+                        id, contextActivity,
+                        PoemHelp(
+                            username,
+                            titlePoem,
+                            namePoet,
+                            genre,
+                            poem,
+                            avatar,
+                            id,
+                            uid,
+                            like
+                        ),
+                    )
+                }
             }
         }
     }
 
     override fun back() {
-        val bundle = Bundle()
-        with(bundle) {
-            putString("username", arguments?.getString("username")!!)
-            putString("titlePoem", titlePoem)
-            putString("namePoet", namePoet)
-            putString("poem", poem)
-            putString("avatar", arguments?.getString("avatar")!!)
-            putInt("like", arguments?.getInt("like")!!)
-            putString("id", arguments?.getString("id")!!)
-            putString("uid", arguments?.getString("uid")!!)
-            putString("genre", genre)
-        }
-        findNavController().navigate(R.id.detailedPoemFragment, bundle)
+        findNavController().navigate(R.id.detailedPoemFragment)
     }
 
     override fun workWithAutoTxt(array: MutableList<String>) {

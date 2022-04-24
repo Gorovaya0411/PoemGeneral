@@ -83,7 +83,7 @@ class AdapterListUser(private var openFragment: (PoemAnswer) -> Unit) :
         listUser[position]?.let { holder.bind(it) }
     }
 
-    class MyViewHolder(itemView: View, private var callback: (PoemAnswer) -> Unit) :
+    class MyViewHolder(itemView: View, private var openNewActivity: (PoemAnswer) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         var binding = ItemViewListUsersBinding.bind(itemView)
         private var avatar: ImageView = binding.listUsersAvatarUsersImg
@@ -104,7 +104,7 @@ class AdapterListUser(private var openFragment: (PoemAnswer) -> Unit) :
                 .into(avatar)
 
             itemView.setOnClickListener {
-                callback.invoke(model)
+                openNewActivity.invoke(model)
             }
         }
     }

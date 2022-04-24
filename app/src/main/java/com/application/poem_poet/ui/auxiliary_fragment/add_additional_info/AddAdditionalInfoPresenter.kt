@@ -15,7 +15,6 @@ class AddAdditionalInfoPresenter @Inject constructor() : AddAdditionalInfoImpl()
     private lateinit var receivedAvatar: String
     private lateinit var refBio: DatabaseReference
     private lateinit var bio: String
-    var array = emptyArray<String>()
 
     override fun getAvatar(id: String) {
         val refBio = FirebaseDatabase.getInstance().reference.child("Poem")

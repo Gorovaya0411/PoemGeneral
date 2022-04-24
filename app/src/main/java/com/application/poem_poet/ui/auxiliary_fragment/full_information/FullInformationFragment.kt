@@ -53,17 +53,16 @@ class FullInformationFragment : MvpAppCompatFragment(), FullInformationView {
             with(contextActivity.communityPresenter.getSavePoemHelp()) {
 
                 val namePoetChanged = namePoet.replace("|", ".", true)
-                val nameUsernameChanged = arguments?.getString("username")!!.replace("|", ".", true)
+                val nameUsernameChanged = username.replace("|", ".", true)
 
                 Picasso.get()
-                    .load(arguments?.getString("avatar")!!)
+                    .load(avatar)
                     .into(listUsersAvatarUsersImg)
                 firebaseUser = FirebaseAuth.getInstance().currentUser
 
-
-                if (arguments?.getString("namePoet")!! == "") {
+                if (namePoet == "") {
                     fullInformationTitleTxt.text = nameUsernameChanged
-                    pathName = arguments?.getString("uid")!!
+                    pathName = uid
                     addressHere = contextActivity.communityPresenter.getSaveUserGeneral().address
                     statusHere = contextActivity.communityPresenter.getSaveUserGeneral().status
                     uidHere = contextActivity.communityPresenter.getSaveUserGeneral().uid
@@ -73,7 +72,7 @@ class FullInformationFragment : MvpAppCompatFragment(), FullInformationView {
                         .load(contextActivity.communityPresenter.getSavePoemHelp().avatar)
                         .into(binding.listUsersAvatarUsersImg)
                     binding.fullInformationTitleTxt.text = namePoetChanged
-                    pathName = arguments?.getString("namePoet")!!
+                    pathName = namePoet
                     fullInformationPresenter.addBio(pathName)
                 }
 
@@ -120,7 +119,7 @@ class FullInformationFragment : MvpAppCompatFragment(), FullInformationView {
 
     override fun convertData(biog: String) {
         bio = biog
-        if (arguments?.getString("namePoet")!! == "") {
+        if (contextActivity.communityPresenter.getSavePoemHelp().namePoet == "") {
             binding.fullInformationCommunicationUserTxt.text = addressHere
             binding.fullInformationBioTxt.text = statusHere
             if (statusHere == "") {
@@ -132,7 +131,7 @@ class FullInformationFragment : MvpAppCompatFragment(), FullInformationView {
             } else {
                 binding.fullInformationBioTxt.text = "..."
             }
-            if (biog == "" || arguments?.getString("avatar")!! == "https://firebasestorage.googleapis.com/v0/b/poemspoets-130cd.appspot.com/o/icon.png?alt=media&token=5935d9cc-88cf-4697-8ed3-17abd66e9fee") {
+            if (biog == "" || contextActivity.communityPresenter.getSavePoemHelp().avatar == "https://firebasestorage.googleapis.com/v0/b/poemspoets-130cd.appspot.com/o/icon.png?alt=media&token=5935d9cc-88cf-4697-8ed3-17abd66e9fee") {
                 binding.fullInformationAddInfo.visibility = ImageView.VISIBLE
             }
         }

@@ -83,7 +83,7 @@ class AdapterListPoets(private var openFragment: (PoemAnswer) -> Unit) :
         }
     }
 
-    class MyViewHolder(itemView: View, private var callback: (PoemAnswer) -> Unit) :
+    class MyViewHolder(itemView: View, private var openNewActivity: (PoemAnswer) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         var binding = ItemViewListPoetsBinding.bind(itemView)
         private var avatar: ImageView = binding.listPoemAvatarPoetsImg
@@ -104,7 +104,7 @@ class AdapterListPoets(private var openFragment: (PoemAnswer) -> Unit) :
                 .into(avatar)
 
             itemView.setOnClickListener {
-                callback.invoke(model)
+                openNewActivity.invoke(model)
             }
         }
     }

@@ -1,7 +1,6 @@
 package com.application.poem_poet.ui.auxiliary_fragment.add_additional_info
 
 import android.widget.EditText
-import com.application.poem_poet.model.PoemAnswer
 import com.application.poem_poet.ui.community.CommunityActivity
 import moxy.MvpPresenter
 import moxy.MvpView

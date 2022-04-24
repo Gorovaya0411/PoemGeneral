@@ -16,7 +16,6 @@ interface DetailedPoemView : MvpView {
 
 abstract class DetailedPoemViewImpl : MvpPresenter<DetailedPoemView>() {
     abstract fun savingValueCheckBoxAddPoem(model: String)
-    abstract fun addEmail()
     abstract fun savingValueCheckBoxLike(model: String)
     abstract fun workCheckboxLike(
         isChecked: Boolean,
@@ -24,7 +23,9 @@ abstract class DetailedPoemViewImpl : MvpPresenter<DetailedPoemView>() {
         like: Int,
         id: String,
         namePoet: String,
-        uid: String
+        uid: String,
+        idUser: String
     ): Boolean
-    abstract fun workCheckboxAdd(isChecked: Boolean,id: String, con: CommunityActivity)
+
+    abstract fun workCheckboxAdd(isChecked: Boolean, id: String, con: CommunityActivity)
 }

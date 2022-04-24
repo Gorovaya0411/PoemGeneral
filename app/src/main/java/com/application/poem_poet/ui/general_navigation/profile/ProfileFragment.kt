@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentProfileBinding
 import com.application.poem_poet.dialogFragments.ForOutDialog
+import com.application.poem_poet.model.UserGeneralSave
 import com.application.poem_poet.ui.community.CommunityActivity
 import com.application.poem_poet.ui.main.MainActivity
 import com.application.poem_poet.utill.extension.launchActivityWithFinish
@@ -138,52 +139,100 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
     }
 
     private fun showDialog(mark: String, title: String, hint: String, view: TextView) {
-        val input = EditText(contextActivity)
-        input.hint = hint
-        input.inputType = InputType.TYPE_CLASS_TEXT
-        val builder: AlertDialog.Builder = AlertDialog.Builder(contextActivity)
         with(contextActivity.communityPresenter) {
-            builder.setTitle(title)
-            builder.setMessage(hint)
-            builder.setView(input)
-            builder.setPositiveButton("OK") { dialog, _ ->
-                val result = input.text.toString()
-                when (mark) {
-                    "status" -> changeData(result, mark, view, "статус")
-                    "address" -> changeData(result, mark, view, "текст")
-                    "login" -> changeLogin(result)
-                    "email" -> changeData(result, mark, view, "email")
+            val input = EditText(contextActivity)
+            input.hint = hint
+            input.inputType = InputType.TYPE_CLASS_TEXT
+            val builder: AlertDialog.Builder = AlertDialog.Builder(contextActivity)
+            with(contextActivity.communityPresenter) {
+                builder.setTitle(title)
+                builder.setMessage(hint)
+                builder.setView(input)
+                builder.setPositiveButton("OK") { dialog, _ ->
+                    val result = input.text.toString()
+                    when (mark) {
+                        "status" -> {
+                            changeData(result, mark, view, "статус")
+                            setSaveUserGeneral(
+                                UserGeneralSave(
+                                    getSaveUserGeneral().email,
+                                    getSaveUserGeneral().login,
+                                    getSaveUserGeneral().avatar,
+                                    result,
+                                    getSaveUserGeneral().address,
+                                    getSaveUserGeneral().uid
+                                )
+                            )
+                        }
+                        "address" -> {
+                            changeData(result, mark, view, "текст")
+                            setSaveUserGeneral(
+                                UserGeneralSave(
+                                    getSaveUserGeneral().email,
+                                    getSaveUserGeneral().login,
+                                    getSaveUserGeneral().avatar,
+                                    getSaveUserGeneral().status,
+                                    result,
+                                    getSaveUserGeneral().uid
+                                )
+                            )
+                        }
+                        "login" -> {
+                            changeLogin(result)
+                            setSaveUserGeneral(
+                                UserGeneralSave(
+                                    getSaveUserGeneral().email,
+                                    result,
+                                    getSaveUserGeneral().avatar,
+                                    getSaveUserGeneral().status,
+                                    getSaveUserGeneral().address,
+                                    getSaveUserGeneral().uid
+                                )
+                            )
+                        }
+                        "email" -> {
+                            changeData(result, mark, view, "email")
+                            setSaveUserGeneral(
+                                UserGeneralSave(
+                                    result,
+                                    getSaveUserGeneral().login,
+                                    getSaveUserGeneral().avatar,
+                                    getSaveUserGeneral().status,
+                                    getSaveUserGeneral().address,
+                                    getSaveUserGeneral().uid
+                                )
+                            )
+                        }
+                    }
+                    dialog.cancel()
+                    findNavController().navigate(R.id.action_profileFragment_self)
                 }
-                dialog.cancel()
-                findNavController().navigate(R.id.action_profileFragment_self)
+                builder.setNegativeButton(
+                    "Cancel"
+                ) { dialog, _ -> dialog.cancel() }
+                builder.show()
             }
-            builder.setNegativeButton(
-                "Cancel"
-            ) { dialog, _ -> dialog.cancel() }
-            builder.show()
         }
     }
 
     private fun changeData(data: String, mark: String, view: TextView, userText: String) {
-        val refDataUser =
-            FirebaseDatabase.getInstance().reference.child("Users")
-                .child(contextActivity.communityPresenter.getSaveUserGeneral().uid)
-                .child(mark)
-        val refDataAll =
-            FirebaseDatabase.getInstance().reference.child(contextActivity.communityPresenter.getSaveUserGeneral().uid)
-                .child(mark)
+            val refDataUser =
+                FirebaseDatabase.getInstance().reference.child("Users")
+                    .child(contextActivity.communityPresenter.getSaveUserGeneral().uid)
+                    .child(mark)
+            val refDataAll =
+                FirebaseDatabase.getInstance().reference.child(contextActivity.communityPresenter.getSaveUserGeneral().uid)
+                    .child(mark)
+            refDataUser.setValue(data)
+            refDataAll.setValue(data)
 
-        refDataUser.setValue(data)
-        refDataAll.setValue(data)
+            view.text = data
 
-        view.text = data
-
-        Toast.makeText(
-            context,
-            getString(R.string.data_successfully_changed, userText),
-            Toast.LENGTH_LONG
-        ).show()
-        findNavController().navigate(R.id.action_profileFragment_self)
+            Toast.makeText(
+                context,
+                getString(R.string.data_successfully_changed, userText),
+                Toast.LENGTH_LONG
+            ).show()
     }
 
     private fun changeLogin(data: String) {

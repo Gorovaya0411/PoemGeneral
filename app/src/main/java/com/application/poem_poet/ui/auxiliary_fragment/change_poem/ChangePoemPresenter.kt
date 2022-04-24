@@ -22,8 +22,7 @@ class ChangePoemPresenter @Inject constructor() : ChangeViewImpl() {
     override fun changePoem(
         id: String,
         model: CommunityActivity,
-        poemHelp: PoemHelp,
-        like: Int
+        poemHelp: PoemHelp
     ) {
         mAuth = FirebaseAuth.getInstance()
         firebaseUserID = mAuth.currentUser!!.uid
@@ -56,7 +55,7 @@ class ChangePoemPresenter @Inject constructor() : ChangeViewImpl() {
         poemHashMap["poem"] = poemHelp.poem
         poemHashMap["id"] = id
         poemHashMap["uid"] = poemHelp.uid
-        poemHashMap["like"] = like
+        poemHashMap["like"] = poemHelp.like
 
         refAllPoem.updateChildren(poemHashMap)
         refJob.updateChildren(poemHashMap)

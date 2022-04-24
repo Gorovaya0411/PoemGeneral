@@ -37,6 +37,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Poem/app/src/main/res/layout/item_view_list_users.xml" value="0.3546875" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Poem/app/src/main/res/layout/item_view_my_poem.xml" value="0.3546875" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Poem/app/src/main/res/layout/prompt.xml" value="0.3546875" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Poem2/app/src/main/res/layout/fragment_list_poets.xml" value="0.15081521739130435" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PoemPoet/app/src/main/res/drawable-hdpi/ic_favorite.xml" value="0.251" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PoemPoet/app/src/main/res/drawable-hdpi/ic_favorite_pink.xml" value="0.331" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PoemPoet/app/src/main/res/drawable-hdpi/search_view_rounded.xml" value="0.28" />
@@ -181,7 +182,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

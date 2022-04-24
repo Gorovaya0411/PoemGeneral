@@ -38,7 +38,7 @@ class AdapterMyPoem(private var openFragment: (PoemAnswer, Int) -> Unit) :
         listPoemAnswer[position]?.let { holder.bind(it) }
     }
 
-    class MyViewHolder(itemView: View, private var callback: (PoemAnswer, Int) -> Unit) :
+    class MyViewHolder(itemView: View, private var openNewActivity: (PoemAnswer, Int) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         var binding = ItemViewMyPoemBinding.bind(itemView)
         private var avatar: ImageView = binding.myPoemAvatarUsersImg
@@ -64,10 +64,10 @@ class AdapterMyPoem(private var openFragment: (PoemAnswer, Int) -> Unit) :
                 .into(avatar)
 
             itemView.setOnClickListener {
-                callback.invoke(model, 1)
+                openNewActivity.invoke(model, 1)
             }
             itemView.setOnLongClickListener {
-                callback.invoke(model, 2)
+                openNewActivity.invoke(model, 2)
                 return@setOnLongClickListener true
             }
         }

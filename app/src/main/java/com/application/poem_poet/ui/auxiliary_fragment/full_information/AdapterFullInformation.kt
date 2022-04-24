@@ -36,7 +36,7 @@ class AdapterFullInformation(private var openNewActivity: (PoemAnswer) -> Unit) 
         listPoem[position]?.let { holder.bind(it) }
     }
 
-    class MyViewHolder(itemView: View, private var callback: (PoemAnswer) -> Unit) :
+    class MyViewHolder(itemView: View, private var openNewActivity: (PoemAnswer) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         var binding = ItemViewFullInformationBinding.bind(itemView)
         private var name: TextView = binding.fullInformationTitleTxt
@@ -48,7 +48,7 @@ class AdapterFullInformation(private var openNewActivity: (PoemAnswer) -> Unit) 
             genre.text = model.genre
             like.text = model.like.toString()
             itemView.setOnClickListener {
-                callback.invoke(model)
+                openNewActivity.invoke(model)
             }
         }
     }

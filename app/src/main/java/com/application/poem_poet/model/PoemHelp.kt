@@ -7,6 +7,8 @@ data class PoemHelp(
     var genre: String,
     var poem: String,
     var avatar: String,
+    var id: String,
     var uid: String,
+    var like: Int
 )
 
