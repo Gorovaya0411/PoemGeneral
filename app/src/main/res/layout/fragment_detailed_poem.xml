@@ -53,6 +53,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/partner_subscription_app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                tools:ignore="MissingConstraints" />
+
             <LinearLayout
                 android:id="@+id/detailed_poem_linear_layout"
                 android:layout_width="wrap_content"

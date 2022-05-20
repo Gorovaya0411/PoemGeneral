@@ -26,6 +26,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
+import kotlinx.android.synthetic.main.activity_community.*
 import kotlinx.android.synthetic.main.fragment_add_additional_info.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import moxy.MvpAppCompatActivity
@@ -37,6 +38,10 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
     private var firebaseUser: FirebaseUser? = null
     private lateinit var refStorageRoot: StorageReference
     private var refChangeAvatarInUser: DatabaseReference? = null
+
+    private val navHostFragment: NavHostFragment by lazy(LazyThreadSafetyMode.NONE) {
+        (supportFragmentManager.findFragmentById(R.id.community_fragment_container_view) as NavHostFragment)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,12 +68,15 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
                 poem.like
             )
         )
-        val navHostFragment: NavHostFragment = supportFragmentManager
-            .findFragmentById(R.id.community_fragment_container_view) as NavHostFragment
+        openDetailedFragment()
+    }
+
+    private fun openDetailedFragment() {
         val navController = navHostFragment.navController
         navController.navigate(
             R.id.action_generalPoetsFragment_to_detailedPoemFragment
         )
+        community_bottom_navigation_view.visibility = BottomNavigationView.GONE
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -150,6 +158,15 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
         if (hasFocus) {
             hideSystemUI()
         }
+    }
+
+
+    fun backDetailToGeneralFragment() {
+        val navController = navHostFragment.navController
+        navController.navigate(
+            R.id.action_detailedPoemFragment_to_generalPoetsFragment
+        )
+        community_bottom_navigation_view.visibility = BottomNavigationView.VISIBLE
     }
 
     override fun onStart() {

@@ -31,11 +31,11 @@
         android:name="com.application.poem_poet.ui.greeting_user.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
-
         <action
             android:id="@+id/action_loginFragment_to_nav_graph_community"
             app:destination="@id/nav_graph_community" />
     </fragment>
+
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.application.poem_poet.ui.greeting_user.RegisterFragment"
@@ -46,7 +46,7 @@
             android:id="@+id/action_registerFragment_to_nav_graph_community"
             app:destination="@id/nav_graph_community" />
     </fragment>
-    <include app:graph="@navigation/nav_graph_community" >
+    <include app:graph="@navigation/nav_graph_community">
         <action
             android:id="@+id/action_nav_graph_community_to_welcomeFragment"
             app:destination="@id/welcomeFragment" />

@@ -81,6 +81,9 @@
         <action
             android:id="@+id/action_detailedPoemFragment_to_fullInformationFragment"
             app:destination="@id/fullInformationFragment" />
+        <action
+            android:id="@+id/action_detailedPoemFragment_to_generalPoetsFragment"
+            app:destination="@id/generalPoetsFragment" />
     </fragment>
     <fragment
         android:id="@+id/changePoemFragment"

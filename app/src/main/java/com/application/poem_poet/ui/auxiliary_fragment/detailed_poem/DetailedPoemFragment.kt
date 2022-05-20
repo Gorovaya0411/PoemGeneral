@@ -4,15 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentDetailedPoemBinding
 import com.application.poem_poet.ui.community.CommunityActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_community.*
+import kotlinx.android.synthetic.main.fragment_detailed_poem.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 
@@ -41,11 +45,18 @@ class DetailedPoemFragment : MvpAppCompatFragment(), DetailedPoemView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailedPoemBinding.bind(view)
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    contextActivity.backDetailToGeneralFragment()
+                }
+            }
+            )
         with(contextActivity.communityPresenter.getSavePoemHelp()) {
             likeHere = like
             id.let { detailedPoemPresenter.savingValueCheckBoxAddPoem(it) }
             id.let { detailedPoemPresenter.savingValueCheckBoxLike(it) }
-
 
             when (contextActivity.communityPresenter.getCheckDetailedFragment()) {
                 "FromProfile" -> {
@@ -60,7 +71,9 @@ class DetailedPoemFragment : MvpAppCompatFragment(), DetailedPoemView {
 
                 val namePoetModified = namePoet.replace("|", ".", true)
                 val usernameModified = username.replace("|", ".", true)
-
+//                biographyBackImg.setOnClickListener {
+//                    contextActivity.backDetailToGeneralFragment()
+//                }
                 if (namePoet == "") {
                     detailedPoemNameTxt.text = usernameModified
                 } else {
