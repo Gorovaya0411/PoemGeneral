@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.poem_poet.R
@@ -59,7 +58,7 @@ class MyPoemFragment : MvpAppCompatFragment(), MyPoemView {
 
     override fun openingNewActivity(model: PoemAnswer) {
         contextActivity.communityPresenter.setCheckDetailedFragment("FromMyPoem")
-        findNavController().navigate(R.id.detailedPoemFragment)
+        contextActivity.openDetailedFragmentFromMyFavoritePoem(model)
     }
 
     override fun workWithAdapter(model: AdapterMyPoem) {

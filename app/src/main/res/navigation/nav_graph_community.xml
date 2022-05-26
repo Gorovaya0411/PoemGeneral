@@ -10,14 +10,14 @@
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_profileFragment_to_jobUserFragment"
-            app:destination="@id/jobUserFragment" />
-        <action
             android:id="@+id/action_profileFragment_self"
             app:destination="@id/profileFragment" />
         <action
             android:id="@+id/action_profileFragment_to_addPoemFragment"
             app:destination="@id/addPoemFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_jobUserFragment"
+            app:destination="@id/jobUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/generalPoetsFragment"
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/jobUserFragment"
-        android:name="com.application.poem_poet.ui.job_user.JobUserFragment"
+        android:name="com.application.poem_poet.ui.auxiliary_fragment.job_user.JobUserFragment"
         android:label="JobUserFragment"
         tools:layout="@layout/fragment_job_user">
         <action
@@ -84,40 +84,18 @@
         <action
             android:id="@+id/action_detailedPoemFragment_to_generalPoetsFragment"
             app:destination="@id/generalPoetsFragment" />
+        <action
+            android:id="@+id/action_detailedPoemFragment_to_myPoemFragment"
+            app:destination="@id/myPoemFragment" />
+        <action
+            android:id="@+id/action_detailedPoemFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/changePoemFragment"
         android:name="com.application.poem_poet.ui.auxiliary_fragment.change_poem.ChangePoemFragment"
         android:label="ChangePoemFragment"
-        tools:layout="@layout/fragment_change_poem">
-        <argument
-            android:name="titlePoem"
-            app:argType="string" />
-        <argument
-            android:name="namePoet"
-            app:argType="string" />
-        <argument
-            android:name="poem"
-            app:argType="string" />
-        <argument
-            android:name="avatar"
-            app:argType="string" />
-        <argument
-            android:name="genre"
-            app:argType="string" />
-        <argument
-            android:name="username"
-            app:argType="string" />
-        <argument
-            android:name="like"
-            app:argType="integer" />
-        <argument
-            android:name="id"
-            app:argType="string" />
-        <argument
-            android:name="uid"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/fragment_change_poem"/>
     <fragment
         android:id="@+id/fullInformationFragment"
         android:name="com.application.poem_poet.ui.auxiliary_fragment.full_information.FullInformationFragment"

@@ -8,4 +8,7 @@ import moxy.viewstate.strategy.StateStrategyType
 @StateStrategyType(value = AddToEndStrategy::class)
 interface MainView : MvpView
 
-abstract class MainActivityPresenterImpl : MvpPresenter<MainView>()
+abstract class MainActivityPresenter : MvpPresenter<MainView>() {
+    abstract fun getUidUser(): String?
+    abstract fun setUidUser(uid: String?)
+}

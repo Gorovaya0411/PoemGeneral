@@ -10,6 +10,7 @@ interface SessionStoreService {
     var checkCropFragment: String?
     var saveUserGeneral: UserGeneralSave
     var savePoemHelp: PoemHelp
+    var saveUidUser: String?
 }
 
 class SessionStoreServiceImpl @Inject constructor(private val sessionStore: SessionStore) :
@@ -37,5 +38,11 @@ class SessionStoreServiceImpl @Inject constructor(private val sessionStore: Sess
         get() = sessionStore.saveUserGeneral
         set(value) {
             sessionStore.saveUserGeneral = value
+        }
+
+    override var saveUidUser: String?
+        get() = sessionStore.saveUidUser
+        set(value) {
+            sessionStore.saveUidUser = value
         }
 }

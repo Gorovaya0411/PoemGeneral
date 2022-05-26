@@ -3,17 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_main"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/welcomeFragment">
 
-    <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.application.poem_poet.ui.splash.SplashFragment"
-        android:label="SplashFragment"
-        tools:layout="@layout/fragment_splash">
-        <action
-            android:id="@+id/action_splashFragment_to_welcomeFragment"
-            app:destination="@id/welcomeFragment" />
-    </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.application.poem_poet.ui.greeting_user.WelcomeFragment"

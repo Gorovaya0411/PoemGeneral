@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentAddAdditionalInfoBinding
@@ -38,6 +39,8 @@ class AddAdditionalInfoFragment : MvpAppCompatFragment(), AddAdditionalInfoView 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAddAdditionalInfoBinding.bind(view)
+        workBackStack()
+
         with(binding) {
             with(contextActivity.communityPresenter.getSavePoemHelp()) {
                 refStorageRoot = FirebaseStorage.getInstance().reference
@@ -75,6 +78,17 @@ class AddAdditionalInfoFragment : MvpAppCompatFragment(), AddAdditionalInfoView 
             .into(binding.addAdditionalInfoPhotoImg)
         binding.addAdditionalInfoChangePhotoTxt.visibility = TextView.INVISIBLE
         binding.addAdditionalInfoPhotoCardView.isEnabled = false
+    }
+
+    private fun workBackStack() {
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(R.id.fullInformationFragment)
+                }
+            }
+            )
     }
 
     override fun broadcastData() {

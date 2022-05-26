@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -49,6 +50,16 @@ class FullInformationFragment : MvpAppCompatFragment(), FullInformationView {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFullInformationBinding.bind(view)
         binding.fullInformationAddInfo.visibility = ImageView.INVISIBLE
+
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(R.id.detailedPoemFragment)
+                }
+            }
+            )
+
         with(binding) {
             with(contextActivity.communityPresenter.getSavePoemHelp()) {
 
@@ -93,7 +104,9 @@ class FullInformationFragment : MvpAppCompatFragment(), FullInformationView {
                     with(bundle) {
                         putString("bio", bio)
                     }
-                    findNavController().navigate(R.id.biographyFragment, bundle)
+                    if (bio != "") {
+                        findNavController().navigate(R.id.biographyFragment, bundle)
+                    }
                 }
             }
         }
@@ -123,13 +136,13 @@ class FullInformationFragment : MvpAppCompatFragment(), FullInformationView {
             binding.fullInformationCommunicationUserTxt.text = addressHere
             binding.fullInformationBioTxt.text = statusHere
             if (statusHere == "") {
-                binding.fullInformationBioTxt.text = "..."
+                binding.fullInformationBioTxt.text = "Полная информация отсутсвует"
             }
         } else {
             if (biog != "") {
                 binding.fullInformationBioTxt.text = "Биография ->"
             } else {
-                binding.fullInformationBioTxt.text = "..."
+                binding.fullInformationBioTxt.text = "Полная информация отсутсвует"
             }
             if (biog == "" || contextActivity.communityPresenter.getSavePoemHelp().avatar == "https://firebasestorage.googleapis.com/v0/b/poemspoets-130cd.appspot.com/o/icon.png?alt=media&token=5935d9cc-88cf-4697-8ed3-17abd66e9fee") {
                 binding.fullInformationAddInfo.visibility = ImageView.VISIBLE

@@ -1,4 +1,4 @@
-package com.application.poem_poet.ui.job_user
+package com.application.poem_poet.ui.auxiliary_fragment.job_user
 
 import androidx.fragment.app.DialogFragment
 import com.application.poem_poet.model.PoemAnswer

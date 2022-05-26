@@ -29,14 +29,13 @@ class AppModule(private val myApplication: App) {
 
     @AppScope
     @Provides
-    fun providesMainUseCase(): MainUseCase =
-        MainUseCaseImpl()
+    fun providesMainUseCase(sessionStoreService: SessionStoreService): MainUseCase {
+        return MainUseCaseImpl(sessionStoreService)
+    }
 
     @AppScope
     @Provides
-    fun providesDetailedUseCase(
-        sessionStoreService: SessionStoreService
-    ): CommunityUseCase {
+    fun providesDetailedUseCase(sessionStoreService: SessionStoreService): CommunityUseCase {
         return CommunityUseCaseImpl(sessionStoreService)
     }
 

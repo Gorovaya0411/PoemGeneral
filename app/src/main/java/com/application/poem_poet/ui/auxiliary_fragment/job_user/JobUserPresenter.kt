@@ -1,4 +1,4 @@
-package com.application.poem_poet.ui.job_user
+package com.application.poem_poet.ui.auxiliary_fragment.job_user
 
 import com.application.poem_poet.dialogFragments.ForDeleteMyDialog
 import com.application.poem_poet.dialogFragments.ForEmptyJobsDialog
@@ -44,7 +44,6 @@ class JobUserPresenter @Inject constructor() : JobUserPresenterImpl() {
                     listPoemPoet.add(poem)
                 }
                 populateData(listPoemPoet)
-
             }
         })
     }

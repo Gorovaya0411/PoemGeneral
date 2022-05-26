@@ -5,7 +5,7 @@
     android:id="@+id/detailed_poem_cons_l"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg">
+    android:background="@drawable/bg_all">
 
     <LinearLayout
         android:id="@+id/detailed_poem_gen_linear_layout"
@@ -53,12 +53,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/partner_subscription_app_bar"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/detailed_poem_back_img"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                tools:ignore="MissingConstraints" />
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@string/back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_base_back" />
 
             <LinearLayout
                 android:id="@+id/detailed_poem_linear_layout"
@@ -68,6 +72,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/detailed_poem_card_view"

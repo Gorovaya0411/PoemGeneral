@@ -67,17 +67,21 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
                                 registerProgressBar.visibility = ProgressBar.VISIBLE
                                 registerRegistrationBtn.visibility = Button.INVISIBLE
                                 firebaseUserID = mAuth.currentUser!!.uid
-                                val refUsers = FirebaseDatabase.getInstance().reference.child("Users")
-                                    .child(firebaseUserID)
+                                val refUsers =
+                                    FirebaseDatabase.getInstance().reference.child("Users")
+                                        .child(firebaseUserID)
 
                                 val userHashMap = HashMap<String, Any>()
                                 userHashMap["uid"] = firebaseUserID
                                 userHashMap["email"] = email
                                 userHashMap["login"] = login
-                                userHashMap["avatar"] = "https://firebasestorage.googleapis.com/v0/b/poemspoets-130cd.appspot.com/o/icon2.png?alt=media&token=f241a65b-137c-47e2-b33c-800e6a6a1b3d"
+                                userHashMap["avatar"] =
+                                    "https://firebasestorage.googleapis.com/v0/b/poemspoets-130cd.appspot.com/o/icon2.png?alt=media&token=f241a65b-137c-47e2-b33c-800e6a6a1b3d"
                                 userHashMap["search"] = login.toLowerCase(Locale.ROOT)
                                 userHashMap["status"] = status
                                 userHashMap["address"] = address
+
+                                contextActivity.mainPresenter.setUidUser(firebaseUserID)
 
                                 refUsers.updateChildren(userHashMap)
                                     .addOnCompleteListener {

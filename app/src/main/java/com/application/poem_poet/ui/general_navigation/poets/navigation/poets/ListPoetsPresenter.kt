@@ -54,25 +54,27 @@ class ListPoetsPresenter @Inject constructor() : ListPoetPresenterImpl() {
 
         val refUser =
             FirebaseDatabase.getInstance().reference.child("Users")
-                .child(model.communityPresenter.getSaveUserGeneral().uid)
         refUser.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
 
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-                val userGeneral: User? = p0.getValue(User::class.java)
-                if (userGeneral != null) {
-                    model.communityPresenter.setSaveUserGeneral(
-                        UserGeneralSave(
-                            userGeneral.email,
-                            userGeneral.login,
-                            userGeneral.avatar,
-                            userGeneral.status,
-                            userGeneral.address,
-                            userGeneral.uid
+                val children = p0.children
+                children.forEach {
+                    val userGeneral: User? = it.getValue(User::class.java)
+                    if (userGeneral != null && userGeneral.uid == model.communityPresenter.getUidUser()) {
+                        model.communityPresenter.setSaveUserGeneral(
+                            UserGeneralSave(
+                                userGeneral.email,
+                                userGeneral.login,
+                                userGeneral.avatar,
+                                userGeneral.status,
+                                userGeneral.address,
+                                userGeneral.uid
+                            )
                         )
-                    )
+                    }
                 }
             }
         })

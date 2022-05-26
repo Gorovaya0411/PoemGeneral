@@ -4,19 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentDetailedPoemBinding
 import com.application.poem_poet.ui.community.CommunityActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_community.*
-import kotlinx.android.synthetic.main.fragment_detailed_poem.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 
@@ -45,53 +43,66 @@ class DetailedPoemFragment : MvpAppCompatFragment(), DetailedPoemView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailedPoemBinding.bind(view)
-        requireActivity()
-            .onBackPressedDispatcher
-            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    contextActivity.backDetailToGeneralFragment()
-                }
-            }
-            )
+        workBackStack()
+
         with(contextActivity.communityPresenter.getSavePoemHelp()) {
             likeHere = like
             id.let { detailedPoemPresenter.savingValueCheckBoxAddPoem(it) }
             id.let { detailedPoemPresenter.savingValueCheckBoxLike(it) }
 
-            when (contextActivity.communityPresenter.getCheckDetailedFragment()) {
-                "FromProfile" -> {
-                    binding.detailedPoemGeneralBtn.setBackgroundResource(R.drawable.bg_detailed_poem_edit_btn)
-                }
-                "FromList" -> {
-                    binding.detailedPoemGeneralBtn.setBackgroundResource(R.drawable.bg_detailed_poem_show_more_btn)
-                }
-            }
-
             with(binding) {
-
                 val namePoetModified = namePoet.replace("|", ".", true)
                 val usernameModified = username.replace("|", ".", true)
-//                biographyBackImg.setOnClickListener {
-//                    contextActivity.backDetailToGeneralFragment()
+
+//                partnerPlatformProductLayout.visibility = ConstraintLayout.VISIBLE
+//                com.application.poem_poet.utill.ToolbarUtils.apply {
+//                    context?.let { setToolbarHomeAsUp(it) }
+//                    setTransparentStatusBar(contextActivity, false)
+//                    context?.let { setSupportActionBar(it, toolbar) }
 //                }
+//
+//                appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
+//                    val maxOffset = appbar.height
+//                    val opacity = verticalOffset / maxOffset.toFloat()
+//                    val alpha = min(1f - opacity * 1.2f, 1f)
+//                    detailedPoemImageImg.alpha = alpha
+//                })
+
+                detailedPoemPoemTxt.text = poem
+                detailedPoemTitleTxt.text = titlePoem
+                firebaseUser = FirebaseAuth.getInstance().currentUser
+                Picasso.get()
+                    .load(avatar)
+                    .into(detailedPoemImageImg)
+
+                when (contextActivity.communityPresenter.getCheckDetailedFragment()) {
+                    "FromProfile" -> detailedPoemGeneralBtn.setBackgroundResource(R.drawable.bg_detailed_poem_edit_btn)
+                    "FromList" -> detailedPoemGeneralBtn.setBackgroundResource(R.drawable.bg_detailed_poem_show_more_btn)
+                    "FromMyPoem" -> {
+                        detailedPoemLikeCheckBox.visibility = CheckBox.GONE
+                        detailedPoemAddPoemCheckBox.visibility = CheckBox.GONE
+                    }
+                }
+
                 if (namePoet == "") {
                     detailedPoemNameTxt.text = usernameModified
                 } else {
                     detailedPoemNameTxt.text = namePoetModified
                 }
 
-                Picasso.get()
-                    .load(avatar)
-                    .into(detailedPoemImageImg)
-
-                detailedPoemPoemTxt.text = poem
-                detailedPoemTitleTxt.text = titlePoem
-                firebaseUser = FirebaseAuth.getInstance().currentUser
-
                 detailedPoemGeneralBtn.setOnClickListener {
                     when (contextActivity.communityPresenter.getCheckDetailedFragment()) {
                         "FromProfile" -> findNavController().navigate(R.id.changePoemFragment)
                         "FromList" -> findNavController().navigate(R.id.fullInformationFragment)
+                        "FromMyPoem" -> findNavController().navigate(R.id.fullInformationFragment)
+                    }
+                }
+
+                detailedPoemBackImg.setOnClickListener {
+                    when (contextActivity.communityPresenter.getCheckDetailedFragment()) {
+                        "FromProfile" -> contextActivity.backDetailToGeneralFragmentProfile()
+                        "FromList" -> contextActivity.backDetailToGeneralFragmentList()
+                        "FromMyPoem" -> contextActivity.backDetailToGeneralFragmentMyPoem()
                     }
                 }
 
@@ -125,6 +136,21 @@ class DetailedPoemFragment : MvpAppCompatFragment(), DetailedPoemView {
                 }
             }
         }
+    }
+
+    private fun workBackStack() {
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    when (contextActivity.communityPresenter.getCheckDetailedFragment()) {
+                        "FromProfile" -> contextActivity.backDetailToGeneralFragmentProfile()
+                        "FromList" -> contextActivity.backDetailToGeneralFragmentList()
+                        "FromMyPoem" -> contextActivity.backDetailToGeneralFragmentMyPoem()
+                    }
+                }
+            }
+            )
     }
 
     override fun addMyAdded() {

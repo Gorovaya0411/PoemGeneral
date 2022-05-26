@@ -1,4 +1,4 @@
-package com.application.poem_poet.ui.job_user
+package com.application.poem_poet.ui.auxiliary_fragment.job_user
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.application.poem_poet.R
 import com.application.poem_poet.databinding.ItemViewJobUserBinding
 import com.application.poem_poet.model.PoemAnswer
-
 
 class AdapterJobUser(private var openNewActivity: (PoemAnswer, Int) -> Unit) :
     RecyclerView.Adapter<AdapterJobUser.MyViewHolder>() {

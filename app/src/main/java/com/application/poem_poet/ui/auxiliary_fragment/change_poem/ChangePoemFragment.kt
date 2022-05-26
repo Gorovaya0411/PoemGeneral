@@ -59,6 +59,19 @@ class ChangePoemFragment : MvpAppCompatFragment(), ChangePoemView {
                     genre = changePoemGenreEditTxt.text.toString()
                     poem = changePoemPoemEditTxt.text.toString()
                     namePoet = changePoemAutoCompleteTxt.text.toString()
+                    contextActivity.communityPresenter.setSavePoemHelp(
+                        PoemHelp(
+                            contextActivity.communityPresenter.getSavePoemHelp().username,
+                            titlePoem,
+                            namePoet,
+                            genre,
+                            poem,
+                            contextActivity.communityPresenter.getSavePoemHelp().avatar,
+                            contextActivity.communityPresenter.getSavePoemHelp().id,
+                            contextActivity.communityPresenter.getSavePoemHelp().uid,
+                            contextActivity.communityPresenter.getSavePoemHelp().like
+                        )
+                    )
                     changePoemPresenter.changePoem(
                         id, contextActivity,
                         PoemHelp(

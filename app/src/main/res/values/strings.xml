@@ -51,4 +51,7 @@
 
     <string name="change_photo">Изменить фото</string>
     <string name="enter_the_biography">Напиши биографию кратко и интересно!\nОбязательно указывайте источник!:)</string>
+
+    <string name="no_work">У вас нет работ</string>
+    <string name="help_messange_work">Воспользуетесь вкладкой Стихи и кнопкой добавить (+), чтобы добавить работу</string>
 </resources>

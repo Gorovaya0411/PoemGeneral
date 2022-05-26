@@ -1,10 +1,12 @@
-package com.application.poem_poet.ui.job_user
+package com.application.poem_poet.ui.auxiliary_fragment.job_user
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +30,18 @@ class JobUserFragment : MvpAppCompatFragment(), JobUserView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentJobUserBinding.bind(view)
+        binding.jobUserNoVersesTxt.visibility = TextView.INVISIBLE
+        binding.jobUserHelpMessageTxt.visibility = TextView.INVISIBLE
+
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(R.id.action_jobUserFragment_to_profileFragment)
+                }
+            }
+            )
+
         binding.jobUserBackImg.setOnClickListener {
             findNavController().navigate(R.id.action_jobUserFragment_to_profileFragment)
         }
@@ -48,6 +62,8 @@ class JobUserFragment : MvpAppCompatFragment(), JobUserView {
     }
 
     override fun openDialog(model: DialogFragment) {
+        binding.jobUserNoVersesTxt.visibility = TextView.VISIBLE
+        binding.jobUserHelpMessageTxt.visibility = TextView.VISIBLE
         model.show(
             contextActivity.supportFragmentManager,
             "ForEmptyJobsDialog"

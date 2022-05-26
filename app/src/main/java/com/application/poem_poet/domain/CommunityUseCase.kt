@@ -10,6 +10,7 @@ interface CommunityUseCase {
     var checkCropFragment: String?
     var savePoemHelp: PoemHelp
     var saveUserGeneral: UserGeneralSave
+    var saveUidUser: String?
 }
 
 class CommunityUseCaseImpl @Inject constructor(
@@ -26,6 +27,12 @@ class CommunityUseCaseImpl @Inject constructor(
         get() = sessionStoreService.checkCropFragment
         set(value) {
             sessionStoreService.checkCropFragment = value
+        }
+
+    override var saveUidUser: String?
+        get() = sessionStoreService.saveUidUser
+        set(value) {
+            sessionStoreService.saveUidUser = value
         }
 
     override var savePoemHelp: PoemHelp

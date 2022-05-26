@@ -19,6 +19,12 @@ class SessionStore(private val sharedPreferences: SharedPreferences) {
             sharedPreferences.edit().putString(KEY_CHECK_CROP_FRAGMENT, value).apply()
         }
 
+    var saveUidUser: String?
+        get() = sharedPreferences.getString(SAVE_UID_USER, "")
+        set(value) {
+            sharedPreferences.edit().putString(SAVE_UID_USER, value).apply()
+        }
+
     var savePoemHelp: PoemHelp
         get() {
             return try {
@@ -27,7 +33,7 @@ class SessionStore(private val sharedPreferences: SharedPreferences) {
                     PoemHelp::class.java
                 )
             } catch (e: Exception) {
-                PoemHelp("", "", "", "", "", " ", "","",0)
+                PoemHelp("", "", "", "", "", " ", "", "", 0)
             }
         }
         set(value) {
@@ -54,5 +60,6 @@ class SessionStore(private val sharedPreferences: SharedPreferences) {
         const val KEY_CHECK_CROP_FRAGMENT = "check_crop_fragment"
         const val SAVE_POEM_HELP = "save_poem_help"
         const val SAVE_USER_GENERAL = "save_user_general"
+        const val SAVE_UID_USER = "save_uid_user"
     }
 }

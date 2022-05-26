@@ -25,19 +25,15 @@ class ProfilePresenter @Inject constructor() : ProfilePresenterImpl() {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-                if (p0.exists()) {
-                    val children = p0.children
-                    children.forEach {
-                        val poem: PoemAnswer? = it.getValue(PoemAnswer::class.java)
-                        if (poem == null) {
-                            viewState.showDialog(emptyMyJobsDialog)
-                        } else {
-                            viewState.goToJobUserFragment()
-                            changeUsernameAll(login)
-                            array += poem.id
-                        }
-                    }
-                    changeUsernameAll(login)
+                val children = p0.children
+                var poem: PoemAnswer? = PoemAnswer()
+                children.forEach {
+                    poem = it.getValue(PoemAnswer::class.java)
+                }
+                if (poem == null) {
+                    viewState.showDialog(emptyMyJobsDialog)
+                } else {
+                    viewState.goToJobUserFragment()
                 }
             }
         })

@@ -16,7 +16,7 @@ import com.application.poem_poet.R
 import com.application.poem_poet.di.detailedModule.CommunityActivityModule
 import com.application.poem_poet.model.PoemAnswer
 import com.application.poem_poet.model.PoemHelp
-import com.application.poem_poet.model.User
+import com.application.poem_poet.model.UserGeneralSave
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -46,7 +46,6 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_community)
-
         firebaseUser = FirebaseAuth.getInstance().currentUser
         refStorageRoot = FirebaseStorage.getInstance().reference
         refChangeAvatarInUser =
@@ -79,6 +78,27 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
         community_bottom_navigation_view.visibility = BottomNavigationView.GONE
     }
 
+    fun openDetailedFragmentFromMyFavoritePoem(poem: PoemAnswer) {
+        communityPresenter.setSavePoemHelp(
+            PoemHelp(
+                poem.username,
+                poem.titlePoem,
+                poem.namePoet,
+                poem.genre,
+                poem.poem,
+                poem.avatar,
+                poem.id,
+                poem.uid,
+                poem.like
+            )
+        )
+        val navController = navHostFragment.navController
+        navController.navigate(
+            R.id.action_myPoemFragment_to_detailedPoemFragment
+        )
+        community_bottom_navigation_view.visibility = BottomNavigationView.GONE
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (communityPresenter.getCheckCropFragment()) {
@@ -87,11 +107,10 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
         }
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK && data != null
         ) {
-
             when (communityPresenter.getCheckCropFragment()) {
                 "profile" -> {
+                    profile_progress_bar.visibility = ProgressBar.VISIBLE
                     communityPresenter.receivingPoemUser(
-                        communityPresenter.getSaveUserGeneral().login,
                         communityPresenter.getSaveUserGeneral().uid
                     )
                     val uri = CropImage.getActivityResult(data).uri
@@ -101,6 +120,16 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
                             path.downloadUrl.addOnCompleteListener { task2 ->
                                 if (task2.isSuccessful) {
                                     val photoUrl = task2.result.toString()
+                                    communityPresenter.setSaveUserGeneral(
+                                        UserGeneralSave(
+                                            communityPresenter.getSaveUserGeneral().email,
+                                            communityPresenter.getSaveUserGeneral().login,
+                                            photoUrl,
+                                            communityPresenter.getSaveUserGeneral().status,
+                                            communityPresenter.getSaveUserGeneral().address,
+                                            communityPresenter.getSaveUserGeneral().uid
+                                        )
+                                    )
                                     refChangeAvatarInUser!!.setValue(photoUrl)
                                     communityPresenter.changeAvatarAll(
                                         photoUrl,
@@ -116,6 +145,7 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
                     }
                 }
                 "add" -> {
+                    add_additional_info_progress_bar.visibility = ProgressBar.VISIBLE
                     communityPresenter.receivingPoemPoet(
                         communityPresenter.getSavePoemHelp().namePoet,
                         communityPresenter.getSaveUserGeneral().uid
@@ -134,6 +164,20 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
                                     communityPresenter.changeAvatarAllAdd(
                                         photoUrl,
                                         communityPresenter.getSavePoemHelp().id
+                                    )
+
+                                    communityPresenter.setSavePoemHelp(
+                                        PoemHelp(
+                                            communityPresenter.getSavePoemHelp().username,
+                                            communityPresenter.getSavePoemHelp().titlePoem,
+                                            communityPresenter.getSavePoemHelp().namePoet,
+                                            communityPresenter.getSavePoemHelp().genre,
+                                            communityPresenter.getSavePoemHelp().poem,
+                                            photoUrl,
+                                            communityPresenter.getSavePoemHelp().id,
+                                            communityPresenter.getSavePoemHelp().uid,
+                                            communityPresenter.getSavePoemHelp().like
+                                        )
                                     )
                                     refAvatar.setValue(photoUrl)
                                     Picasso.get()
@@ -161,10 +205,26 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
     }
 
 
-    fun backDetailToGeneralFragment() {
+    fun backDetailToGeneralFragmentList() {
         val navController = navHostFragment.navController
         navController.navigate(
             R.id.action_detailedPoemFragment_to_generalPoetsFragment
+        )
+        community_bottom_navigation_view.visibility = BottomNavigationView.VISIBLE
+    }
+
+    fun backDetailToGeneralFragmentMyPoem() {
+        val navController = navHostFragment.navController
+        navController.navigate(
+            R.id.action_detailedPoemFragment_to_myPoemFragment
+        )
+        community_bottom_navigation_view.visibility = BottomNavigationView.VISIBLE
+    }
+
+    fun backDetailToGeneralFragmentProfile() {
+        val navController = navHostFragment.navController
+        navController.navigate(
+            R.id.action_detailedPoemFragment_to_profileFragment
         )
         community_bottom_navigation_view.visibility = BottomNavigationView.VISIBLE
     }
