@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.SearchView
+import android.widget.TextView
+import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.poem_poet.R
@@ -14,7 +16,7 @@ import com.application.poem_poet.model.PoemAnswer
 import com.application.poem_poet.ui.community.CommunityActivity
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
-
+import org.w3c.dom.Text
 
 class ListPoetsFragment : MvpAppCompatFragment(), ListPoetsView {
 
@@ -35,9 +37,20 @@ class ListPoetsFragment : MvpAppCompatFragment(), ListPoetsView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentListPoetsBinding.bind(view)
-        binding.listPoetCountrySearch.onActionViewCollapsed()
-        binding.listPoetClose.visibility = ImageView.INVISIBLE
-        poemsPoetsPresenter.getData(contextActivity)
+        with(binding) {
+
+            listPoetCountrySearch.onActionViewCollapsed()
+            poemsPoetsPresenter.getData(contextActivity)
+            listPoetClose.visibility = TextView.INVISIBLE
+
+            if (!contextActivity.lackInternet()) {
+                listPoetNoVersesTxt.visibility = TextView.VISIBLE
+                listPoetHelpMessageTxt.visibility = TextView.VISIBLE
+            } else {
+                listPoetNoVersesTxt.visibility = TextView.INVISIBLE
+                listPoetHelpMessageTxt.visibility = TextView.INVISIBLE
+            }
+        }
     }
 
     override fun workWithSearchWidget(model: AdapterListPoets) {

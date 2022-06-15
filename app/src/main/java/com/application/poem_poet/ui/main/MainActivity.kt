@@ -33,7 +33,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     fun provideLandingActivityPresenter(): MainPresenter {
         return App.appComponent.inject(
             MainActivityModule()
-        ).presenter
+        ).mainPresenter
     }
 
     private fun hideSystemUI() {

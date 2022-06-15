@@ -54,4 +54,6 @@
 
     <string name="no_work">У вас нет работ</string>
     <string name="help_messange_work">Воспользуетесь вкладкой Стихи и кнопкой добавить (+), чтобы добавить работу</string>
+
+    <string name="check_the_connection">Проверьте соединение</string>
 </resources>

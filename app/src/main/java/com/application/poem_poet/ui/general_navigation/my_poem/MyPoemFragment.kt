@@ -10,12 +10,15 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.application.poem_poet.App
 import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentMyPoemBinding
+import com.application.poem_poet.di.mainModule.MainActivityModule
 import com.application.poem_poet.model.PoemAnswer
 import com.application.poem_poet.ui.community.CommunityActivity
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 
 class MyPoemFragment : MvpAppCompatFragment(), MyPoemView {
 
@@ -26,6 +29,13 @@ class MyPoemFragment : MvpAppCompatFragment(), MyPoemView {
 
     @InjectPresenter
     lateinit var myPoemPresenter: MyPoemPresenter
+
+    @ProvidePresenter
+    fun provideLandingActivityPresenter(): MyPoemPresenter {
+        return App.appComponent.inject(
+            MainActivityModule()
+        ).myPoemPresenter
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

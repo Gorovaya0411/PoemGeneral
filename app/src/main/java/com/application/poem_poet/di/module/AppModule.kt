@@ -9,6 +9,7 @@ import com.application.poem_poet.domain.CommunityUseCase
 import com.application.poem_poet.domain.CommunityUseCaseImpl
 import com.application.poem_poet.domain.MainUseCase
 import com.application.poem_poet.domain.MainUseCaseImpl
+import com.application.poem_poet.repository.CharactersDetailedRepository
 import com.application.poem_poet.service.SessionStoreService
 import com.application.poem_poet.service.SessionStoreServiceImpl
 import dagger.Module
@@ -35,8 +36,8 @@ class AppModule(private val myApplication: App) {
 
     @AppScope
     @Provides
-    fun providesDetailedUseCase(sessionStoreService: SessionStoreService): CommunityUseCase {
-        return CommunityUseCaseImpl(sessionStoreService)
+    fun providesDetailedUseCase(sessionStoreService: SessionStoreService, charactersMainRepository: CharactersDetailedRepository): CommunityUseCase {
+        return CommunityUseCaseImpl(sessionStoreService,charactersMainRepository)
     }
 
     @Provides
@@ -44,6 +45,11 @@ class AppModule(private val myApplication: App) {
     fun provideSessionStoreService(sharedPreferences: SharedPreferences): SessionStoreService {
         return SessionStoreServiceImpl(SessionStore(sharedPreferences))
     }
+
+    @AppScope
+    @Provides
+    fun providesDetailedRepository(): CharactersDetailedRepository =
+        CharactersDetailedRepository()
 
     @Provides
     @AppScope

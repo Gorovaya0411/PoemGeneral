@@ -55,6 +55,24 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
             profileProgressBar.visibility = ProgressBar.INVISIBLE
             showElementsProfile()
 
+                if (!contextActivity.lackInternet()) {
+                    profileChangePhotoBtn.isEnabled = false
+                    profileLoginTxt.isEnabled = false
+                    profileStatusTxt.isEnabled = false
+                    profileEmailTxt.isEnabled = false
+                    profileCommunicationTxt.isEnabled = false
+                    profileMyJobLinearLayout.isEnabled = false
+                    profileGoOutTxt.isEnabled = false
+                } else {
+                    profileChangePhotoBtn.isEnabled = true
+                    profileLoginTxt.isEnabled = true
+                    profileStatusTxt.isEnabled = true
+                    profileEmailTxt.isEnabled = true
+                    profileCommunicationTxt.isEnabled = true
+                    profileMyJobLinearLayout.isEnabled = true
+                    profileGoOutTxt.isEnabled = true
+                }
+
             profileLoginTxt.setOnClickListener {
                 showDialog(
                     "login",

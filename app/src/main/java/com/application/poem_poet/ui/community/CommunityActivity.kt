@@ -1,6 +1,9 @@
 package com.application.poem_poet.ui.community
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -8,6 +11,7 @@ import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -236,6 +240,23 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
         val navController = findNavController(R.id.community_fragment_container_view)
         bottomNavigationView.setupWithNavController(navController)
         startPostponedEnterTransition()
+    }
+
+    fun lackInternet(): Boolean {
+        val connectionManager: ConnectivityManager =
+            this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = connectionManager.activeNetworkInfo
+        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+        if (!isConnected) {
+            Toast.makeText(
+                this,
+                "Подключение к интернету отсуствует",
+                Toast.LENGTH_LONG
+            )
+                .show()
+        }
+
+        return isConnected
     }
 
     @InjectPresenter

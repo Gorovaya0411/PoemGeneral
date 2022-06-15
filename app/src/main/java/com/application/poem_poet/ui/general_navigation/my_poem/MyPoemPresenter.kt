@@ -3,15 +3,19 @@ package com.application.poem_poet.ui.general_navigation.my_poem
 import com.application.poem_poet.dialogFragments.ForDeleteMyDialog
 import com.application.poem_poet.dialogFragments.ForEmptyMyPoemDialog
 import com.application.poem_poet.model.PoemAnswer
+import com.application.poem_poet.repository.CharactersDetailedRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class MyPoemPresenter @Inject constructor() : MyPoemViewImpl() {
+class MyPoemPresenter @Inject constructor(private val charactersMainUseCase: CharactersDetailedRepository) :
+    MyPoemViewImpl() {
     private var firebaseUser: FirebaseUser? = null
     private var listPoemPoet: MutableList<PoemAnswer?> = mutableListOf()
     private val myAdapter =
@@ -39,15 +43,25 @@ class MyPoemPresenter @Inject constructor() : MyPoemViewImpl() {
                 }
                 children.forEach {
                     val poem: PoemAnswer? = it.getValue(PoemAnswer::class.java)
-                    listPoemPoet.add(poem)
+                    getCharactersByID(poem)
                 }
-                populateData(listPoemPoet)
             }
         })
+        getAllCharacters()
     }
 
     override fun populateData(poems: MutableList<PoemAnswer?>) {
         myAdapter.setData(poems)
+    }
+
+    fun getCharactersByID(id: PoemAnswer?) {
+        val disposable =
+            charactersMainUseCase.getCharactersByID(id).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                }, {
+
+                })
     }
 
     override fun onClick(model: PoemAnswer, mode: Int) {
@@ -57,6 +71,16 @@ class MyPoemPresenter @Inject constructor() : MyPoemViewImpl() {
         } else {
             viewState.showDeleteDialog(deleteDialog)
         }
+    }
+
+    private fun getAllCharacters() {
+        val disposable = charactersMainUseCase.getAllCharacters().subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                populateData(it)
+            }, {
+
+            })
     }
 
     override fun openingNewActivity(model: PoemAnswer) {

@@ -2,6 +2,7 @@ package com.application.poem_poet.ui.general_navigation.poets
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -21,6 +22,8 @@ class GeneralPoetsFragment : BaseFragment<FragmentGeneralPoetsBinding>() {
         binding.generalPoetsFloatingActionBar.setOnClickListener {
             findNavController().navigate(R.id.action_generalPoetsFragment_to_addPoemFragment)
         }
+
+        binding.generalPoetsFloatingActionBar.isEnabled = contextActivity.lackInternet()
     }
 
     override fun onStart() {

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.SearchView
+import android.widget.TextView
+import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.poem_poet.databinding.FragmentListUsersBinding
@@ -35,9 +37,19 @@ class ListUsersFragment : MvpAppCompatFragment(), ListUserView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentListUsersBinding.bind(view)
-        binding.listUsersCountrySearch.onActionViewCollapsed()
-        binding.listUsersClose.visibility = ImageView.INVISIBLE
-        poemsUsersPresenter.getData()
+        with(binding) {
+            listUsersCountrySearch.onActionViewCollapsed()
+            poemsUsersPresenter.getData()
+            listUsersClose.visibility = TextView.INVISIBLE
+
+            if (!contextActivity.lackInternet()) {
+                listUsersNoVersesTxt.visibility = TextView.VISIBLE
+                listUsersHelpMessageTxt.visibility = TextView.VISIBLE
+            } else {
+                listUsersNoVersesTxt.visibility = TextView.INVISIBLE
+                listUsersHelpMessageTxt.visibility = TextView.INVISIBLE
+            }
+        }
     }
 
     override fun workWithSearchWidget(model: AdapterListUser) {
