@@ -3,7 +3,6 @@ package com.application.poem_poet.ui.auxiliary_fragment
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.core.widget.NestedScrollView
 import androidx.navigation.fragment.findNavController
 import com.application.poem_poet.R
 import com.application.poem_poet.databinding.FragmentBiographyBinding

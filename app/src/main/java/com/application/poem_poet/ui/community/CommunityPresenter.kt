@@ -161,7 +161,7 @@ class CommunityPresenter @Inject constructor(
     }
 
     override fun changeAvatarAllAdd(photo: String, id: String) {
-        arrayPoet.forEach {
+        arrayPoet.forEach { _ ->
             val refChangeAvatarAll =
                 FirebaseDatabase.getInstance().reference.child("Poem").child(id)
                     .child("avatar")

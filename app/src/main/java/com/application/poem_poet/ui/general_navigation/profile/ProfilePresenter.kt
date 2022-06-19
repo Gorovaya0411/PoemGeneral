@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class ProfilePresenter @Inject constructor() : ProfilePresenterImpl() {
     private var firebaseUser: FirebaseUser? = null
-    var array = emptyArray<String>()
+    private var array = emptyArray<String>()
     var arrayCatalog = emptyArray<String>()
     var arrayPoem = emptyArray<String>()
     private val emptyMyJobsDialog = ForEmptyJobsDialog(::openAddActivity)
