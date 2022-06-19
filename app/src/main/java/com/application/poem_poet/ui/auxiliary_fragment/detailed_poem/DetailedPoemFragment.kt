@@ -27,7 +27,6 @@ class DetailedPoemFragment : MvpAppCompatFragment(), DetailedPoemView {
         (activity as CommunityActivity)
     }
     private var likeHere: Int = 0
-    private var checkActivity: Boolean = false
     lateinit var binding: FragmentDetailedPoemBinding
     private lateinit var refFavouritesPoem: DatabaseReference
     private lateinit var refMyPoem: DatabaseReference
@@ -53,20 +52,6 @@ class DetailedPoemFragment : MvpAppCompatFragment(), DetailedPoemView {
             with(binding) {
                 val namePoetModified = namePoet.replace("|", ".", true)
                 val usernameModified = username.replace("|", ".", true)
-
-//                partnerPlatformProductLayout.visibility = ConstraintLayout.VISIBLE
-//                com.application.poem_poet.utill.ToolbarUtils.apply {
-//                    context?.let { setToolbarHomeAsUp(it) }
-//                    setTransparentStatusBar(contextActivity, false)
-//                    context?.let { setSupportActionBar(it, toolbar) }
-//                }
-//
-//                appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
-//                    val maxOffset = appbar.height
-//                    val opacity = verticalOffset / maxOffset.toFloat()
-//                    val alpha = min(1f - opacity * 1.2f, 1f)
-//                    detailedPoemImageImg.alpha = alpha
-//                })
 
                 detailedPoemPoemTxt.text = poem
                 detailedPoemTitleTxt.text = titlePoem
@@ -109,16 +94,14 @@ class DetailedPoemFragment : MvpAppCompatFragment(), DetailedPoemView {
                 detailedPoemLikeCheckBox.setOnCheckedChangeListener { _, isChecked ->
                     detailedPoemPresenter.workCheckboxLike(
                         isChecked,
-                        checkActivity,
                         likeHere,
                         id,
                         namePoet,
                         uid,
                         contextActivity.communityPresenter.getSaveUserGeneral().uid
                     )
-                    checkActivity = detailedPoemPresenter.workCheckboxLike(
+                    detailedPoemPresenter.workCheckboxLike(
                         isChecked,
-                        checkActivity,
                         likeHere,
                         id,
                         namePoet,
@@ -191,7 +174,6 @@ class DetailedPoemFragment : MvpAppCompatFragment(), DetailedPoemView {
     }
 
     override fun workWithLike() {
-        checkActivity = true
         binding.detailedPoemLikeCheckBox.isChecked = true
         likeHere = contextActivity.communityPresenter.getSavePoemHelp().like
     }

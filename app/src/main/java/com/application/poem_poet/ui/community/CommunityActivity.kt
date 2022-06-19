@@ -74,6 +74,14 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
         openDetailedFragment()
     }
 
+    fun openMyJobUser() {
+        val navController = navHostFragment.navController
+        navController.navigate(
+            R.id.action_profileFragment_to_jobUserFragment
+        )
+        community_bottom_navigation_view.visibility = BottomNavigationView.GONE
+    }
+
     private fun openDetailedFragment() {
         val navController = navHostFragment.navController
         navController.navigate(
@@ -113,6 +121,7 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
         ) {
             when (communityPresenter.getCheckCropFragment()) {
                 "profile" -> {
+                    add_additional_info_progress_bar.isActivated = true
                     profile_progress_bar.visibility = ProgressBar.VISIBLE
                     communityPresenter.receivingPoemUser(
                         communityPresenter.getSaveUserGeneral().uid
@@ -149,6 +158,7 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
                     }
                 }
                 "add" -> {
+                    add_additional_info_progress_bar.isActivated = true
                     add_additional_info_progress_bar.visibility = ProgressBar.VISIBLE
                     communityPresenter.receivingPoemPoet(
                         communityPresenter.getSavePoemHelp().namePoet,
@@ -208,6 +218,13 @@ class CommunityActivity : MvpAppCompatActivity(), CommunityActivityView {
         }
     }
 
+    fun backJobUserUserFragmentProfile() {
+        val navController = navHostFragment.navController
+        navController.navigate(
+            R.id.action_detailedPoemFragment_to_myPoemFragment
+        )
+        community_bottom_navigation_view.visibility = BottomNavigationView.VISIBLE
+    }
 
     fun backDetailToGeneralFragmentList() {
         val navController = navHostFragment.navController

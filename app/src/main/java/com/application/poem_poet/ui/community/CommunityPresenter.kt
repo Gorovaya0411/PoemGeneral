@@ -113,7 +113,7 @@ class CommunityPresenter @Inject constructor(
                         val poem: PoemAnswer? = it.getValue(PoemAnswer::class.java)
                         if (poem != null) {
                             if (poem.namePoet == namePoet) {
-                                arrayPoet += poem.id
+                                arrayPoet += poem.namePoet
                             }
                         }
                     }
@@ -135,7 +135,7 @@ class CommunityPresenter @Inject constructor(
                         val poem: PoemAnswer? = it.getValue(PoemAnswer::class.java)
                         if (poem != null) {
                             if (poem.namePoet == namePoet) {
-                                arrayPoetAdd += poem.id
+                                arrayPoetAdd += poem.namePoet
                             }
                         }
                     }
@@ -163,7 +163,7 @@ class CommunityPresenter @Inject constructor(
     override fun changeAvatarAllAdd(photo: String, id: String) {
         arrayPoet.forEach {
             val refChangeAvatarAll =
-                FirebaseDatabase.getInstance().reference.child("Poem").child(it)
+                FirebaseDatabase.getInstance().reference.child("Poem").child(id)
                     .child("avatar")
             refChangeAvatarAll.setValue(photo)
         }

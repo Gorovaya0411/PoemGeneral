@@ -37,13 +37,13 @@ class JobUserFragment : MvpAppCompatFragment(), JobUserView {
             .onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    findNavController().navigate(R.id.action_jobUserFragment_to_profileFragment)
+                    contextActivity.backJobUserUserFragmentProfile()
                 }
             }
             )
 
         binding.jobUserBackImg.setOnClickListener {
-            findNavController().navigate(R.id.action_jobUserFragment_to_profileFragment)
+            contextActivity.backJobUserUserFragmentProfile()
         }
         jobUserPresenter.getData()
     }

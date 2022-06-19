@@ -73,17 +73,14 @@ class DetailedPoemPresenter @Inject constructor() : DetailedPoemViewImpl() {
 
     override fun workCheckboxLike(
         isChecked: Boolean,
-        checkActivity: Boolean,
         like: Int,
         id: String,
         namePoet: String,
         uid: String,
         idUser: String
-    ): Boolean {
+    ) {
         var likeAdapt = like
-        var check = checkActivity
         if (isChecked) {
-            if (!checkActivity) {
                 viewState.addFavouritesPoem()
                 likeAdapt++
                 val refLike =
@@ -107,10 +104,8 @@ class DetailedPoemPresenter @Inject constructor() : DetailedPoemViewImpl() {
                             .child("Poems").child(id).child("like")
                     refLikeForUserName.setValue(likeAdapt)
                 }
-            }
         } else {
             likeAdapt--
-            check = false
             val refLike =
                 FirebaseDatabase.getInstance().reference.child("Poem")
                     .child(id).child("like")
@@ -137,7 +132,6 @@ class DetailedPoemPresenter @Inject constructor() : DetailedPoemViewImpl() {
                 refLikeForUserName.setValue(likeAdapt)
             }
         }
-        return check
     }
 
     override fun workCheckboxAdd(isChecked: Boolean, id: String, con: CommunityActivity) {

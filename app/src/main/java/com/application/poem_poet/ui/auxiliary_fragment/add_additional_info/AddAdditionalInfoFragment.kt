@@ -66,6 +66,7 @@ class AddAdditionalInfoFragment : MvpAppCompatFragment(), AddAdditionalInfoView 
 
                 addAdditionalInfoPhotoCardView.setOnClickListener {
                     contextActivity.communityPresenter.setCheckCropFragment("add")
+                    binding.addAdditionalInfoPhotoImg.visibility = ProgressBar.VISIBLE
                     addAdditionalInfoPresenter.changePhotoUser(contextActivity)
                 }
             }

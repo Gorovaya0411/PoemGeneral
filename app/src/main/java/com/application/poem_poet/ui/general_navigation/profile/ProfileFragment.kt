@@ -264,8 +264,7 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
 
         if (data == "") {
             Toast.makeText(
-                context,
-                getString(R.string.line_remained_empty),
+                context, (R.string.line_remained_empty),
                 Toast.LENGTH_LONG
             ).show()
         } else {
@@ -290,7 +289,7 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
     }
 
     override fun goToJobUserFragment() {
-        findNavController().navigate(R.id.action_profileFragment_to_jobUserFragment)
+        contextActivity.openMyJobUser()
     }
 
     private fun changePhotoUser() {

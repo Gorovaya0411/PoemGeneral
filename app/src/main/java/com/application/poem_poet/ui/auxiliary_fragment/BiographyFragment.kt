@@ -18,12 +18,6 @@ class BiographyFragment : BaseFragment<FragmentBiographyBinding>() {
             findNavController().navigate(R.id.fullInformationFragment)
         }
 
-//       binding.scrollView.setOnScrollChangeListener(
-//            NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
-//                binding.appBar.elevate(scrollY != 0)
-//            }
-//        )
-
         requireActivity()
             .onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {

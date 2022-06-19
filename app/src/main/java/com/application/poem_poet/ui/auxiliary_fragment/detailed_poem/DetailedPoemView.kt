@@ -19,13 +19,12 @@ abstract class DetailedPoemViewImpl : MvpPresenter<DetailedPoemView>() {
     abstract fun savingValueCheckBoxLike(model: String)
     abstract fun workCheckboxLike(
         isChecked: Boolean,
-        checkActivity: Boolean,
         like: Int,
         id: String,
         namePoet: String,
         uid: String,
         idUser: String
-    ): Boolean
+    )
 
     abstract fun workCheckboxAdd(isChecked: Boolean, id: String, con: CommunityActivity)
 }
